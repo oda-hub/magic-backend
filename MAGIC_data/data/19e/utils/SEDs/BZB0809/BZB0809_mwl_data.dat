@@ -1,0 +1,64 @@
+// This file list the MWL SED 
+// ****************** //
+// Format: 5 columns with the following informations:
+// col1: frequency [Hz]
+// col2: err- frequency (when available) [Hz]
+// col2: err+ frequency (when available) [Hz]
+// col3: vfv [erg/cm2/s]
+// col5: vfv err- [erg/cm2/s]
+// col4: vfv err+ [erg/cm2/s]
+// ****************** //
+! Last update 19.06.2018
+! Source Name BZB J0809+3455
+! Redshift 0.0825 (NED)
+! PI: A. Stamerra
+! Contact: Elisa Prandini (prandini@pd.infn.it)
+// ****************** //
+// ****THIS IS THE  DATASET to CONSIDER WHEN FITTING************** //
+// ****************** //
+// ****************** //
+!- Band		       UV
+! Instrument 	       UVOT 
+! Obs_period 	       57126.4
+! Other_info 	      analysis by Filippo D'Ammando
+1 5.550e14   0 0    6.077117016e-12     0.423839956e-12 0.423839956e-12
+1 6.925e14    0 0    3.397049487e-12     0.258208037e-12 0.258208037e-12
+1 8.563e14  0 0       1.551682604e-12     0.174692744e-12 0.174692744e-12
+1 1.157e15   0 0     0.806597154e-12     0.129763345e-12 0.129763345e-12
+1 1.345e15   0 0    0.780801598e-12     0.095921572e-12 0.095921572e-12
+1 1.475e15   0 0    0.618197449e-12     0.080634450e-12 0.080634450e-12
+// ****************** //
+!- Band		       Xray
+! Instrument 	       XRT 
+! Obs_period 	      57126.4
+! Other_info 	      analysis by Vandad Fallah Ramazani (ObsID 40529007) updated on 17.12.2018
+2 9.79E+16	2.54E+16	2.54E+16	8.21E-13	2.51E-13	2.51E-13
+2 1.41E+17	1.81E+16	1.81E+16	1.36E-12	2.77E-13	2.77E-13
+2 1.81E+17	2.18E+16	2.18E+16	1.18E-12	2.27E-13	2.27E-13
+2 2.25E+17	2.18E+16	2.18E+16	1.13E-12	2.04E-13	2.04E-13
+2 2.67E+17	2.06E+16	2.06E+16	1.27E-12	2.18E-13	2.18E-13
+2 3.16E+17	2.78E+16	2.78E+16	1.18E-12	2.07E-13	2.07E-13
+2 3.84E+17	4.11E+16	4.11E+16	1.14E-12	2.17E-13	2.17E-13
+2 4.98E+17	7.25E+16	7.25E+16	1.24E-12	2.64E-13	2.64E-13
+2 8.02E+17	2.31E+17	2.31E+17	1.15E-12	3.75E-13	3.75E-13
+// ****************** //
+! Source	      BZB0809						
+! Band                 HE
+! Instrument          Fermi/LAT 
+! Obs_period          
+! Other_info          Analysis done by Cornelia Arcaro on November 2018
+4 4.9368E+23	2.5168E+23	5.13474E+23	4.64E-13	1.34399E-13	1.34399E-13
+4 2.05458E+24	1.04743E+24	2.13698E+24	6.34E-13	0	0
+4 8.55083E+24	4.35927E+24	8.89358E+24	1.04E-12	6.0628E-13	6.0628E-13
+4 3.55873E+25	1.81429E+25	3.70127E+25	2.13E-12	0	0
+// ****************** //
+!- Band		       VHE
+! Instrument 	       MAGIC  EBL deabsorbed (franceschini)!
+! Obs_period 	       MAGIC Cycle X: around MJD 57185
+! Other_info 
+5 1.45E+25	0	0	1.46E-11	0	0
+5 2.67E+25	0	0	7.32E-12	0	0
+5 4.93E+25	0	0	1.70E-12	0	0
+5 9.08E+25	0	0	2.20E-12	0	0
+5 1.67E+26	0	0	7.94E-13	0	0
+5 3.08E+26	0	0	2.37E-12	0	0

@@ -1,0 +1,57 @@
+// This file list the MWL SED 
+// ****************** //
+// Format: 5 columns with the following informations:
+// col1: frequency [Hz]
+// col2: err- frequency (when available) [Hz]
+// col2: err+ frequency (when available) [Hz]
+// col3: vfv [erg/cm2/s]
+// col5: vfv err- [erg/cm2/s]
+// col4: vfv err+ [erg/cm2/s]
+// ****************** //
+! Last update 19.02.2018
+! Source Name 1ES 0927+500
+! Redshift 0.186742 (NED)
+! PI: Fabrizio Tavecchio
+! Contact: Elisa Prandini (prandini@pd.infn.it)
+// ****************** //
+// ****THIS IS THE  DATASET to CONSIDER WHEN FITTING************** //
+// ****************** //
+!- Band	      		X-rays       
+! Instrument 	      XRT
+! Obs_period	      ID: 00039154003 MJD 55648.9
+! Other_info 	      Filippo's analysis
+!8.563e14 0 0   1.570946849e-12    0.082200707e-12 0.082200707e-12
+// ****************** //
+!- Band	      		X-rays       
+! Instrument 	      XRT
+! Obs_period	      ID 00039154003 MJD 55648.9
+! Other_info 	      Vandad's analysis
+2 9.31E+16	2.06E+16	2.06E+16	4.10E-12	1.04E-12	1.04E-12
+2 1.28E+17	1.45E+16	1.45E+16	6.31E-12	1.06E-12	1.06E-12
+2 1.62E+17	1.93E+16	1.93E+16	5.44E-12	9.42E-13	9.42E-13
+2 2.03E+17	2.18E+16	2.18E+16	4.51E-12	7.49E-13	7.49E-13
+2 2.48E+17	2.30E+16	2.30E+16	4.58E-12	7.10E-13	7.10E-13
+2 2.97E+17	2.66E+16	2.66E+16	4.59E-12	7.03E-13	7.03E-13
+2 3.61E+17	3.75E+16	3.75E+16	4.45E-12	7.26E-13	7.26E-13
+2 5.21E+17	1.22E+17	1.22E+17	3.56E-12	9.45E-13	9.45E-13
+2 8.28E+17	1.85E+17	1.85E+17	6.06E-12	1.56E-12	1.56E-12
+// ****************** //
+! Source	      1ES0927							
+! Band                 HE
+! Instrument          Fermi/LAT 
+! Obs_period          55562 - 57022
+! Other_info          Analysis done by Cornelia Arcaro on November 2018
+!	E	err	err	flux	errf	errf
+4 4.9368E+23	2.5168E+23	5.13474E+23	3.83E-13	0	0
+4 2.05458E+24	1.04743E+24	2.13698E+24	7.32E-13	0	0
+4 8.55083E+24	4.35927E+24	8.89358E+24	1.18E-12	5.85245E-13	5.85245E-13
+4 3.55873E+25	1.81429E+25	3.70127E+25	4.52E-12	0	0
+// ****************** //
+!- Band		       VHE
+! Instrument 	       MAGIC  EBL deabsorbed !
+! Obs_period 	       Nov 2012 (56232) - May 2013 (56427)
+! Other_info  	       Paolo and Cornelia, Assumed index 2
+5 2.67e+25 0 0 4.38601e-12 0 0
+5 4.92e+25 0 0 2.02073e-12 0 0
+5 9e+25 0 0 5.11596e-12 0 0
+5 1.64e+26 0 0 4.94818e-12 0 0

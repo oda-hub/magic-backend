@@ -1,0 +1,31 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘energy'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_lc1_fig2_target04.ecsv}
+# - {Source: 1ES 2037+521}
+# schema : astropy −2.0
+
+nufnu      nufnu_elo  nufnu_eup  tstart      tstop texpo  comments
+1.5268e-11 1.0300e-12 1.0300e-12 57658.91336 nan 2467.3  "photon counting"
+1.7959e-11 2.0382e-12 2.0382e-12 57659.95241 nan 1488.4  "photon counting"
+1.0672e-11 1.0273e-12 1.0273e-12 57660.89442 nan 2322.5  "photon counting"
+2.3149e-11 1.6715e-12 1.6715e-12 57661.87837 nan 2449.8  "photon counting"
+1.6153e-11 1.0635e-12 1.0635e-12 57662.88451 nan 2386.9  "photon counting"
+1.8322e-11 1.4458e-12 1.4458e-12 57663.86974 nan 2335.0  "photon counting"
+1.1164e-11 1.1080e-12 1.1080e-12 57664.86609 nan 2185.1  "photon counting"
+1.7273e-11 1.3605e-12 1.3605e-12 57665.86249 nan 2302.5  "photon counting"
+1.1699e-11 8.1436e-13 8.1436e-13 57666.85965 nan 2484.8  "photon counting"
+8.7632e-12 8.7040e-13 8.7040e-13 57667.80433 nan 2417.4  "photon counting"
+5.7555e-12 8.1576e-13 8.1576e-13 57668.85287 nan 2674.6  "photon counting"
+1.2742e-11 1.1400e-12 1.1400e-12 57669.85052 nan 2255.1  "photon counting"
+1.3015e-11 1.2817e-12 1.2817e-12 57670.91436 nan 2659.6  "photon counting"
+2.6008e-11 4.2150e-12 4.2150e-12 57671.97846 nan 761.7   "photon counting"
+4.9800e-12 9.0266e-13 9.0266e-13 58368.00984 nan 2387.4  "photon counting"

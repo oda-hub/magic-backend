@@ -1,0 +1,83 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘energy'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_lc1_fig2_target04.ecsv}
+# - {Source: 1ES 0229+200}
+# schema : astropy −2.0
+
+nufnu      nufnu_elo  nufnu_eup  tstart      tstop texpo  comments
+1.3270e-11 3.4724e-12 3.4724e-12 54683.59935 nan 339.6   "photon counting"
+1.2247e-11 6.2596e-13 6.2596e-13 54685.60958 nan 3259.0  "photon counting"
+8.7033e-12 7.1350e-13 7.1350e-13 54686.01234 nan 3366.4  "photon counting"
+2.2589e-11 3.2199e-12 3.2199e-12 56566.98716 nan 394.9   "photon counting"
+1.6561e-11 1.1168e-12 1.1168e-12 56567.03516 nan 2356.8  "photon counting"
+2.8109e-11 1.3701e-12 1.3701e-12 56571.04010 nan 5209.4  "photon counting"
+2.8860e-11 3.9598e-12 3.9598e-12 56575.99421 nan 539.4   "photon counting"
+1.8271e-11 9.6144e-13 9.6144e-13 56576.06479 nan 5331.7  "photon counting"
+1.0020e-11 1.8540e-12 1.8540e-12 56921.30570 nan 944.0   "photon counting"
+8.3491e-12 1.4487e-12 1.4487e-12 56926.36807 nan 936.5   "photon counting"
+8.6058e-12 1.2899e-12 1.2899e-12 56954.21848 nan 899.0   "photon counting"
+1.0413e-11 9.9746e-13 9.9746e-13 56963.14253 nan 1238.7  "photon counting"
+1.4240e-11 2.0158e-12 2.0158e-12 56975.19765 nan 961.5   "photon counting"
+9.9335e-12 1.4068e-12 1.4068e-12 56980.19427 nan 1201.2  "photon counting"
+1.1082e-11 1.1291e-12 1.1291e-12 56987.25088 nan 1648.2  "photon counting"
+8.7908e-12 1.2031e-12 1.2031e-12 57009.10769 nan 1063.8  "photon counting"
+6.5474e-12 8.5854e-13 8.5854e-13 57033.12748 nan 1028.9  "photon counting"
+1.5015e-11 1.7233e-12 1.7233e-12 57038.06227 nan 1613.3  "photon counting"
+8.1028e-12 1.1273e-12 1.1273e-12 57305.77150 nan 1008.9  "photon counting"
+9.5966e-12 1.1237e-12 1.1237e-12 57313.27518 nan 1221.2  "photon counting"
+1.1642e-11 1.2682e-12 1.2682e-12 57336.21718 nan 1011.4  "photon counting"
+9.6856e-12 1.1498e-12 1.1498e-12 57369.20322 nan 964.0   "photon counting"
+5.0633e-12 6.7617e-13 6.7617e-13 57419.12961 nan 1021.4  "photon counting"
+7.2647e-12 1.0616e-12 1.0616e-12 57687.27823 nan 998.9   "photon counting"
+6.9717e-12 1.3585e-12 1.3585e-12 57696.24763 nan 981.4   "photon counting"
+8.2315e-12 1.3531e-12 1.3531e-12 57724.29975 nan 964.0   "photon counting"
+5.4975e-12 6.7752e-13 6.7752e-13 57742.16218 nan 1043.9  "photon counting"
+6.7796e-12 8.6380e-13 8.6380e-13 57752.13281 nan 1048.9  "photon counting"
+1.3710e-11 1.9455e-12 1.9455e-12 58016.40090 nan 921.5   "photon counting"
+9.4093e-12 1.2376e-12 1.2376e-12 58026.36931 nan 991.4   "photon counting"
+1.4773e-11 1.6278e-12 1.6278e-12 58041.24672 nan 869.1   "photon counting"
+1.4049e-11 2.1537e-12 2.1537e-12 58053.33466 nan 1008.9  "photon counting"
+1.7444e-11 1.8787e-12 1.8787e-12 58400.31118 nan 1013.9  "photon counting"
+1.2534e-11 1.5753e-12 1.5753e-12 58402.35673 nan 854.1   "photon counting"
+2.0770e-11 1.8685e-12 1.8685e-12 58405.28925 nan 983.9   "photon counting"
+1.1797e-11 1.2919e-12 1.2919e-12 58408.33209 nan 1061.3  "photon counting"
+1.5606e-11 1.5949e-12 1.5949e-12 58428.25915 nan 946.5   "photon counting"
+1.5385e-11 1.5909e-12 1.5909e-12 58431.24745 nan 936.5   "photon counting"
+1.7093e-11 3.3157e-12 3.3157e-12 58434.23715 nan 509.5   "photon counting"
+1.3286e-11 1.1949e-12 1.1949e-12 58436.29390 nan 1003.9  "photon counting"
+1.4819e-11 1.9192e-12 1.9192e-12 55117.30536 nan 956.7  "windowed time"
+1.2390e-11 1.3757e-12 1.3757e-12 55118.37642 nan 1058.1 "windowed time"
+1.5923e-11 2.4898e-12 2.4898e-12 55125.28375 nan 498.3  "windowed time"
+1.3152e-11 1.3652e-12 1.3652e-12 55126.27346 nan 1192.1 "windowed time"
+1.4146e-11 1.4217e-12 1.4217e-12 55127.34655 nan 1003.6 "windowed time"
+1.3069e-11 1.1037e-12 1.1037e-12 55128.28320 nan 1008.2 "windowed time"
+1.4102e-11 1.5240e-12 1.5240e-12 55129.28462 nan 1188.5 "windowed time"
+1.1267e-11 1.1106e-12 1.1106e-12 55130.28925 nan 1148.0 "windowed time"
+1.6475e-11 1.5556e-12 1.5556e-12 55131.36065 nan 1168.5 "windowed time"
+2.0281e-11 1.7358e-12 1.7358e-12 55152.24849 nan 832.5  "windowed time"
+1.7252e-11 1.1893e-12 1.1893e-12 55153.25130 nan 1381.1 "windowed time"
+2.4000e-11 1.7452e-12 1.7452e-12 55154.25066 nan 1245.2 "windowed time"
+1.8880e-11 1.8317e-12 1.8317e-12 55155.25714 nan 988.0  "windowed time"
+2.1873e-11 2.4920e-12 2.4920e-12 55156.25978 nan 814.5  "windowed time"
+1.9407e-11 1.4439e-12 1.4439e-12 55157.26245 nan 1016.0 "windowed time"
+2.0452e-11 2.0007e-12 2.0007e-12 55158.26743 nan 934.9  "windowed time"
+1.4133e-11 1.0556e-12 1.0556e-12 56210.33984 nan 980.1  "windowed time"
+1.1706e-11 1.1452e-12 1.1452e-12 56217.42274 nan 1025.6 "windowed time"
+1.6964e-11 1.8699e-12 1.8699e-12 56238.25972 nan 1022.9 "windowed time"
+1.4353e-11 1.5750e-12 1.5750e-12 56245.27875 nan 979.4  "windowed time"
+1.3137e-11 1.0116e-12 1.0116e-12 56264.10960 nan 1506.3 "windowed time"
+1.5492e-11 1.5200e-12 1.5200e-12 56274.13071 nan 1229.4 "windowed time"
+1.6769e-11 1.6495e-12 1.6495e-12 56278.08583 nan 1149.1 "windowed time"
+2.0152e-11 1.5917e-12 1.5917e-12 56569.37099 nan 996.8  "windowed time"
+1.0696e-11 2.3939e-12 2.3939e-12 56654.12400 nan 370.6  "windowed time"
+2.1311e-11 1.9790e-12 1.9790e-12 56656.11752 nan 1057.5 "windowed time"
+1.6309e-11 1.6217e-12 1.6217e-12 56680.13457 nan 959.5  "windowed time"
