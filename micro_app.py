@@ -21,7 +21,6 @@ micro_service = Flask("micro_service")
 
 
 class APIerror(Exception):
-    status_code = 400
 
     def __init__(self, message, status_code=None, payload=None):
         Exception.__init__(self)
@@ -91,7 +90,7 @@ def get_data():
         _o_dict['astropy_table'] = t.encode(use_binary=False)
         _o_dict = json.dumps(_o_dict)
     except Exception as e:
-        raise AstropyTable('table file is empty/corrupted or missing', status_code=410)
+        raise APIerror('table file is empty/corrupted or missing', status_code=410)
 
     #_o_dict = json.loads(_o_dict)
     #t_rec = base64.b64decode(_o_dict['table'])
