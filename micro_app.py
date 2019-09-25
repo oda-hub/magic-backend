@@ -20,26 +20,23 @@ micro_service = Flask("micro_service")
 
 
 
-class NoTraceBackWithLineNumber(Exception):
-    def __init__(self, msg):
-        try:
-            ln = sys.exc_info()[-1].tb_lineno
-        except AttributeError:
-            ln = inspect.currentframe().f_back.f_lineno
-        self.args = "{0.__name__} (line {1}): {2}".format(type(self), ln, msg),
-        sys.exit(self)
+class APIerror(Exception):
+    status_code = 400
+
+    def __init__(self, message, status_code=None, payload=None):
+        Exception.__init__(self)
+        self.message = message
+        if status_code is not None:
+            self.status_code = status_code
+        self.payload = payload
+
+    def to_dict(self):
+        rv = dict(self.payload or ())
+        rv['message'] = self.message
+        return rv
 
 
-class NoTraceBackWithLineNumber(NoTraceBackWithLineNumber):
-    pass
 
-
-class RemoteException(NoTraceBackWithLineNumber):
-
-    def __init__(self, message='Remote analysis exception', debug_message=''):
-        super(RemoteException, self).__init__(message)
-        self.message=message
-        self.debug_message=debug_message
 
 class CustomJSONEncoder(JSONEncoder):
 
@@ -51,6 +48,12 @@ class CustomJSONEncoder(JSONEncoder):
 
 app = Flask(__name__)
 app.json_encoder = CustomJSONEncoder
+
+@micro_service.errorhandler(APIerror)
+def handle_api_error(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
 
 @micro_service.route('/api/v1.0/magic/get-catalog', methods=['GET','POST'])
@@ -88,8 +91,8 @@ def get_data():
         _o_dict['astropy_table'] = t.encode(use_binary=False)
         _o_dict = json.dumps(_o_dict)
     except Exception as e:
-        raise RemoteException(message='table file is empty/corrupted or missing')
-        
+        raise AstropyTable('table file is empty/corrupted or missing', status_code=410)
+
     #_o_dict = json.loads(_o_dict)
     #t_rec = base64.b64decode(_o_dict['table'])
     #t_rec = pickle.loads(t_rec)
