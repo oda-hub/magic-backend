@@ -31,7 +31,7 @@ class APIerror(Exception):
 
     def to_dict(self):
         rv = dict(self.payload or ())
-        rv['message'] = self.message
+        rv['error_message'] = self.message
         return rv
 
 
