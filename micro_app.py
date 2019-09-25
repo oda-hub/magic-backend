@@ -25,13 +25,14 @@ class CustomJSONEncoder(JSONEncoder):
 app = Flask(__name__)
 app.json_encoder = CustomJSONEncoder
 
+
 @micro_service.route('/api/v1.0/magic/get-catalog', methods=['GET','POST'])
 def get_catalog():
 
     with open('MAGIC_data/data/19e/magic_19e.yaml') as f:
         data = yaml.load(f, Loader=yaml.FullLoader)
 
-    _o_dict = json.dumps(data)
+    _o_dict = json.dumps(data,sort_keys=False)
     print(_o_dict)
     return jsonify(_o_dict)
 
@@ -73,4 +74,4 @@ def get_data():
 #    micro_service.run(host=conf.microservice_url, port=conf.microservice_port, debug=debug,threaded=threaded)
 
 if __name__ == '__main__':
-    micro_service.run(host="0.0.0.0", port=5000)
+    micro_service.run(host="0.0.0.0", port=32790)
