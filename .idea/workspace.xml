@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa825ad1-7cb3-42d2-8dba-319d4cc69d87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MAGIC_data/data/19e/magic_19e.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/MAGIC_data/data/19e/magic_19e.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/micro_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/micro_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,13 +32,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1" />
+          <entry key="py" value="2" />
           <entry key="yaml" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1" />
+          <entry key="Python" value="2" />
           <entry key="YAML" value="21" />
         </counts>
       </usages-collector>
@@ -52,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/micro_app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="556">
-              <caret line="32" column="51" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="51" />
+              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
               <folding>
                 <element signature="e#1#65#0" expanded="true" />
               </folding>
@@ -77,8 +75,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/micro_app.py" />
         <option value="$PROJECT_DIR$/MAGIC_data/data/19e/magic_19e.yaml" />
+        <option value="$PROJECT_DIR$/micro_app.py" />
       </list>
     </option>
   </component>
@@ -187,7 +185,7 @@
     <entry file="file://$PROJECT_DIR$/micro_app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
-          <caret line="32" column="51" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="51" />
+          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
           <folding>
             <element signature="e#1#65#0" expanded="true" />
           </folding>

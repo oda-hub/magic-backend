@@ -30,7 +30,7 @@ app.json_encoder = CustomJSONEncoder
 def get_catalog():
 
     with open('MAGIC_data/data/19e/magic_19e.yaml') as f:
-        data = yaml.load(f, Loader=yaml.FullLoader)
+        data = yaml.load(f)
 
     _o_dict = json.dumps(data,sort_keys=False)
     print(_o_dict)
