@@ -11,8 +11,35 @@ from flask.json import JSONEncoder
 import  numpy as np
 import json
 import yaml
+import sys
+import inspect
+
+
 
 micro_service = Flask("micro_service")
+
+
+
+class NoTraceBackWithLineNumber(Exception):
+    def __init__(self, msg):
+        try:
+            ln = sys.exc_info()[-1].tb_lineno
+        except AttributeError:
+            ln = inspect.currentframe().f_back.f_lineno
+        self.args = "{0.__name__} (line {1}): {2}".format(type(self), ln, msg),
+        sys.exit(self)
+
+
+class NoTraceBackWithLineNumber(NoTraceBackWithLineNumber):
+    pass
+
+
+class RemoteException(NoTraceBackWithLineNumber):
+
+    def __init__(self, message='Remote analysis exception', debug_message=''):
+        super(RemoteException, self).__init__(message)
+        self.message=message
+        self.debug_message=debug_message
 
 class CustomJSONEncoder(JSONEncoder):
 
@@ -54,11 +81,15 @@ def get_data():
     #out_dict['products']['astropy_table_product_list'] = [json.dumps(table_text)]
     # print ( 'ECCO',out_dict['products']['numpy_data_product_list'],_p,_npdl)
     print ('file_name',file_name)
-    t = AstropyTable(Table.read('MAGIC_data/data/19e/%s'%file_name, format='ascii'),name='MAGIC TABLE')
+    try:
+        t = AstropyTable(Table.read('MAGIC_data/data/19e/%s'%file_name, format='ascii'),name='MAGIC TABLE')
 
-    _o_dict = {}
-    _o_dict['astropy_table'] = t.encode(use_binary=False)
-    _o_dict = json.dumps(_o_dict)
+        _o_dict = {}
+        _o_dict['astropy_table'] = t.encode(use_binary=False)
+        _o_dict = json.dumps(_o_dict)
+    except Exception as e:
+        raise RemoteException(message='table file is empty/corrupted or missing')
+        
     #_o_dict = json.loads(_o_dict)
     #t_rec = base64.b64decode(_o_dict['table'])
     #t_rec = pickle.loads(t_rec)
