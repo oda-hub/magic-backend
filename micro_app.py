@@ -4,11 +4,11 @@ from __future__ import absolute_import, division, print_function
 from builtins import (open, str, range,
                       object)
 
-from flask import Flask, jsonify, abort,request
 from oda_api.data_products import AstropyTable
+from flask import Flask, jsonify, abort,request
 from astropy.table import Table
 from flask.json import JSONEncoder
-import  numpy as np
+import numpy as np
 import json
 import yaml
 import sys
@@ -91,7 +91,7 @@ def get_data():
         _o_dict = json.dumps(_o_dict)
     except Exception as e:
         raise APIerror('table file is empty/corrupted or missing', status_code=410)
-        
+
     #_o_dict = json.loads(_o_dict)
     #t_rec = base64.b64decode(_o_dict['table'])
     #t_rec = pickle.loads(t_rec)
@@ -107,4 +107,4 @@ def get_data():
 #    micro_service.run(host=conf.microservice_url, port=conf.microservice_port, debug=debug,threaded=threaded)
 
 if __name__ == '__main__':
-    micro_service.run(host="0.0.0.0", port=32790)
+    micro_service.run(host="0.0.0.0", port=32792)
