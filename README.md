@@ -22,11 +22,9 @@ cd to the `magic-backend` directory
 1) Anaconda
     * `conda config --add channels conda-forge`
     * `conda install --file requirements.txt`
-    * `python setup.py install`
     
 2) PIP
     * `pip install -r requirements.txt`
-    * `python setup.py install`
 
 Testing 
 -------
