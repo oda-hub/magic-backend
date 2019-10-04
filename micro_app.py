@@ -8,26 +8,40 @@ from flask import Flask, jsonify, abort,request
 from flask_restplus import Api, Resource,reqparse
 
 from astropy.table import Table
-from flask.json import JSONEncoder
 import json
 import yaml
 import pickle
 import base64
-import numpy as np
 try:
     from StringIO import StringIO
 except ImportError:
     from io import StringIO
 
 
-
 micro_service = Flask("micro_service")
+
 api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
     description='API to extract data for MAGIC Telescope\n Author: Andrea Tramacere',)
+
 ns_conf = api.namespace('api/v1.0/magic', description='Conference operations')
 
 api_parser = reqparse.RequestParser()
 api_parser.add_argument('file_name')
+
+class APIerror(Exception):
+
+    def __init__(self, message, status_code=None, payload=None):
+        Exception.__init__(self)
+        self.message = message
+        if status_code is not None:
+            self.status_code = status_code
+        self.payload = payload
+
+    def to_dict(self):
+        rv = dict(self.payload or ())
+        rv['error_message'] = self.message
+        return rv
+
 
 class AstropyTable(object):
 
@@ -75,23 +89,6 @@ class AstropyTable(object):
             t_rec = ascii.read(_o_dict['ascii'])
 
         return cls(t_rec,name=encoded_name,meta_data=encoded_meta_data)
-
-
-
-class APIerror(Exception):
-
-    def __init__(self, message, status_code=None, payload=None):
-        Exception.__init__(self)
-        self.message = message
-        if status_code is not None:
-            self.status_code = status_code
-        self.payload = payload
-
-    def to_dict(self):
-        rv = dict(self.payload or ())
-        rv['error_message'] = self.message
-        return rv
-
 
 
 
@@ -147,9 +144,6 @@ class Data(Resource):
 
         return jsonify(_o_dict)
 
-
-#api.add_resource(Catalog, '/api/v1.0/magic/get-catalog')
-#api.add_resource(Data, '/api/v1.0/magic/get-data')
 
 if __name__ == '__main__':
     from argparse import ArgumentParser

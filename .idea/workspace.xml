@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa825ad1-7cb3-42d2-8dba-319d4cc69d87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/magic-test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/magic-test.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/micro_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/micro_app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,7 +44,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="388" />
-          <entry key="py" value="709" />
+          <entry key="py" value="738" />
           <entry key="txt" value="17" />
           <entry key="yaml" value="21" />
         </counts>
@@ -54,7 +53,7 @@
         <counts>
           <entry key="Markdown" value="388" />
           <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Python" value="709" />
+          <entry key="Python" value="738" />
           <entry key="YAML" value="21" />
         </counts>
       </usages-collector>
@@ -65,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/micro_app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
+            <state relative-caret-position="341">
+              <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
               <folding>
                 <element signature="e#1#65#0" expanded="true" />
               </folding>
@@ -119,6 +118,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>parse</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -227,13 +231,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -261,10 +258,17 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/micro_app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
+        <state relative-caret-position="341">
+          <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
           <folding>
             <element signature="e#1#65#0" expanded="true" />
           </folding>
