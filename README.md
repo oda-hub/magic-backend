@@ -1,4 +1,4 @@
-MAGIC backend API
+MAGIC backend API Documentation
 ==========================================
 *API for MAGIC backend*
 
@@ -15,7 +15,10 @@ ISDC Data Centre for Astrophysics, Astronomy Department of the University of Gen
 
 
 Installation
--------------------
+------------
+Clone the repository `git clone https://github.com/andreatramacere/magic-backend`
+
+cd to the `magic-backend` directory 
 1) Anaconda
     * `conda config --add channels conda-forge`
     * `conda install --file requirements.txt`
@@ -25,8 +28,10 @@ Installation
     * `pip install -r requirements.txt`
     * `python setup.py install`
 
-Documentation
--------------------
+Testing 
+-------
+cd to the `magic-backend` directory 
+
 A) For local development  
 
 1) run the app: `python micro_app.py`
