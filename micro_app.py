@@ -13,6 +13,7 @@ import json
 import yaml
 import pickle
 import base64
+import numpy as np
 try:
     from StringIO import StringIO
 except ImportError:
@@ -25,8 +26,8 @@ api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
     description='API to extract data for MAGIC Telescope\n Author: Andrea Tramacere',)
 ns_conf = api.namespace('api/v1.0/magic', description='Conference operations')
 
-parser = reqparse.RequestParser()
-parser.add_argument('file_name')
+api_parser = reqparse.RequestParser()
+api_parser.add_argument('file_name')
 
 class AstropyTable(object):
 
@@ -94,16 +95,7 @@ class APIerror(Exception):
 
 
 
-class CustomJSONEncoder(JSONEncoder):
 
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return list(obj)
-        return JSONEncoder.default(self, obj)
-
-
-app = Flask(__name__)
-app.json_encoder = CustomJSONEncoder
 
 @micro_service.errorhandler(APIerror)
 def handle_api_error(error):
@@ -127,7 +119,8 @@ class Catalog(Resource):
             print(_o_dict)
             return jsonify(_o_dict)
         except Exception as e:
-            raise APIerror('table file is empty/corrupted or missing', status_code=410)
+            print(e)
+            raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
 
 @ns_conf.route('/data')
 @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
@@ -140,15 +133,15 @@ class Data(Resource):
 
 
         try:
-            args = parser.parse_args()
-            file_name = args['file_name']
+            api_args = api_parser.parse_args()
+            file_name = api_args['file_name']
             print('file_name', file_name)
             t = AstropyTable(Table.read('MAGIC_data/data/19e/%s'%file_name, format='ascii'),name='MAGIC TABLE')
             _o_dict = {}
             _o_dict['astropy_table'] = t.encode(use_binary=False)
             _o_dict = json.dumps(_o_dict)
         except Exception as e:
-            raise APIerror('table file is empty/corrupted or missing', status_code=410)
+            raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
 
 
 
@@ -160,13 +153,13 @@ class Data(Resource):
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    parser = ArgumentParser()
-    parser.add_argument('-port', type=int, default=None)
-    args = parser.parse_args()
+    cl_parser = ArgumentParser()
+    cl_parser.add_argument('-port', type=int, default=None)
+    cl_args = cl_parser.parse_args()
 
     micro_service.config.from_pyfile('config.py')
     port=micro_service.config['PORT']
-    if args.port is not None:
-        port=args.port
+    if cl_args.port is not None:
+        port=cl_args.port
 
     micro_service.run(host="0.0.0.0",port=port)
