@@ -2,4 +2,3 @@ flask
 astropy
 flask-restplus
 yaml
-json
