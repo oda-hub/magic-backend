@@ -34,4 +34,4 @@ A) For local development
 3) open the `magic-test.ipynb` notebook
 
 B) For  deployment: 
-1) set the `PORT` in the config.py to the valued used on that machine
+1) `python micro_app.py -port YOUR_PORT_NUMBER`
