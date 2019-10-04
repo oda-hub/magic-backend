@@ -4,13 +4,11 @@ from __future__ import absolute_import, division, print_function
 from builtins import (open, str, range,
                       object)
 
-from oda_api.data_products import AstropyTable
 from flask import Flask, jsonify, abort,request
 from flask_restplus import Api, Resource,reqparse
 
 from astropy.table import Table
 from flask.json import JSONEncoder
-import numpy as np
 import json
 import yaml
 import pickle
