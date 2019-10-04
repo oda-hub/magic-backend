@@ -18,7 +18,7 @@ Installation
 -------------------
 1) Anaconda
     * `conda config --add channels conda-forge`
-    * `conda --file requirements.txt`
+    * `conda install --file requirements.txt`
     * `python setup.py install`
     
 2) PIP
