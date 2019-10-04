@@ -159,6 +159,14 @@ class Data(Resource):
 #api.add_resource(Data, '/api/v1.0/magic/get-data')
 
 if __name__ == '__main__':
+    from argparse import ArgumentParser
+    parser = ArgumentParser()
+    parser.add_argument('-port', type=int, default=None)
+    args = parser.parse_args()
+
     micro_service.config.from_pyfile('config.py')
-    print(micro_service.config)
-    micro_service.run(host="0.0.0.0",port=micro_service.config['PORT'])
+    port=micro_service.config['PORT']
+    if args.port is not None:
+        port=args.port
+
+    micro_service.run(host="0.0.0.0",port=port)

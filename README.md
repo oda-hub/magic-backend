@@ -27,7 +27,7 @@ Installation
 
 Documentation
 -------------------
-A) For local development  set the `PORT` in the config.py to '5000'
+A) For local development  
 
 1) run the app: `python micro_app.py`
 2) browse this url to get api doc `http://localhost:5000/`
