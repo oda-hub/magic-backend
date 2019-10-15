@@ -32,7 +32,7 @@ cd to the `magic-backend` directory
 
 Testing 
 -------
-cd to the `run_test` directory 
+cd to the `test_examples` directory 
 
  
 
