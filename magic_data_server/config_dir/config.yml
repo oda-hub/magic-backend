@@ -1,0 +1,7 @@
+url: 0.0.0.0
+port: 5001
+data_root_path: MAGIC_data/data/19e
+catalog_file: magic_19e.yaml
+source_name_field: 'Targets in file'
+MW_file_kw: 'File list MWL'
+MAGIC_file_kw: 'File list MAGIC'

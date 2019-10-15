@@ -1,4 +1,5 @@
 flask
 astropy
 flask-restplus
-yaml
+pyyaml
+gunicorn

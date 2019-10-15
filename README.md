@@ -19,22 +19,27 @@ Installation
 Clone the repository `git clone https://github.com/andreatramacere/magic-backend`
 
 cd to the `magic-backend` directory 
-1) Anaconda
-    * `conda config --add channels conda-forge`
-    * `conda install --file requirements.txt`
+
+* using Anaconda
+ 
+     * `conda config --add channels conda-forge`
+     * `conda install --file requirements.txt`
     
-2) PIP
-    * `pip install -r requirements.txt`
+* or using PIP
+     * `pip install -r requirements.txt`
+
+* `python setup.py install`
 
 Testing 
 -------
-cd to the `magic-backend` directory 
+cd to the `run_test` directory 
 
-A) For local development  
+ 
 
-1) run the app: `python micro_app.py`
-2) browse this url to get api doc `http://localhost:5000/`
+1) run the app: `run_magic_back_end.py`
+
+2) browse this url to get api doc `http://localhost:5001/`
+    * check the backend API doc
+
 3) open the `magic-test.ipynb` notebook
 
-B) For  deployment: 
-1) `python micro_app.py -port YOUR_PORT_NUMBER`
