@@ -149,8 +149,17 @@ class DataPlot(object):
         self.fig = plt.figure(figsize=(8, 6))
         self.ax = self.fig.subplots(1, 1)
 
-
-    def add_data_plot(self, x,y,dx=None,dy=None, label=None, color=None, autoscale=True, fmt='o', ms=None, mew=None,loglog=True,grid=False):
+    def add_data_plot(self,
+                      x,
+                      y,dx=None,
+                      dy=None,
+                      label=None,
+                      color=None,
+                      fmt='o',
+                      ms=None,
+                      mew=None,
+                      loglog=True,
+                      grid=False):
 
 
 
@@ -171,6 +180,7 @@ class DataPlot(object):
         if loglog is True:
             self.ax.set_xscale("log", nonposx='clip')
             self.ax.set_yscale("log", nonposy='clip')
+
 
         if grid is True:
             self.ax.grid()
