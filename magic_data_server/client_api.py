@@ -9,11 +9,13 @@ __author__ = "Andrea Tramacere"
 
 import requests
 #import ast
+import  numpy as np
 import json
 #import random
 #import string
 #import time
 #import os
+from matplotlib import  pylab as plt
 import inspect
 import sys
 from astropy.io import ascii
@@ -34,8 +36,6 @@ class NoTraceBackWithLineNumber(Exception):
         sys.exit(self)
 
 
-class APIError(NoTraceBackWithLineNumber):
-    pass
 
 
 class RemoteException(NoTraceBackWithLineNumber):
@@ -105,9 +105,10 @@ class MagicClientAPI(object):
 
         print('request',s,params)
         res = requests.get(s, params=params)
+        print(res)
         #print(res.json())
         if 'error_message' in res.json():
-            raise APIError('error on remote server: %s' % res.json()['error_message'])
+            raise RemoteException('error on remote server: %s' % res.json()['error_message'])
 
         return res
 
@@ -140,4 +141,39 @@ class MagicClientAPI(object):
         return res.json()
 
 
+
+
+class DataPlot(object):
+    def __init__(self):
+
+        self.fig = plt.figure(figsize=(8, 6))
+        self.ax = self.fig.subplots(1, 1)
+
+
+    def add_data_plot(self, x,y,dx=None,dy=None, label=None, color=None, autoscale=True, fmt='o', ms=None, mew=None,loglog=True,grid=False):
+
+
+
+        # get x,y,dx,dy from SEDdata
+        if dx is None:
+            dx = np.zeros(len(x))
+
+        if dy is None:
+            dy = np.zeros(len(y))
+
+        # set color
+        #if color is None:
+        #    color = self.counter
+
+
+
+        line = self.ax.errorbar(x, y, xerr=dx, yerr=dy, fmt=fmt, label=label, ms=ms, mew=mew)
+        if loglog is True:
+            self.ax.set_xscale("log", nonposx='clip')
+            self.ax.set_yscale("log", nonposy='clip')
+
+        if grid is True:
+            self.ax.grid()
+
+        self.ax.legend()
 

@@ -26,18 +26,9 @@ micro_service = Flask("micro_service")
 api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
     description='API to extract data for MAGIC Telescope\n Author: Andrea Tramacere',)
 
-#magic_config=dict(source_name_field='Targets in file')
-#magic_config['MW_file_kw']='File list MWL'
-#magic_config['MAGIC_file_kw']='File list MAGIC'
-
-#magic_config['catalog_file']='MAGIC_data/data/19e/magic_19e.yaml'
-#magic_config['root_dir']='MAGIC_data/data/19e'
 
 ns_conf = api.namespace('api/v1.0/magic', description='data access')
 
-#api_parser = reqparse.RequestParser()
-#api_parser.add_argument('file_name')
-#api_parser.add_argument('target_name')
 
 class Configurer(object):
     def __init__(self, cfg_dict):
@@ -76,9 +67,11 @@ class APIerror(Exception):
     def __init__(self, message, status_code=None, payload=None):
         Exception.__init__(self)
         self.message = message
+
         if status_code is not None:
             self.status_code = status_code
         self.payload = payload
+        print('API Error Message',message)
 
     def to_dict(self):
         rv = dict(self.payload or ())
@@ -137,11 +130,21 @@ class AstropyTable(object):
 
 @micro_service.errorhandler(APIerror)
 def handle_api_error(error):
+    #print('handle_api_error 1')
     response = jsonify(error.to_dict())
+    #response.json()['error message'] = error
     response.status_code = error.status_code
+
     return response
 
+@api.errorhandler(APIerror)
+def handle_api_error(error):
+    #print('handle_api_error 2')
+    response = jsonify(error.to_dict())
+    response.json()['error message']=error
+    response.status_code = error.status_code
 
+    return response
 
 @ns_conf.route('/search-by-name')
 class SearchName(Resource):
@@ -257,6 +260,7 @@ class Data(Resource):
             _o_dict['astropy_table'] = t.encode(use_binary=False)
             _o_dict = json.dumps(_o_dict)
         except Exception as e:
+            #print('qui',e)
             raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
 
         return jsonify(_o_dict)
