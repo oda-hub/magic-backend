@@ -25,8 +25,6 @@ from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMappe
 
 from bokeh.embed import components
 from bokeh.plotting import figure
-from bokeh.palettes import Plasma256
-from flask_bootstrap import Bootstrap
 
 
 try:
@@ -236,27 +234,15 @@ class ScatterPlot(object):
 
     def get_html_draw(self):
 
-
-
         layout = row(
             self.fig
         )
-        #curdoc().add_root(layout)
-
-
-        #show(layout)
-
-        #script, div = components(layout)
-
-        #print ('script',script)
-        #print ('div',div)
-
-        #html_dict = {}
-        #html_dict['script'] = script
-        #html_dict['div'] = div
 
         return components(layout)
 
+@micro_service.errorhandler(APIerror)
+def handle_app_error(error):
+    return 'bad request! %s'%error.message, 400
 
 @micro_service.route('/index')
 def index():
@@ -288,23 +274,21 @@ def plot_target():
         script=None
         div=None
 
-        if 'sed' in file_name:
-            c=APIPlotSED()
+        try:
+            if 'sed' in file_name:
+                c=APIPlotSED()
 
-        if 'lc' in file_name:
-            c = APIPlotLC()
+            if 'lc' in file_name:
+                c = APIPlotLC()
 
-        script, div = c.get(render=False)
-        return render_template("index.html", script=script, div=div)
+            script, div = c.get(render=False)
+            return render_template("index.html", script=script, div=div)
+        except Exception as e:
+            print(e)
+            raise APIerror('table file is empty/corrupted or missing: %s' % e, status_code=410)
 
-@micro_service.errorhandler(APIerror)
-def handle_api_error(error):
-    #print('handle_api_error 1')
-    response = jsonify(error.to_dict())
-    #response.json()['error message'] = error
-    response.status_code = error.status_code
 
-    return response
+
 
 @api.errorhandler(APIerror)
 def handle_api_error(error):
