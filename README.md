@@ -43,6 +43,7 @@ cd to the `test_examples` directory
     
     * open the `magic-test.ipynb` notebook
     
-1) with the frontend
-   browse this url to get api doc `http://localhost:5001/index`
+2) with the frontend
+
+  * browse this url `http://localhost:5001/index`
    
