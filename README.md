@@ -32,11 +32,11 @@ cd to the `magic-backend` directory
 
 Testing 
 -------
-cd to the `test_examples` directory 
+- cd to the `test_examples` directory 
 
+-  run the app: `run_magic_back_end.py`
  
 1) with the notebook
-    * run the app: `run_magic_back_end.py`
     
     * browse this url to get api doc `http://localhost:5001/`
         * check the backend API doc
