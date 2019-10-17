@@ -298,8 +298,8 @@ class APITableHtml(Resource):
         except Exception as e:
             #print('qui',e)
             raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
-        #return output_html(t.table.show_in_notebook().data,200)
-        return output_html(t.table.show_in_browser(jsviewer=True),200)
+        return output_html(t.table.show_in_notebook().data,200)
+        #return output_html(t.table.show_in_browser(jsviewer=True),200)
 
 
 def run_micro_service(conf,debug=False,threaded=False):
