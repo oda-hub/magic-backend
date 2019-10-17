@@ -37,7 +37,6 @@ class NoTraceBackWithLineNumber(Exception):
 
 
 
-
 class RemoteException(NoTraceBackWithLineNumber):
 
     def __init__(self, message='Remote analysis exception', debug_message=''):
@@ -97,7 +96,7 @@ class MagicClientAPI(object):
 
 
 
-    #@safe_run
+    @safe_run
     def request(self,product='catalog',api='api/v1.0/magic',params=None,url=None):
         if url is None:
             url=self.url
@@ -112,14 +111,14 @@ class MagicClientAPI(object):
 
         return res
 
-    #@safe_run
+    @safe_run
     def get_catalog(self):
         res = self.request(product='catalog')
         #cat_rec = json.loads(res.json(), object_pairs_hook=OrderedDict)
         #print(json.dumps(cat_rec, indent=4))
         return res.json()
 
-    #@safe_run
+    @safe_run
     def get_targets(self):
         res = self.request(product='targets')
         #targets = json.loads(res.json(), object_pairs_hook=OrderedDict)
@@ -127,14 +126,14 @@ class MagicClientAPI(object):
 
         return res.json()
 
-   # @safe_run
+    @safe_run
     def get_table_data(self,file_name):
         res = self.request(product='data',params = dict(file_name=file_name))
         _o_dict = json.loads(res.json())
         t_rec = ascii.read(_o_dict['astropy_table']['ascii'])
         return t_rec
 
-    #@safe_run
+    @safe_run
     def search_by_name(self, target_name):
         res = self.request(product='search-by-name', params=dict(target_name=target_name))
         #targets = json.loads(res.json())
