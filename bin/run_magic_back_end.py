@@ -85,8 +85,8 @@ def main(argv=None):
     debug = args.debug
 
     if use_gunicorn is True:
-        dispatcher_url = conf.dispatcher_url
-        port = conf.dispatcher_port
+        dispatcher_url = conf.url
+        port = conf.port
 
         options = {
             'bind': '%s:%s' % (dispatcher_url, port),
