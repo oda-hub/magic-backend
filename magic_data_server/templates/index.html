@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.1.0.min.css" type="text/css">
+
+
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.1.0.min.js"></script>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+
+<div class="col-md-8">
+
+    <div class="panel panel-primary text-center ">
+        <br>
+        {% block main %}
+        MAGIC MWL data server
+        {% endblock %}
+        <br>
+        <br>
+    </div>
+
+
+    <div class="col-md-8 text-left">
+        {% block targets %}
+        Targets
+        {% endblock %}
+        <br>
+        <form method="POST" action="/show-targets">
+            <table>
+                <tr><td align="right"><input type="submit" value="get targets",name='get target'></td>
+                </tr>
+            </table>
+
+        </form>
+        <div class="panel panel-primary col-md-8">
+        {% if targets %}
+        {% for c in targets %}
+         {{c}}<br>
+        {% endfor %}
+
+        {% endif %}
+            <br>
+            <br>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-8 text-left">
+        {% block search_targets %}
+        Search Target
+        {% endblock %}
+        <br>
+        <form method="POST" action="/search-name">
+            <table>
+                <tr>
+                    <td align="left"> <input type="text" name="target_name" required></td>
+                    <td align="right"><input type="submit" value="get file names",name='get file names'></td>
+                  </tr>
+            </table>
+        </form>
+        <div class="panel panel-primary col-md-8">
+        {% if file_names %}
+        {% for c in file_names %}
+         {{c}}<br>
+        {% endfor %}
+
+        {% endif %}
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="col-md-12 text-left">
+        {% block plot_targets %}
+        Plot Target
+        {% endblock %}
+         <br>
+        <form method="POST" action="/plot-target">
+            <table>
+                <tr>
+                    <td align="left"><input type="text" name="file_name" required><br></td>
+                    <td align="right"><input type="submit" value="plot target",name='plot target'></td>
+                </tr>
+            </table>
+        </form>
+        <div class="panel panel-primary col-md-10">
+        <br>
+            {{ script|safe }}
+            {{ div|safe }}
+        <br>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+
+</html>

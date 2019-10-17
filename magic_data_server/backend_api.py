@@ -26,6 +26,7 @@ from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMappe
 from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.palettes import Plasma256
+from flask_bootstrap import Bootstrap
 
 
 try:
@@ -46,8 +47,10 @@ class CustomJSONEncoder(JSONEncoder):
 
 
 template_dir =os.path.abspath(os.path.dirname(__file__))+'/templates'
+static_dir=os.path.abspath(os.path.dirname(__file__))+'/static'
 print ('template_dir',template_dir)
-micro_service = Flask("micro_service",template_folder=template_dir)
+
+micro_service = Flask("micro_service",template_folder=template_dir,static_folder=static_dir)
 
 micro_service.json_encoder = CustomJSONEncoder
 
@@ -255,21 +258,44 @@ class ScatterPlot(object):
         return components(layout)
 
 
-
-
-@micro_service.route('/test-bokeh')
+@micro_service.route('/index')
 def index():
-    # Determine the selected feature
-
-    p=ScatterPlot(800,400)
-    p.add_line([0,1],[0,1])
-
-    script, div = p.get_html_draw()
-    # Create the plot
-
-    return render_template("plot.html", script=script, div=div)
+    return render_template("index.html")
 
 
+@micro_service.route('/search-name',methods=['GET', 'POST'])
+def seach_name():
+    c=SearchName()
+    targets = c.get().json
+    s=[]
+    for k in targets.keys():
+        s.append('%s: %s '%(k,targets[k]))
+    return render_template("index.html",file_names=s)
+
+@micro_service.route('/show-targets',methods=['GET', 'POST'])
+def show_targets():
+    c=Targets()
+    targets = c.get().json
+    s=[]
+    for k in targets.keys():
+        s.append('%s: %s '%(k,targets[k]))
+    return render_template("index.html",targets=s)
+
+@micro_service.route('/plot-target',methods=['GET', 'POST'])
+def plot_target():
+    if request.method == 'POST':
+        file_name = request.form['file_name']
+        script=None
+        div=None
+
+        if 'sed' in file_name:
+            c=APIPlotSED()
+
+        if 'lc' in file_name:
+            c = APIPlotLC()
+
+        script, div = c.get(render=False)
+        return render_template("index.html", script=script, div=div)
 
 @micro_service.errorhandler(APIerror)
 def handle_api_error(error):
@@ -445,7 +471,7 @@ class APITableHtml(Resource):
 @ns_conf.route('/plot-sed')
 class APIPlotSED(Resource):
     @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
-    def get(self):
+    def get(self,render=True):
         """
         returns the plot for a SED table
         """
@@ -474,15 +500,17 @@ class APIPlotSED(Resource):
             #sed_plot.fig.savefig(buf, format="png")
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-            sp1 = ScatterPlot(w=800, h=600, x_label=str(sed_table['freq'].unit), y_label=str(sed_table['nufnu'].unit),
+            sp1 = ScatterPlot(w=600, h=400, x_label=str(sed_table['freq'].unit), y_label=str(sed_table['nufnu'].unit),
                               y_axis_type='log', x_axis_type='log')
 
             sp1.add_errorbar(sed_table['freq'], sed_table['nufnu'], yerr=sed_table['nufnu_elo'], xerr=sed_table['freq_elo'])
 
             script, div = sp1.get_html_draw()
 
-
-            return output_html(render_template("plot.html", script=script, div=div),200)
+            if render is True:
+                return output_html(render_template("plot.html", script=script, div=div),200)
+            else:
+                return script, div
 
 
         except Exception as e:
@@ -495,7 +523,7 @@ class APIPlotSED(Resource):
 @ns_conf.route('/plot-lc')
 class APIPlotLC(Resource):
     @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
-    def get(self):
+    def get(self,render=True):
         """
          returns the plot for a LC table
         """
@@ -522,13 +550,16 @@ class APIPlotLC(Resource):
             #lc_plot.fig.savefig(buf, format="png")
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-            lc = ScatterPlot(w=800, h=600, x_label=str(lc_table['tstart'].unit), y_label=str(lc_table['nufnu'].unit))
+            lc = ScatterPlot(w=600, h=400, x_label=str(lc_table['tstart'].unit), y_label=str(lc_table['nufnu'].unit))
 
             lc.add_errorbar(lc_table['tstart'], lc_table['nufnu'], yerr=lc_table['nufnu_eup'])
 
             script, div = lc.get_html_draw()
 
-            return output_html(render_template("plot.html", script=script, div=div), 200)
+            if render is True:
+                return output_html(render_template("plot.html", script=script, div=div),200)
+            else:
+                return script, div
 
         except Exception as e:
             #print('qui',e)

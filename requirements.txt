@@ -3,3 +3,4 @@ astropy
 flask-restplus
 pyyaml
 gunicorn
+bokeh
