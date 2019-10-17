@@ -22,6 +22,7 @@ from io import BytesIO
 
 from bokeh.layouts import row, widgetbox, gridplot
 from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMapper, LabelSet, ColumnDataSource
+
 from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.palettes import Plasma256
