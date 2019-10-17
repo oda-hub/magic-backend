@@ -128,7 +128,7 @@ class MagicClientAPI(object):
 
     @safe_run
     def get_table_data(self,file_name):
-        res = self.request(product='data',params = dict(file_name=file_name))
+        res = self.request(product='get-table',params = dict(file_name=file_name))
         _o_dict = json.loads(res.json())
         t_rec = ascii.read(_o_dict['astropy_table']['ascii'])
         return t_rec

@@ -4,7 +4,7 @@ from __future__ import absolute_import, division, print_function
 from builtins import (open, str, range,
                       object)
 
-from flask import Flask, jsonify, abort,request,render_template
+from flask import Flask, jsonify, abort,request,render_template,Response
 from flask_restplus import Api, Resource,reqparse
 
 from astropy.table import Table
@@ -29,6 +29,11 @@ api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
 
 ns_conf = api.namespace('api/v1.0/magic', description='data access')
 
+
+def output_html(data, code, headers=None):
+    resp = Response(data, mimetype='text/html', headers=headers)
+    resp.status_code = code
+    return resp
 
 class Configurer(object):
     def __init__(self, cfg_dict):
@@ -235,8 +240,8 @@ class Catalog(Resource):
             raise APIerror('Catalog file is empty/corrupted or missing: %s'%e, status_code=410)
 
 
-@ns_conf.route('/data')
-class Data(Resource):
+@ns_conf.route('/get-table')
+class APITable(Resource):
     @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
     def get(self):
         """
@@ -264,6 +269,37 @@ class Data(Resource):
             raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
 
         return jsonify(_o_dict)
+
+
+@ns_conf.route('/get-html-table')
+class APITableHtml(Resource):
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    def get(self):
+        """
+        returns the html view of an astropy table
+        """
+        api_parser = reqparse.RequestParser()
+        api_parser.add_argument('file_name', required=True, help="the name of the file",type=str)
+        api_args = api_parser.parse_args()
+        file_name = api_args['file_name']
+        print('file_name',file_name)
+        try:
+            #api_args = api_parser.parse_args()
+            #file_name = api_args['file_name']
+            #print('file_name', file_name)
+            config = micro_service.config.get('conf')
+            # TODO make this walk through directories
+            # TODO and put root_file into a method/function
+            data_file = os.path.join(config.data_root_path, file_name)
+            t = AstropyTable(Table.read(data_file, format='ascii'),name='MAGIC TABLE')
+            #_o_dict = {}
+            #_o_dict['astropy_table'] = t.encode(use_binary=False)
+            #_o_dict = json.dumps(_o_dict)
+        except Exception as e:
+            #print('qui',e)
+            raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
+        #return output_html(t.table.show_in_notebook().data,200)
+        return output_html(t.table.show_in_browser(jsviewer=True),200)
 
 
 def run_micro_service(conf,debug=False,threaded=False):
