@@ -35,11 +35,14 @@ Testing
 cd to the `test_examples` directory 
 
  
-
-1) run the app: `run_magic_back_end.py`
-
-2) browse this url to get api doc `http://localhost:5001/`
-    * check the backend API doc
-
-3) open the `magic-test.ipynb` notebook
-
+1) with the notebook
+    * run the app: `run_magic_back_end.py`
+    
+    * browse this url to get api doc `http://localhost:5001/`
+        * check the backend API doc
+    
+    * open the `magic-test.ipynb` notebook
+    
+1) with the frontend
+   browse this url to get api doc `http://localhost:5001/index`
+   
