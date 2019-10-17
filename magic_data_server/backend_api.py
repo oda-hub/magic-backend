@@ -20,8 +20,11 @@ from .client_api import    DataPlot
 import base64
 from io import BytesIO
 
-import mpld3
-from mpld3 import plugins
+from bokeh.layouts import row, widgetbox, gridplot
+from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMapper, LabelSet, ColumnDataSource
+from bokeh.embed import components
+from bokeh.plotting import figure
+from bokeh.palettes import Plasma256
 
 
 try:
@@ -41,7 +44,9 @@ class CustomJSONEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
-micro_service = Flask("micro_service")
+template_dir =os.path.abspath(os.path.dirname(__file__))+'/templates'
+print ('template_dir',template_dir)
+micro_service = Flask("micro_service",template_folder=template_dir)
 
 micro_service.json_encoder = CustomJSONEncoder
 
@@ -176,6 +181,95 @@ class MAGICTable(object):
 
 
 
+class ScatterPlot(object):
+
+    def __init__(self,w,h,x_label=None,y_label=None,x_range=None,y_range=None,title=None,y_axis_type='linear',x_axis_type='linear'):
+        hover = HoverTool(tooltips=[("x", "$x"), ("y", "$y")])
+
+        self.fig = figure(title=title, width=w, height=h,x_range=x_range,y_range=y_range,
+                          y_axis_type=y_axis_type,
+                          x_axis_type=x_axis_type,
+                     tools=[hover, 'pan,box_zoom,box_select,wheel_zoom,reset,save,crosshair'])
+
+        if x_label is not None:
+            self.fig.xaxis.axis_label = x_label
+
+        if y_label is not None:
+            self.fig.yaxis.axis_label = y_label
+
+        self.fig.add_tools(hover)
+
+    def add_errorbar(self, x, y, xerr=None, yerr=None, color='red',
+                 point_kwargs={}, error_kwargs={}):
+
+        self.fig.circle(x, y, color=color, **point_kwargs)
+
+        if xerr is not None:
+            x_err_x = []
+            x_err_y = []
+            for px, py, err in zip(x, y, xerr):
+                x_err_x.append((px - err, px + err))
+                x_err_y.append((py, py))
+            self.fig.multi_line(x_err_x, x_err_y, color=color, **error_kwargs)
+
+        if yerr is not None:
+            y_err_x = []
+            y_err_y = []
+            for px, py, err in zip(x, y, yerr):
+                y_err_x.append((px, px))
+                y_err_y.append((py - err, py + err))
+            self.fig.multi_line(y_err_x, y_err_y, color=color, **error_kwargs)
+
+
+
+    def add_step_line(self,x,y,legend=None):
+        #print('a')
+        self.fig.step(x,y,name=legend, mode="center")
+        #print('b')
+
+    def add_line(self,x,y,legend=None,color=None):
+        self.fig.line(x,y,legend=legend,line_color=color)
+
+    def get_html_draw(self):
+
+
+
+        layout = row(
+            self.fig
+        )
+        #curdoc().add_root(layout)
+
+
+        #show(layout)
+
+        #script, div = components(layout)
+
+        #print ('script',script)
+        #print ('div',div)
+
+        #html_dict = {}
+        #html_dict['script'] = script
+        #html_dict['div'] = div
+
+        return components(layout)
+
+
+
+
+@micro_service.route('/test-bokeh')
+def index():
+    # Determine the selected feature
+
+    p=ScatterPlot(800,400)
+    p.add_line([0,1],[0,1])
+
+    script, div = p.get_html_draw()
+    # Create the plot
+
+    return render_template("plot.html", script=script, div=div)
+
+
+
 @micro_service.errorhandler(APIerror)
 def handle_api_error(error):
     #print('handle_api_error 1')
@@ -196,7 +290,6 @@ def handle_api_error(error):
 
 
 
-    return mpld3.fig_to_html(fig)
 
 @ns_conf.route('/search-by-name')
 class SearchName(Resource):
@@ -367,24 +460,35 @@ class APIPlotSED(Resource):
             if 'Source' in sed_table.meta:
                 name = sed_table.meta['Source']
 
-            sed_plot = DataPlot()
+            #sed_plot = DataPlot()
 
-            sed_plot.add_data_plot(x=sed_table['freq'], y=sed_table['nufnu'],
-                                   dx=[sed_table['freq_elo'], sed_table['freq_eup']],
-                                   dy=[sed_table['nufnu_elo'], sed_table['nufnu_eup']], label=name)
+            #sed_plot.add_data_plot(x=sed_table['freq'], y=sed_table['nufnu'],
+            #                       dx=[sed_table['freq_elo'], sed_table['freq_eup']],
+            #                       dy=[sed_table['nufnu_elo'], sed_table['nufnu_eup']], label=name)
 
-            sed_plot.ax.set_ylabel(sed_table['nufnu'].unit)
-            sed_plot.ax.set_xlabel(sed_table['freq'].unit)
-            sed_plot.ax.grid()
-            buf = BytesIO()
-            sed_plot.fig.savefig(buf, format="png")
-            data = base64.b64encode(buf.getbuffer()).decode("ascii")
+            #sed_plot.ax.set_ylabel(sed_table['nufnu'].unit)
+            #sed_plot.ax.set_xlabel(sed_table['freq'].unit)
+            #sed_plot.ax.grid()
+            #buf = BytesIO()
+            #sed_plot.fig.savefig(buf, format="png")
+            #data = base64.b64encode(buf.getbuffer()).decode("ascii")
+
+            sp1 = ScatterPlot(w=800, h=600, x_label=str(sed_table['freq'].unit), y_label=str(sed_table['nufnu'].unit),
+                              y_axis_type='log', x_axis_type='log')
+
+            sp1.add_errorbar(sed_table['freq'], sed_table['nufnu'], yerr=sed_table['nufnu_elo'], xerr=sed_table['freq_elo'])
+
+            script, div = sp1.get_html_draw()
+
+
+            return output_html(render_template("plot.html", script=script, div=div),200)
+
 
         except Exception as e:
             #print('qui',e)
             raise APIerror('problem im producing sedplot: %s'%e, status_code=410)
 
-        return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
+        #return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
 
 
 @ns_conf.route('/plot-lc')
@@ -406,16 +510,24 @@ class APIPlotLC(Resource):
             if 'Source' in lc_table.meta:
                 name = lc_table.meta['Source']
 
-            lc_plot = DataPlot()
+            #lc_plot = DataPlot()
 
-            lc_plot.add_data_plot(x=lc_table['tstart'], y=lc_table['nufnu'],
-                                  dy=[lc_table['nufnu_elo'], lc_table['nufnu_eup']], label=name, loglog=False)
-            lc_plot.ax.set_ylabel(lc_table['nufnu'].unit)
-            lc_plot.ax.set_xlabel(lc_table['tstart'].unit)
-            lc_plot.ax.grid()
-            buf = BytesIO()
-            lc_plot.fig.savefig(buf, format="png")
-            data = base64.b64encode(buf.getbuffer()).decode("ascii")
+            #lc_plot.add_data_plot(x=lc_table['tstart'], y=lc_table['nufnu'],
+            #                      dy=[lc_table['nufnu_elo'], lc_table['nufnu_eup']], label=name, loglog=False)
+            #lc_plot.ax.set_ylabel(lc_table['nufnu'].unit)
+            #lc_plot.ax.set_xlabel(lc_table['tstart'].unit)
+            #lc_plot.ax.grid()
+            #buf = BytesIO()
+            #lc_plot.fig.savefig(buf, format="png")
+            #data = base64.b64encode(buf.getbuffer()).decode("ascii")
+
+            lc = ScatterPlot(w=800, h=600, x_label=str(lc_table['tstart'].unit), y_label=str(lc_table['nufnu'].unit))
+
+            lc.add_errorbar(lc_table['tstart'], lc_table['nufnu'], yerr=lc_table['nufnu_eup'])
+
+            script, div = lc.get_html_draw()
+
+            return output_html(render_template("plot.html", script=script, div=div), 200)
 
         except Exception as e:
             #print('qui',e)
