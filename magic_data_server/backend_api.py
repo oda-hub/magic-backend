@@ -6,14 +6,23 @@ from builtins import (open, str, range,
 
 from flask import Flask, jsonify, abort,request,render_template,Response
 from flask_restplus import Api, Resource,reqparse
+from flask.json import JSONEncoder
 
 from astropy.table import Table
 import json
 import yaml
 import pickle
-import base64
 import os
-from collections import OrderedDict
+import  numpy as np
+
+from .client_api import    DataPlot
+
+import base64
+from io import BytesIO
+
+import mpld3
+from mpld3 import plugins
+
 
 try:
     from StringIO import StringIO
@@ -21,7 +30,21 @@ except ImportError:
     from io import StringIO
 from magic_data_server import  conf_dir
 
+
+class CustomJSONEncoder(JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            print('hi')
+            return list(obj)
+
+        return JSONEncoder.default(self, obj)
+
+
 micro_service = Flask("micro_service")
+
+micro_service.json_encoder = CustomJSONEncoder
+
 
 api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
     description='API to extract data for MAGIC Telescope\n Author: Andrea Tramacere',)
@@ -29,6 +52,12 @@ api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
 
 ns_conf = api.namespace('api/v1.0/magic', description='data access')
 
+
+
+def get_path(file_name):
+    config = micro_service.config.get('conf')
+    file_path = os.path.join(config.data_root_path, file_name)
+    return file_path
 
 def output_html(data, code, headers=None):
     resp = Response(data, mimetype='text/html', headers=headers)
@@ -84,12 +113,26 @@ class APIerror(Exception):
         return rv
 
 
-class AstropyTable(object):
+class MAGICTable(object):
 
     def __init__(self,table_object,name='astropy table', meta_data={}):
         self.name=name
         self.meta_data=meta_data
         self.table=table_object
+
+
+    @classmethod
+    def from_file(cls,file_path,format,name):
+
+        table=Table.read(file_path, format=format)
+
+        meta=None
+
+        if hasattr(table,'meta'):
+            meta=table.meta
+
+        return cls(table,name,meta_data=meta)
+
 
     def encode(self,use_binary=False,to_json = False):
 
@@ -150,6 +193,10 @@ def handle_api_error(error):
     response.status_code = error.status_code
 
     return response
+
+
+
+    return mpld3.fig_to_html(fig)
 
 @ns_conf.route('/search-by-name')
 class SearchName(Resource):
@@ -259,10 +306,10 @@ class APITable(Resource):
             config = micro_service.config.get('conf')
             # TODO make this walk through directories
             # TODO and put root_file into a method/function
-            data_file = os.path.join(config.data_root_path, file_name)
-            t = AstropyTable(Table.read(data_file, format='ascii'),name='MAGIC TABLE')
+            file_path = get_path(file_name)
+            table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE')
             _o_dict = {}
-            _o_dict['astropy_table'] = t.encode(use_binary=False)
+            _o_dict['astropy_table'] = table.encode(use_binary=False)
             _o_dict = json.dumps(_o_dict)
         except Exception as e:
             #print('qui',e)
@@ -287,11 +334,10 @@ class APITableHtml(Resource):
             #api_args = api_parser.parse_args()
             #file_name = api_args['file_name']
             #print('file_name', file_name)
-            config = micro_service.config.get('conf')
             # TODO make this walk through directories
             # TODO and put root_file into a method/function
-            data_file = os.path.join(config.data_root_path, file_name)
-            t = AstropyTable(Table.read(data_file, format='ascii'),name='MAGIC TABLE')
+            file_path = get_path(file_name)
+            table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE').table
             #_o_dict = {}
             #_o_dict['astropy_table'] = t.encode(use_binary=False)
             #_o_dict = json.dumps(_o_dict)
@@ -299,8 +345,90 @@ class APITableHtml(Resource):
             #print('qui',e)
             raise APIerror('table file is empty/corrupted or missing: %s'%e, status_code=410)
         #return output_html(t.table.show_in_notebook().data,200)
-        return output_html(t.table.show_in_browser(jsviewer=True),200)
+        return output_html(table.show_in_browser(jsviewer=True),200)
 
+
+@ns_conf.route('/plot-sed')
+class APIPlotSED(Resource):
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    def get(self):
+        """
+        returns the plot for a SED table
+        """
+        api_parser = reqparse.RequestParser()
+        api_parser.add_argument('file_name', required=True, help="the name of the file", type=str)
+        api_args = api_parser.parse_args()
+        file_name = api_args['file_name']
+
+        try:
+            file_path = get_path(file_name)
+            sed_table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE').table
+            name = ''
+            if 'Source' in sed_table.meta:
+                name = sed_table.meta['Source']
+
+            sed_plot = DataPlot()
+
+            sed_plot.add_data_plot(x=sed_table['freq'], y=sed_table['nufnu'],
+                                   dx=[sed_table['freq_elo'], sed_table['freq_eup']],
+                                   dy=[sed_table['nufnu_elo'], sed_table['nufnu_eup']], label=name)
+
+            sed_plot.ax.set_ylabel(sed_table['nufnu'].unit)
+            sed_plot.ax.set_xlabel(sed_table['freq'].unit)
+            sed_plot.ax.grid()
+            buf = BytesIO()
+            sed_plot.fig.savefig(buf, format="png")
+            data = base64.b64encode(buf.getbuffer()).decode("ascii")
+
+        except Exception as e:
+            #print('qui',e)
+            raise APIerror('problem im producing sedplot: %s'%e, status_code=410)
+
+        return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
+
+
+@ns_conf.route('/plot-lc')
+class APIPlotLC(Resource):
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    def get(self):
+        """
+         returns the plot for a LC table
+        """
+        api_parser = reqparse.RequestParser()
+        api_parser.add_argument('file_name', required=True, help="the name of the file", type=str)
+        api_args = api_parser.parse_args()
+        file_name = api_args['file_name']
+
+        try:
+            file_path = get_path(file_name)
+            lc_table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE').table
+            name = ''
+            if 'Source' in lc_table.meta:
+                name = lc_table.meta['Source']
+
+            lc_plot = DataPlot()
+
+            lc_plot.add_data_plot(x=lc_table['tstart'], y=lc_table['nufnu'],
+                                  dy=[lc_table['nufnu_elo'], lc_table['nufnu_eup']], label=name, loglog=False)
+            lc_plot.ax.set_ylabel(lc_table['nufnu'].unit)
+            lc_plot.ax.set_xlabel(lc_table['tstart'].unit)
+            lc_plot.ax.grid()
+            buf = BytesIO()
+            lc_plot.fig.savefig(buf, format="png")
+            data = base64.b64encode(buf.getbuffer()).decode("ascii")
+
+        except Exception as e:
+            #print('qui',e)
+            raise APIerror('problem im producing sedplot: %s'%e, status_code=410)
+
+        #plugins.connect(lc_plot.fig, plugins.MousePosition(fontsize=14))
+
+        #print('ciccio')
+        #mpld3.show()
+        #return  output_html(render_template('plot_mpld3.html', plot=mpld3.fig_to_html(lc_plot.fig)),200)
+        #return  mpld3.fig_to_html(lc_plot.fig)
+
+        return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
 
 def run_micro_service(conf,debug=False,threaded=False):
 
@@ -312,5 +440,6 @@ def run_micro_service(conf,debug=False,threaded=False):
 
 
     micro_service.run(host=conf.url,port=conf.port,debug=debug,threaded=threaded)
+
 
 
