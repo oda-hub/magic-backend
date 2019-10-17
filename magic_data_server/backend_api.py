@@ -15,27 +15,16 @@ import pickle
 import os
 import  numpy as np
 
-from .client_api import    DataPlot
 
 import base64
 from io import BytesIO
+from .plot_tools import ScatterPlot
+from .data_tools import MAGICTable
 
-from bokeh.layouts import row, widgetbox, gridplot
-from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMapper, LabelSet, ColumnDataSource
-
-from bokeh.embed import components
-from bokeh.plotting import figure
-
-
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import StringIO
-from magic_data_server import  conf_dir
+from magic_data_server import conf_dir
 
 
 class CustomJSONEncoder(JSONEncoder):
-
     def default(self, obj):
         if isinstance(obj, np.ndarray):
             print('hi')
@@ -43,20 +32,14 @@ class CustomJSONEncoder(JSONEncoder):
 
         return JSONEncoder.default(self, obj)
 
-
 template_dir =os.path.abspath(os.path.dirname(__file__))+'/templates'
 static_dir=os.path.abspath(os.path.dirname(__file__))+'/static'
-print ('template_dir',template_dir)
 
 micro_service = Flask("micro_service",template_folder=template_dir,static_folder=static_dir)
-
 micro_service.json_encoder = CustomJSONEncoder
-
 
 api= Api(app=micro_service, version='1.0', title='MAGIC back-end API',
     description='API to extract data for MAGIC Telescope\n Author: Andrea Tramacere',)
-
-
 ns_conf = api.namespace('api/v1.0/magic', description='data access')
 
 
@@ -85,7 +68,6 @@ class Configurer(object):
             if k not in self._valid:
                 raise RuntimeError('conf key',k,'is not valid')
 
-
     @classmethod
     def from_conf_file(cls, conf_file):
 
@@ -103,6 +85,7 @@ class Configurer(object):
 
         return Configurer(cfg_dict)
 
+
 class APIerror(Exception):
 
     def __init__(self, message, status_code=None, payload=None):
@@ -119,128 +102,20 @@ class APIerror(Exception):
         rv['error_message'] = self.message
         return rv
 
+class APP(Exception):
+    def __init__(self, message, status_code=None, payload=None):
+        Exception.__init__(self)
+        self.message = message
 
-class MAGICTable(object):
-
-    def __init__(self,table_object,name='astropy table', meta_data={}):
-        self.name=name
-        self.meta_data=meta_data
-        self.table=table_object
-
-
-    @classmethod
-    def from_file(cls,file_path,format,name):
-
-        table=Table.read(file_path, format=format)
-
-        meta=None
-
-        if hasattr(table,'meta'):
-            meta=table.meta
-
-        return cls(table,name,meta_data=meta)
-
-
-    def encode(self,use_binary=False,to_json = False):
-
-        _o_dict = {}
-        _o_dict['binary']=None
-        _o_dict['ascii']=None
-
-        if use_binary is True:
-            _binarys = base64.b64encode(pickle.dumps(self.table, protocol=2)).decode('utf-8')
-            _o_dict['binary'] = _binarys
-        else:
-            fh=StringIO()
-            self.table.write(fh, format='ascii.ecsv')
-            _text = fh.getvalue()
-            fh.close()
-            _o_dict['ascii'] = _text
-
-        _o_dict['name']=self.name
-        _o_dict['meta_data']=json.dumps(self.meta_data)
-
-        if to_json == True:
-            _o_dict=json.dumps(_o_dict)
-        return   _o_dict
-
-    @classmethod
-    def decode(cls,_o_dict,use_binary=False):
-
-        encoded_name = _o_dict['name']
-        encoded_meta_data = _o_dict['meta_data']
-        if use_binary is True:
-            t_rec = base64.b64decode(_o_dict['binary'])
-            try:
-                t_rec = pickle.loads(t_rec)
-            except:
-                t_rec= pickle.loads(t_rec,encoding='latin')
-
-        else:
-            t_rec = ascii.read(_o_dict['ascii'])
-
-        return cls(t_rec,name=encoded_name,meta_data=encoded_meta_data)
+        if status_code is not None:
+            self.status_code = status_code
+        self.payload = payload
+        print('APP Error Message',message)
 
 
 
-class ScatterPlot(object):
 
-    def __init__(self,w,h,x_label=None,y_label=None,x_range=None,y_range=None,title=None,y_axis_type='linear',x_axis_type='linear'):
-        hover = HoverTool(tooltips=[("x", "$x"), ("y", "$y")])
-
-        self.fig = figure(title=title, width=w, height=h,x_range=x_range,y_range=y_range,
-                          y_axis_type=y_axis_type,
-                          x_axis_type=x_axis_type,
-                     tools=[hover, 'pan,box_zoom,box_select,wheel_zoom,reset,save,crosshair'])
-
-        if x_label is not None:
-            self.fig.xaxis.axis_label = x_label
-
-        if y_label is not None:
-            self.fig.yaxis.axis_label = y_label
-
-        self.fig.add_tools(hover)
-
-    def add_errorbar(self, x, y, xerr=None, yerr=None, color='red',
-                 point_kwargs={}, error_kwargs={}):
-
-        self.fig.circle(x, y, color=color, **point_kwargs)
-
-        if xerr is not None:
-            x_err_x = []
-            x_err_y = []
-            for px, py, err in zip(x, y, xerr):
-                x_err_x.append((px - err, px + err))
-                x_err_y.append((py, py))
-            self.fig.multi_line(x_err_x, x_err_y, color=color, **error_kwargs)
-
-        if yerr is not None:
-            y_err_x = []
-            y_err_y = []
-            for px, py, err in zip(x, y, yerr):
-                y_err_x.append((px, px))
-                y_err_y.append((py - err, py + err))
-            self.fig.multi_line(y_err_x, y_err_y, color=color, **error_kwargs)
-
-
-
-    def add_step_line(self,x,y,legend=None):
-        #print('a')
-        self.fig.step(x,y,name=legend, mode="center")
-        #print('b')
-
-    def add_line(self,x,y,legend=None,color=None):
-        self.fig.line(x,y,legend=legend,line_color=color)
-
-    def get_html_draw(self):
-
-        layout = row(
-            self.fig
-        )
-
-        return components(layout)
-
-@micro_service.errorhandler(APIerror)
+@micro_service.errorhandler(APP)
 def handle_app_error(error):
     return 'bad request! %s'%error.message, 400
 
@@ -285,16 +160,23 @@ def plot_target():
             return render_template("index.html", script=script, div=div)
         except Exception as e:
             print(e)
-            raise APIerror('table file is empty/corrupted or missing: %s' % e, status_code=410)
+            raise APP('table file is empty/corrupted or missing: %s' % e, status_code=410)
 
 
 
+@micro_service.errorhandler(APIerror)
+def handle_api_error(error):
+    #print('handle_api_error 2')
+    response = jsonify(error.to_dict())
+    #response.json()['error message']=error
+    response.status_code = error.status_code
+    return response
 
 @api.errorhandler(APIerror)
 def handle_api_error(error):
     #print('handle_api_error 2')
     response = jsonify(error.to_dict())
-    response.json()['error message']=error
+    #response.json()['error message']=error
     response.status_code = error.status_code
 
     return response
