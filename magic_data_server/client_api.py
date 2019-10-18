@@ -9,20 +9,17 @@ __author__ = "Andrea Tramacere"
 
 import requests
 #import ast
-import  numpy as np
 import json
 #import random
 #import string
 #import time
 #import os
-from matplotlib import  pylab as plt
 import inspect
 import sys
 from astropy.io import ascii
 #import base64
-
 from collections import OrderedDict
-
+from .data_tools import get_targets_dic
 
 from itertools import cycle
 
@@ -112,77 +109,37 @@ class MagicClientAPI(object):
         return res
 
     @safe_run
-    def get_catalog(self):
-        res = self.request(product='catalog')
+    def get_paper_ids(self):
+        res = self.request(product='paper_ids')
+        # cat_rec = json.loads(res.json(), object_pairs_hook=OrderedDict)
+        # print(json.dumps(cat_rec, indent=4))
+        return res.json()
+
+    @safe_run
+    def get_catalog(self,paper_id):
+        res = self.request(product='catalog',params = dict(paper_id=paper_id))
         #cat_rec = json.loads(res.json(), object_pairs_hook=OrderedDict)
         #print(json.dumps(cat_rec, indent=4))
         return res.json()
 
     @safe_run
-    def get_targets(self):
-        res = self.request(product='targets')
-        #targets = json.loads(res.json(), object_pairs_hook=OrderedDict)
-        # print(json.dumps(cat_rec, indent=4))
-
-        return res.json()
+    def get_targets(self,paper_id):
+        res = self.request(product='targets',params = dict(paper_id=paper_id))
+        return get_targets_dic(res.json())
 
     @safe_run
-    def get_table_data(self,file_name):
-        res = self.request(product='get-table',params = dict(file_name=file_name))
+    def get_table_data(self,file_name,paper_id):
+        res = self.request(product='get-table',params = dict(file_name=file_name,paper_id=paper_id))
         _o_dict = json.loads(res.json())
         t_rec = ascii.read(_o_dict['astropy_table']['ascii'])
         return t_rec
 
     @safe_run
-    def search_by_name(self, target_name):
-        res = self.request(product='search-by-name', params=dict(target_name=target_name))
+    def search_by_name(self, target_name,paper_id):
+        res = self.request(product='search-by-name', params=dict(target_name=target_name,paper_id=paper_id))
         #targets = json.loads(res.json())
         return res.json()
 
 
 
-
-class DataPlot(object):
-    def __init__(self):
-
-        self.fig = plt.figure(figsize=(8, 6))
-        self.ax = self.fig.subplots(1, 1)
-
-    def add_data_plot(self,
-                      x,
-                      y,dx=None,
-                      dy=None,
-                      label=None,
-                      color=None,
-                      fmt='o',
-                      ms=None,
-                      mew=None,
-                      loglog=True,
-                      grid=False):
-
-
-
-        # get x,y,dx,dy from SEDdata
-        if dx is None:
-            dx = np.zeros(len(x))
-
-        if dy is None:
-            dy = np.zeros(len(y))
-
-        # set color
-        #if color is None:
-        #    color = self.counter
-
-
-
-        line = self.ax.errorbar(x, y, xerr=dx, yerr=dy, fmt=fmt, label=label, ms=ms, mew=mew)
-        if loglog is True:
-            self.ax.set_xscale("log", nonposx='clip')
-            self.ax.set_yscale("log", nonposy='clip')
-
-
-        if grid is True:
-            self.ax.grid()
-
-        self.ax.legend()
 

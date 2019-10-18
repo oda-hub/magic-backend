@@ -51,5 +51,14 @@ border-radius: 3px;
 /* gradients */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(65%, white), color-stop(100%, #f7f7f7));
 background: -moz-linear-gradient(top, white 0%, white 65%, #f7f7f7 100%);
+border: 1px solid black;
+overflow: hidden;
+resize: both;
+width: 160px;
+height: 120px;
+min-width: 120px;
+min-height: 90px;
+max-width: 400px;
+max-height: 300px;
 }
 

@@ -1,0 +1,27 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: energy    , unit: GeV          , datatype: float32 , description: Energy                                }
+# - {name: energy_wlo, unit: GeV          , datatype: float32 , description: Energy bin width low                  }
+# - {name: energy_wup, unit: GeV          , datatype: float32 , description: Energy bin width up                   }
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential energy flux at ‘energy‘  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: isot         , datatype: str , description: MJD start                             }
+# - {name: tstop     , unit: isot         , datatype: str , description: MJD stop                              }
+# - {name: texpo     , unit: h            , datatype: float32 , description: Observation time                      }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename: magic_19a_sed_fig2.ecsv}
+# - {Source:   NGC1068}
+# - {Comments: Date only approximate in paper. Points are upper limits}
+# schema : astropy −2.0
+
+energy  energy_wlo energy_wup nufnu     nufnu_elo   nufnu_eup   tstart tstop texpo comments
+177.881	 101.041   307.447  1.065e-12 1.065e-12 0 '2016-01-01T00:00:00.000' '2018-01-01T00:00:00.000' 125  " "
+563.969	 311.015   989.154  2.793e-13 2.793e-13 0 '2016-01-01T00:00:00.000' '2018-01-01T00:00:00.000' 125  " "
+1784.965 1000.285  3170.301 1.163e-13 1.163e-13 0 '2016-01-01T00:00:00.000' '2018-01-01T00:00:00.000' 125  " "
+5539.744 3130.132  9685.101 2.905e-13 2.905e-13 0 '2016-01-01T00:00:00.000' '2018-01-01T00:00:00.000' 125  " "
+
+
+

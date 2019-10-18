@@ -4,7 +4,7 @@ from __future__ import absolute_import, division, print_function
 from builtins import (open, str, range,
                       object)
 
-from flask import Flask, jsonify, abort,request,render_template,Response
+from flask import Flask, jsonify, abort,request,render_template,Response,make_response
 from flask_restplus import Api, Resource,reqparse
 from flask.json import JSONEncoder
 
@@ -19,7 +19,7 @@ import  numpy as np
 import base64
 from io import BytesIO
 from .plot_tools import ScatterPlot
-from .data_tools import MAGICTable
+from .data_tools import MAGICTable,get_targets_dic
 
 from magic_data_server import conf_dir
 
@@ -44,10 +44,14 @@ ns_conf = api.namespace('api/v1.0/magic', description='data access')
 
 
 
-def get_path(file_name):
+def get_file_path(paper_id,file_name):
     config = micro_service.config.get('conf')
-    file_path = os.path.join(config.data_root_path, file_name)
+    file_path = os.path.join(config.data_root_path, paper_id, file_name)
     return file_path
+
+def get_papers_collection():
+    config = micro_service.config.get('conf')
+    return os.listdir(config.data_root_path)
 
 def output_html(data, code, headers=None):
     resp = Response(data, mimetype='text/html', headers=headers)
@@ -56,7 +60,7 @@ def output_html(data, code, headers=None):
 
 class Configurer(object):
     def __init__(self, cfg_dict):
-        self._valid=['port','url','data_root_path','catalog_file','source_name_field','MW_file_kw','MAGIC_file_kw']
+        self._valid=['port','url','data_root_path','catalog_file_prefix','catalog_file_type','source_name_field','MW_file_kw','MAGIC_file_kw']
         self._validate(cfg_dict)
 
         for k in cfg_dict.keys():
@@ -123,44 +127,82 @@ def handle_app_error(error):
 def index():
     return render_template("index.html")
 
+def get_pars():
+    if request.method == 'POST':
+        p_dict= request.form
+
+    if request.method == 'GET':
+        p_dict = request.args.to_dict()
+
+    return p_dict
+
+
+
 
 @micro_service.route('/search-name',methods=['GET', 'POST'])
-def seach_name():
+def search_name():
     c=SearchName()
-    targets = c.get().json
-    s=[]
-    for k in targets.keys():
-        s.append('%s: %s '%(k,targets[k]))
-    return render_template("index.html",file_names=s)
+    files_dict = c.get().json
+    file_type=[]
+    file_name_list=[]
+
+    for k in files_dict.keys():
+        file_type.append('%s:'%(k))
+        file_name_list.append(files_dict[k])
+        print(files_dict[k])
+    return render_template("index.html",file_names=zip(file_type,file_name_list))
+
+
+@micro_service.route('/show-papers',methods=['GET', 'POST'])
+def show_papers():
+    c = Papers()
+    papers_id_list = c.get().json
+    s = []
+    n = []
+    print(papers_id_list)
+    for ID,p in enumerate(papers_id_list):
+        print(ID,p)
+        s.append('id_%02d :'%ID)
+        n.append(' %s' %p)
+    return render_template("index.html",paper_ids=zip(s,n))
 
 @micro_service.route('/show-targets',methods=['GET', 'POST'])
 def show_targets():
-    c=Targets()
-    targets = c.get().json
-    s=[]
+    c = Targets()
+    targets = get_targets_dic(c.get().json)
+    s = []
+    n = []
     for k in targets.keys():
-        s.append('%s: %s '%(k,targets[k]))
-    return render_template("index.html",targets=s)
+        s.append('%s :'%k)
+        n.append(' %s' % (targets[k][0]))
+    return render_template("index.html",targets=zip(s,n))
 
 @micro_service.route('/plot-target',methods=['GET', 'POST'])
 def plot_target():
-    if request.method == 'POST':
-        file_name = request.form['file_name']
-        script=None
-        div=None
+    script = None
+    div = None
 
-        try:
-            if 'sed' in file_name:
-                c=APIPlotSED()
+    p_dict=get_pars()
+    #if request.method == 'POST':
+    file_name = p_dict['file_name']
+    #paper_id=p_dict['paper_id']
 
-            if 'lc' in file_name:
-                c = APIPlotLC()
+    try:
+        if 'sed' in file_name:
+            c=APIPlotSED()
 
-            script, div = c.get(render=False)
-            return render_template("index.html", script=script, div=div)
-        except Exception as e:
-            print(e)
-            raise APP('table file is empty/corrupted or missing: %s' % e, status_code=410)
+        if 'lc' in file_name:
+            c = APIPlotLC()
+
+        script, div = c.get(render=False)
+        resp = make_response('{"test": "ok"}')
+        resp.headers['Content-Type'] = "text/html"
+        return Response((script, div), content_type='text/html')
+        #return make_response(script=script, div=div)
+        #return render_template("index.html", script=script, div=div,)
+    except Exception as e:
+        print(e)
+        raise APP('table file is empty/corrupted or missing: %s' % e, status_code=410)
 
 
 
@@ -183,26 +225,109 @@ def handle_api_error(error):
 
 
 
+@ns_conf.route('/paper_ids')
+class Papers(Resource):
+    @api.doc(responses={410: ''},)
+    def get(self):
+        """
+        returns the list of paper ids
+        """
+        config = micro_service.config.get('conf')
+        # TODO make this walk through directories
+        # TODO and put root_file into a method/function
+        config = micro_service.config.get('conf')
+        try:
+            papers_ids_list = os.listdir(config.data_root_path)
+
+            return jsonify(papers_ids_list)
+        except Exception as e:
+            print(e)
+            raise APIerror('no paper folder found: %s' % e, status_code=410)
+
+@ns_conf.route('/catalog')
+class Catalog(Resource):
+    @api.doc(responses={410: 'Catalog file is empty/corrupted or missing'})
+    def get(self):
+        """
+        returns the catalog
+        """
+        config = micro_service.config.get('conf')
+        api_parser = reqparse.RequestParser()
+        api_parser.add_argument('paper_id', required=True, help="the id of the paper", type=str)
+
+        api_args = api_parser.parse_args()
+        paper_id = api_args['paper_id']
+
+        catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
+        catalog_file_path = os.path.join(config.data_root_path, paper_id, catalog_file_name)
+        # TODO make this walk through directories
+        # TODO and put root_file into a method/function
+        try:
+            with open(catalog_file_path) as f:
+                data = yaml.load(f,Loader=yaml.FullLoader)
+
+            #_o_dict = json.dumps(data,sort_keys=False)
+            _o_dict=dict(catalog=data)
+            #print(_o_dict)
+            return jsonify(_o_dict)
+        except Exception as e:
+            print(e)
+            raise APIerror('Catalog file is empty/corrupted or missing: %s'%e, status_code=410)
+
+
+@ns_conf.route('/targets')
+class Targets(Resource):
+    @api.doc(responses={410: ''},params={'paper_id':'the paper id'})
+    def get(self):
+        """
+        returns the list of sources
+        """
+        config = micro_service.config.get('conf')
+        # TODO make this walk through directories
+        # TODO and put root_file into a method/function
+        api_parser = reqparse.RequestParser()
+        api_parser.add_argument('paper_id', required=True, help="the id of the paper", type=str)
+
+        api_args = api_parser.parse_args()
+        paper_id = api_args['paper_id']
+
+        catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
+        catalog_file_path = os.path.join(config.data_root_path, paper_id, catalog_file_name)
+        try:
+            with open(catalog_file_path) as f:
+                data = yaml.load(f,Loader=yaml.FullLoader)
+
+            return jsonify(data[config.source_name_field])
+        except Exception as e:
+            print(e)
+            raise APIerror('table catalog is empty/corrupted or missing: %s' % e, status_code=410)
+
 
 @ns_conf.route('/search-by-name')
 class SearchName(Resource):
-    @api.doc(responses={410: ''}, params={'target_name': 'the source name'})
+    @api.doc(responses={410: ''}, params={'target_name': 'the source name','paper_id':'the paper id'})
     def get(self):
         """
         returns the file list for a given source
         """
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('target_name', required=True, help="the name of the source",type=str)
+        api_parser.add_argument('paper_id', required=True, help="the id of the paper", type=str)
+
         api_args = api_parser.parse_args()
         target_name = api_args['target_name']
+        paper_id= api_args['paper_id']
+
         config = micro_service.config.get('conf')
         print('target_name', target_name)
         #TODO make this walk through directories
         #TODO and put root_file into a method/function
-        catalog_file=os.path.join(config.data_root_path,config.catalog_file)
+        catalog_file_name = config.catalog_file_prefix+paper_id+config.catalog_file_type
+        catalog_file_path = os.path.join(config.data_root_path,paper_id,catalog_file_name)
 
+        print(catalog_file_path)
         try:
-            with open(catalog_file) as f:
+            with open(catalog_file_path) as f:
                 data = yaml.load(f,Loader=yaml.FullLoader)
 
 
@@ -228,63 +353,23 @@ class SearchName(Resource):
             raise APIerror('table file is empty/corrupted or missing: %s' % e, status_code=410)
 
 
-@ns_conf.route('/targets')
-class Targets(Resource):
-    @api.doc(responses={410: ''},)
-    def get(self):
-        """
-        returns the list of sources
-        """
-        config = micro_service.config.get('conf')
-        # TODO make this walk through directories
-        # TODO and put root_file into a method/function
-        catalog_file = os.path.join(config.data_root_path, config.catalog_file)
-        try:
-            with open(catalog_file) as f:
-                data = yaml.load(f,Loader=yaml.FullLoader)
-
-            return jsonify(data[config.source_name_field])
-        except Exception as e:
-            print(e)
-            raise APIerror('table catalog is empty/corrupted or missing: %s' % e, status_code=410)
 
 
-@ns_conf.route('/catalog')
-class Catalog(Resource):
-    @api.doc(responses={410: 'Catalog file is empty/corrupted or missing'})
-    def get(self):
-        """
-        returns the catalog
-        """
-        config = micro_service.config.get('conf')
-        # TODO make this walk through directories
-        # TODO and put root_file into a method/function
-        catalog_file = os.path.join(config.data_root_path, config.catalog_file)
-        try:
-            with open(catalog_file) as f:
-                data = yaml.load(f,Loader=yaml.FullLoader)
-
-            #_o_dict = json.dumps(data,sort_keys=False)
-            _o_dict=dict(catalog=data)
-            #print(_o_dict)
-            return jsonify(_o_dict)
-        except Exception as e:
-            print(e)
-            raise APIerror('Catalog file is empty/corrupted or missing: %s'%e, status_code=410)
 
 
 @ns_conf.route('/get-table')
 class APITable(Resource):
-    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name','paper_id':'the paper id'})
     def get(self):
         """
         returns the astropy table
         """
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('file_name', required=True, help="the name of the file",type=str)
+        api_parser.add_argument('paper_id', required=True, help="the paper id", type=str)
         api_args = api_parser.parse_args()
         file_name = api_args['file_name']
-        print('file_name',file_name)
+        paper_id = api_args['paper_id']
         try:
             #api_args = api_parser.parse_args()
             #file_name = api_args['file_name']
@@ -292,7 +377,7 @@ class APITable(Resource):
             config = micro_service.config.get('conf')
             # TODO make this walk through directories
             # TODO and put root_file into a method/function
-            file_path = get_path(file_name)
+            file_path = get_file_path(paper_id,file_name)
             table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE')
             _o_dict = {}
             _o_dict['astropy_table'] = table.encode(use_binary=False)
@@ -306,23 +391,24 @@ class APITable(Resource):
 
 @ns_conf.route('/get-html-table')
 class APITableHtml(Resource):
-    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name','paper_id':'the paper id'})
     def get(self):
         """
         returns the html view of an astropy table
         """
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('file_name', required=True, help="the name of the file",type=str)
+        api_parser.add_argument('paper_id', required=True, help="the paper id", type=str)
         api_args = api_parser.parse_args()
         file_name = api_args['file_name']
-        print('file_name',file_name)
+        paper_id = api_args['paper_id']
         try:
             #api_args = api_parser.parse_args()
             #file_name = api_args['file_name']
             #print('file_name', file_name)
             # TODO make this walk through directories
             # TODO and put root_file into a method/function
-            file_path = get_path(file_name)
+            file_path = get_file_path(paper_id, file_name)
             table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE').table
             #_o_dict = {}
             #_o_dict['astropy_table'] = t.encode(use_binary=False)
@@ -336,18 +422,20 @@ class APITableHtml(Resource):
 
 @ns_conf.route('/plot-sed')
 class APIPlotSED(Resource):
-    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name','paper_id':'the paper id'})
     def get(self,render=True):
         """
         returns the plot for a SED table
         """
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('file_name', required=True, help="the name of the file", type=str)
+        api_parser.add_argument('paper_id', required=True, help="the paper id", type=str)
         api_args = api_parser.parse_args()
         file_name = api_args['file_name']
+        paper_id = api_args['paper_id']
 
         try:
-            file_path = get_path(file_name)
+            file_path = get_file_path(paper_id, file_name)
             sed_table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE').table
             name = ''
             if 'Source' in sed_table.meta:
@@ -367,7 +455,7 @@ class APIPlotSED(Resource):
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
             sp1 = ScatterPlot(w=600, h=400, x_label=str(sed_table['freq'].unit), y_label=str(sed_table['nufnu'].unit),
-                              y_axis_type='log', x_axis_type='log')
+                              y_axis_type='log', x_axis_type='log',title=name)
 
             sp1.add_errorbar(sed_table['freq'], sed_table['nufnu'], yerr=sed_table['nufnu_elo'], xerr=sed_table['freq_elo'])
 
@@ -388,18 +476,19 @@ class APIPlotSED(Resource):
 
 @ns_conf.route('/plot-lc')
 class APIPlotLC(Resource):
-    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name'})
+    @api.doc(responses={410: 'table file is empty/corrupted or missing'}, params={'file_name': 'the file name','paper_id':'the paper id'})
     def get(self,render=True):
         """
          returns the plot for a LC table
         """
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('file_name', required=True, help="the name of the file", type=str)
+        api_parser.add_argument('paper_id', required=True, help="the paper id", type=str)
         api_args = api_parser.parse_args()
         file_name = api_args['file_name']
-
+        paper_id=api_args['paper_id']
         try:
-            file_path = get_path(file_name)
+            file_path = get_file_path(paper_id,file_name)
             lc_table = MAGICTable.from_file(file_path=file_path, format='ascii', name='MAGIC TABLE').table
             name = ''
             if 'Source' in lc_table.meta:
@@ -416,7 +505,7 @@ class APIPlotLC(Resource):
             #lc_plot.fig.savefig(buf, format="png")
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-            lc = ScatterPlot(w=600, h=400, x_label=str(lc_table['tstart'].unit), y_label=str(lc_table['nufnu'].unit))
+            lc = ScatterPlot(w=600, h=400, x_label=str(lc_table['tstart'].unit), y_label=str(lc_table['nufnu'].unit),title=name)
 
             lc.add_errorbar(lc_table['tstart'], lc_table['nufnu'], yerr=lc_table['nufnu_eup'])
 

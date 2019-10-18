@@ -10,7 +10,54 @@ from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMappe
 
 from bokeh.embed import components
 from bokeh.plotting import figure
+from matplotlib import  pylab as plt
+import  numpy as np
 
+
+
+class DataPlot(object):
+    def __init__(self):
+
+        self.fig = plt.figure(figsize=(8, 6))
+        self.ax = self.fig.subplots(1, 1)
+
+    def add_data_plot(self,
+                      x,
+                      y,dx=None,
+                      dy=None,
+                      label=None,
+                      color=None,
+                      fmt='o',
+                      ms=None,
+                      mew=None,
+                      loglog=True,
+                      grid=False):
+
+
+
+        # get x,y,dx,dy from SEDdata
+        if dx is None:
+            dx = np.zeros(len(x))
+
+        if dy is None:
+            dy = np.zeros(len(y))
+
+        # set color
+        #if color is None:
+        #    color = self.counter
+
+
+
+        line = self.ax.errorbar(x, y, xerr=dx, yerr=dy, fmt=fmt, label=label, ms=ms, mew=mew)
+        if loglog is True:
+            self.ax.set_xscale("log", nonposx='clip')
+            self.ax.set_yscale("log", nonposy='clip')
+
+
+        if grid is True:
+            self.ax.grid()
+
+        self.ax.legend()
 
 
 
@@ -64,9 +111,11 @@ class ScatterPlot(object):
         self.fig.line(x,y,legend=legend,line_color=color)
 
     def get_html_draw(self):
-
+        self.fig.sizing_mode = 'scale_width'
         layout = row(
             self.fig
         )
+
+        layout.sizing_mode = 'scale_width'
 
         return components(layout)
