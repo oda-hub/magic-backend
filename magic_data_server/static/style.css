@@ -32,7 +32,9 @@
  div.transbox {
   background-color: ##808080    ;
 }
-
+.inline-flex-parent {
+  display: inline-flex;
+}
 
 
 .gradientBoxesWithOuterShadows {

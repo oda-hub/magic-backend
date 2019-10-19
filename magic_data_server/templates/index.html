@@ -30,7 +30,7 @@
 <body>
 
 <div class="container">
-    <div class="col-md-10 text-left">
+    <div class="col-md-18 text-left">
         <div class="panel panel-primary  col-md-10 text-center">
             <br>
             {% block main %}
@@ -41,8 +41,8 @@
         </div>
     </div>
 
-
-    <div class="col-md-8 text-left">
+    <div class="row">
+    <div class="col-md-4 text-left">
         {% block papers %}
         {% endblock %}
         <br>
@@ -74,7 +74,7 @@
     </div>
 
 
-    <div class="col-md-8 text-left">
+    <div class="col-md-4 text-left">
         {% block targets %}
         Search Targets
         {% endblock %}
@@ -110,9 +110,10 @@
         </div>
 
     </div>
+    </div>
 
-
-    <div class="col-md-8 text-left ">
+    <div class="row">
+    <div class="col-md-6 text-left ">
         {% block search_targets %}
         Search Target Files
         {% endblock %}
@@ -183,7 +184,7 @@
 
 
     </div>
-
+    </div>
 </div>
 
 

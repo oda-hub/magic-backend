@@ -454,10 +454,22 @@ class APIPlotSED(Resource):
             #sed_plot.fig.savefig(buf, format="png")
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-            sp1 = ScatterPlot(w=600, h=400, x_label=str(sed_table['freq'].unit), y_label=str(sed_table['nufnu'].unit),
+
+            if 'energy' in sed_table.colnames:
+                x=sed_table['energy']
+                dx=sed_table['energy_wlo']
+            elif 'nu' in sed_table.colnames:
+                x=sed_table['freq']
+                dx=sed_table['freq_elo']
+            else:
+                raise APIerror('problem im producing sedplot, x axis names not valid:, status_code=410')
+
+            sp1 = ScatterPlot(w=600, h=400, x_label=str(x.unit), y_label=str(sed_table['nufnu'].unit),
                               y_axis_type='log', x_axis_type='log',title=name)
 
-            sp1.add_errorbar(sed_table['freq'], sed_table['nufnu'], yerr=sed_table['nufnu_elo'], xerr=sed_table['freq_elo'])
+
+
+            sp1.add_errorbar(x, sed_table['nufnu'], yerr=sed_table['nufnu_elo'], xerr=dx)
 
             script, div = sp1.get_html_draw()
 

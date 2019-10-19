@@ -4,6 +4,7 @@ File_info :
  Fgen = Michele Doro, michele.doro@unipd.it
  Fmail = contact.magic@mpp.mpg.de
  Flink = XXX
+
 Paper info:
  Pref : The Astrophysical Journal, 883:135 (9pp), 2019 October 1
  Pdoi: https://doi.org/10.3847/1538-4357/ab3a51
@@ -12,20 +13,22 @@ Paper info:
  Pcauthor: Alessandra Lamastra, Saverio Lombardi, Antonio Stamerra
  Pads:  2019arXiv190610954M
  Pinspire : Acciari:2019raw
+
 Targets in file: 
  Tpname01: NGC1068
  Taname01: PKS0240-002 NGC1068 PKSB0240-002 PBCJ0242.7-0000 M77 IRASF02401-0013 1ES0240-002 1WGAJ0242.6-0000 1Jy0240-002 2E0240.1-0013 AXS_J024240-0001 PGC10266 N1068 IRAS02401-0013 PLCKERC545G172.09-51.93 PLCKERC353G172.10-51.93 2FGLJ0242.5+0006 1RXSJ024240.9-000046 PLCKERC857G172.09-51.93
+
 File list MAGIC:
  - magic_19a_sed_target01_fig2.ecsv 
 
 File list MWL:
- - magic_19a_sed_fig2_target01_mwl1.ecsv 
- - magic_19a_sed_fig2_target01_mwl2.ecsv 
+ - magic_19a_sed_fig2_mwl1_target01.ecsv 
+ - magic_19a_sed_fig2_mwl2_target01.ecsv 
 
 File on demands (available on request to Fmail):
- - magic_19a_sed_fig2_target01_model1.ecsv 
- - magic_19a_sed_fig2_target01_model2.ecsv 
- - magic_19a_sed_fig2_target01_model3.ecsv 
+ - magic_19a_sed_fig2_model1_target01.ecsv 
+ - magic_19a_sed_fig2_model2_target01.ecsv 
+ - magic_19a_sed_fig2_model3_target01.ecsv 
 
 Comments: 
               
