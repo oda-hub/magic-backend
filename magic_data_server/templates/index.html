@@ -30,8 +30,8 @@
 <body>
 
 <div class="container">
-    <div class="col-md-18 text-left">
-        <div class="panel panel-primary  col-md-10 text-center">
+    <div class="col-xs-18 text-left">
+        <div class="panel panel-primary  col-xs-10 text-center">
             <br>
             {% block main %}
             MAGIC MWL data server
@@ -42,19 +42,11 @@
     </div>
 
     <div class="row">
-    <div class="col-md-4 text-left">
-        {% block papers %}
-        {% endblock %}
-        <br>
-        <form method="POST" action="/show-papers">
-            <table>
-                <tr>
-                    <td align="right"><input type="submit" value="get paper ids" ,name='get paper ids'></td>
-                </tr>
-            </table>
+    <div class="col-xs-6 text-left">
 
-        </form>
-        <div class="panel panel-primary col-md-8">
+        <br>
+
+        <div class="panel panel-primary col-xs-6">
             <table>
 
                 {% if paper_ids %}
@@ -67,31 +59,24 @@
                 {% endif %}
 
             </table>
-
             <br>
             <br>
         </div>
-    </div>
-
-
-    <div class="col-md-4 text-left">
-        {% block targets %}
-        Search Targets
-        {% endblock %}
-        <br>
-        <form method="POST" action="/show-targets">
+        <form method="POST" action="/show-papers">
             <table>
                 <tr>
-
-                    <td align="left"><input type="text" name="paper_id" required>paper_id</td>
-                </tr>
-                <tr>
-                    <td align="left"><input type="submit" value="get targets" ,name='get target'></td>
+                    <td align="right"><input type="submit" value="get paper ids" ,name='get paper ids'></td>
                 </tr>
             </table>
 
         </form>
-        <div class="panel panel-primary col-md-8">
+    </div>
+
+
+    <div class="col-xs-6 text-left">
+
+        <br>
+        <div class="panel panel-primary  col-xs-6">
             <table>
 
                 {% if targets %}
@@ -108,30 +93,35 @@
             <br>
             <br>
         </div>
-
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="col-md-6 text-left ">
-        {% block search_targets %}
-        Search Target Files
-        {% endblock %}
-        <br>
-        <form method="POST" action="/search-name">
+        <form method="POST" action="/show-targets">
             <table>
                 <tr>
-                    <td align="left"><input type="text" name="target_name" required>target_name</td>
-                 <tr>
+
                     <td align="left"><input type="text" name="paper_id" required>paper_id</td>
                 </tr>
-                </tr>
-                    <td align="left"><input type="submit" value="get file names" ,name='get file names'></td>
+                <tr>
+                    <td align="left"><input type="submit" value="get targets" ,name='get target'></td>
                 </tr>
             </table>
+
         </form>
 
-        <div class="panel panel-primary col-md-8">
+
+    </div>
+    </div>
+
+
+
+
+
+
+    <div class="row">
+
+
+    <div class="col-xs-6 text-left ">
+
+        <div class="panel panel-primary col-xs-6">
+
             {% if file_names %}
             {% for (f_t,f_nl) in file_names %}
             <table>
@@ -151,28 +141,26 @@
             <br>
             <br>
         </div>
-    </div>
-
-    <div class="col-md-10 text-left">
-        {% block plot_targets %}
-        Plot Target
-        {% endblock %}
-        <br>
-        <div class='wrapper'>
+        <form method="POST" action="/search-name">
             <table>
                 <tr>
-                    <td align="left"><input type="text" id="file_name" required>file name</td>
+                    <td align="left"><input type="text" name="target_name" required>target_name</td>
+                 <tr>
+                    <td align="left"><input type="text" name="paper_id" required>paper_id</td>
                 </tr>
-                <tr>
-                    <td align="left"><input type="text" id="paper_id" required>paper_id</td>
                 </tr>
-                <tr>
-                    <td align="left"><button id="get_plot"> Plot Target</button></td>
+                    <td align="left"><input type="submit" value="get file names" ,name='get file names'></td>
                 </tr>
             </table>
-        </div>
+        </form>
 
-        <div class="panel panel-primary col-md-8" ,id="Test">
+
+    </div>
+    </div>
+    <div class="col-xs-16 text-left">
+
+
+        <div class="panel panel-primary col-xs-7    " ,id="Test">
             <div class='plot' , id="plot">
                 <br>
 
@@ -182,8 +170,23 @@
 
         </div>
 
+        <table>
+                <tr>
+                    <td align="left"><input type="text" id="file_name" required size="42">file name</td>
+                </tr>
+                <tr>
+                    <td align="left"><input type="text" id="paper_id" required>paper_id</td>
+                </tr>
+                <tr>
+                    <td align="left"><button id="get_plot"> Plot Target</button></td>
+                </tr>
+            </table>
 
-    </div>
+
+
+
+
+
     </div>
 </div>
 

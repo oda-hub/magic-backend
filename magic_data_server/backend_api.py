@@ -454,11 +454,10 @@ class APIPlotSED(Resource):
             #sed_plot.fig.savefig(buf, format="png")
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-
             if 'energy' in sed_table.colnames:
                 x=sed_table['energy']
                 dx=sed_table['energy_wlo']
-            elif 'nu' in sed_table.colnames:
+            elif 'freq' in sed_table.colnames:
                 x=sed_table['freq']
                 dx=sed_table['freq_elo']
             else:
