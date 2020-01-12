@@ -28,7 +28,7 @@ cd to the `magic-backend` directory
 * or using PIP
      * `pip install -r requirements.txt`
 
-* `python setup.py install`
+* `sudo python setup.py install`
 
 Testing 
 -------
