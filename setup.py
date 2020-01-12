@@ -13,7 +13,7 @@ __author__ = 'andrea tramacere'
 
 from setuptools import setup, find_packages
 import  glob
-
+import  json
 
 
 f = open("./requirements.txt",'r')
@@ -26,13 +26,16 @@ packs=find_packages()
 print ('packs',packs)
 
 
+with open('magic_data_server/pkg_info.json') as fp:
+    _info = json.load(fp)
 
+__version__ = _info['version']
 
 include_package_data=True
 
 scripts_list=glob.glob('./bin/*')
 setup(name='magic_data_server',
-      version=1.0,
+      version=__version__,
       description='A Python Framework for MAGIC high-level data distribution',
       author='Andrea Tramacere',
       author_email='andrea.tramacere@unige.ch',
@@ -40,7 +43,8 @@ setup(name='magic_data_server',
       package_data={'magic_data_server': ['config_dir/*','templates/*','static/*']},
       packages=packs,
       include_package_data=True,
-      install_requires=install_req,)
+      install_requires=install_req,
+      python_requires='>=3.5')
 
 
 

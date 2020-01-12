@@ -23,7 +23,8 @@ class DataPlot(object):
 
     def add_data_plot(self,
                       x,
-                      y,dx=None,
+                      y,
+                      dx=None,
                       dy=None,
                       label=None,
                       color=None,
@@ -59,7 +60,32 @@ class DataPlot(object):
 
         self.ax.legend()
 
+    def add_sed(self,sed_table,label=None,color=None):
+        if label is None:
+            label=sed_table.meta['Source']
+        self.add_data_plot(x=sed_table['freq'],
+                           y=sed_table['nufnu'],
+                           dx=[sed_table['freq_elo'], sed_table['freq_eup']],
+                           dy=[sed_table['nufnu_elo'], sed_table['nufnu_eup']],
+                           label=label,
+                           color=color)
 
+        self.ax.set_ylabel(sed_table['nufnu'].unit)
+        self.ax.set_xlabel(sed_table['freq'].unit)
+        #self.ax.set_ylim(5E-14, 1E-9)
+        #self.ax.grid()
+
+    def add_lc(self,lc_table):
+        self.add_data_plot(x=lc_table['tstart'],
+                           y=lc_table['nufnu'],
+                           dy=[lc_table['nufnu_elo'],lc_table['nufnu_eup']],
+                           label=lc_table.meta['Source'],
+                           loglog=False)
+
+        self.ax.set_ylabel(lc_table['nufnu'].unit)
+        self.ax.set_xlabel(lc_table['tstart'].unit)
+        #self.ax.grid()
+        #self.ax.legend()
 
 class ScatterPlot(object):
 

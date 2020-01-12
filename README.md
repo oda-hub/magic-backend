@@ -21,12 +21,22 @@ Clone the repository `git clone https://github.com/andreatramacere/magic-backend
 cd to the `magic-backend` directory 
 
 * using Anaconda
+     * create a virtual environment (not necessary, but suggested): 
  
-     * `conda config --add channels conda-forge`
-     * `conda install --file requirements.txt`
+       `conda create --name magic-backend python=3.7 ipython jupyter`
+    
+       `conda activate magic-backend`
+
+     * `conda install -c conda-forge --file   requirements.txt`
     
 * or using PIP
+     * create a virtual environment (not necessary, but suggested, https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+      
      * `pip install -r requirements.txt`
+     
+       OR if you are using system python (deprecated)
+     
+     * `sudo pip install -r requirements.txt`
 
 * `python setup.py install`
 

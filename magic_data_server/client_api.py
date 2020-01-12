@@ -120,7 +120,7 @@ class MagicClientAPI(object):
         res = self.request(product='catalog',params = dict(paper_id=paper_id))
         #cat_rec = json.loads(res.json(), object_pairs_hook=OrderedDict)
         #print(json.dumps(cat_rec, indent=4))
-        return res.json()
+        return  res.json()['catalog']
 
     @safe_run
     def get_targets(self,paper_id):

@@ -18,7 +18,7 @@ import yaml
 
 import gunicorn.app.base
 
-from gunicorn.six import iteritems
+#from gunicorn.six import iteritems
 
 from magic_data_server.backend_api import run_micro_service, micro_service
 

@@ -246,7 +246,7 @@ class Papers(Resource):
 
 @ns_conf.route('/catalog')
 class Catalog(Resource):
-    @api.doc(responses={410: 'Catalog file is empty/corrupted or missing'})
+    @api.doc(responses={410: 'Catalog file is empty/corrupted or missing'},params={'paper_id':'the paper id'})
     def get(self):
         """
         returns the catalog
@@ -312,7 +312,7 @@ class SearchName(Resource):
         """
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('target_name', required=True, help="the name of the source",type=str)
-        api_parser.add_argument('paper_id', required=True, help="the id of the paper", type=str)
+        api_parser.add_argument('paper_id', required=False, help="the id of the paper", type=str)
 
         api_args = api_parser.parse_args()
         target_name = api_args['target_name']
