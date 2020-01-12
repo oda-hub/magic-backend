@@ -44,8 +44,10 @@ Testing
 -------
 - cd to the `test_examples` directory 
 
--  run the app: `run_magic_back_end.py`
- 
+-  run 'on the command line' the app: `run_magic_back_end.py`
+
+   this a script installed with the package and it is available in your command line
+
 1) with the notebook
     
     * browse this url to get api doc `http://localhost:5001/`
