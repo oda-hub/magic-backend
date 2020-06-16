@@ -42,9 +42,8 @@ class MAGICTable(object):
 
 
     @classmethod
-    def from_file(cls,file_path,format,name):
-
-        table=Table.read(file_path, format=format)
+    def from_file(cls,file_path,format,name,delimiter=';'):
+        table=Table.read(file_path, format=format,delimiter=delimiter)
 
         meta=None
 

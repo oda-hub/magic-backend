@@ -1,0 +1,108 @@
+File_info :
+ Fdate = 20190819
+ Fvers = 1
+ Fgen = Michele Doro, michele.doro@unipd.it
+ Fmail = magic_sapo@mpp.mpg.de 
+ Flink = XXXX
+Paper info
+ Pref : Astrophysical Journal Supplement XXX
+ Pdoi: https:// doi.org/XXX 
+ Parxiv: http://arxiv.org/abs/arXiv:XXX
+ Pcoll: magic
+ Pcauthor: Elisa Prandini, Cornelia Arcaro, Vandad Fallah Ramazani
+ Pads: XX
+ Pinspire : XXX
+Targets in file 
+ Tpname01: TXS0210+515
+ Taname01: BZBJ0214+5144; 1RXSJ021417.8+514457; 87GB02109+5130; GB6J0214+5145; 5BZGJ0214+5144; GB6B0210+5131; 2WHSPJ021417.8+514451; 2FHLJ0214.9+5149
+ Tpname02: TXS0637-128
+ Taname02: 
+ Tpname03: BZBJ0809+3455
+ Taname03: 
+ Tpname04: RBS0723
+ Taname04:
+ Tpname05: 1ES0927+500
+ Taname05: 
+ Tpname06: RBS0921
+ Taname06: 
+ Tpname07: 1ES1426+428
+ Taname07: 
+ Tpname08: 1ES2037+521
+ Taname09: 
+ Tpname09: RGBJ2042+244
+ Taname09: 
+ Tpname10: RGBJ2323+147
+ Taname10: 
+ Tpname11: 1ES0229+200
+ Taname11: 
+File list MAGIC:
+ magic_19e_sed_fig1_target_all.ecsv 
+ magic_19e_sed_fig1_target01.ecsv 
+ magic_19e_sed_fig1_target04.ecsv 
+ magic_19e_sed_fig1_target07.ecsv 
+ magic_19e_sed_fig1_target08.ecsv 
+ magic_19e_sed_fig1_target09.ecsv 
+
+File list MWL;
+ magic_19e_lc1_fig2_target_all.ecsv 
+ magic_19e_lc1_fig2_target01.ecsv 
+ magic_19e_lc1_fig2_target02.ecsv 
+ magic_19e_lc1_fig2_target03.ecsv 
+ magic_19e_lc1_fig2_target04.ecsv 
+ magic_19e_lc1_fig2_target05.ecsv 
+ magic_19e_lc1_fig2_target06.ecsv 
+ magic_19e_lc1_fig2_target07.ecsv 
+ magic_19e_lc1_fig2_target08.ecsv 
+ magic_19e_lc1_fig2_target09.ecsv 
+ magic_19e_lc1_fig2_target010.ecsv 
+ magic_19e_lc1_fig2_target011.ecsv 
+
+ magic_19e_sed_fig3_mwl_target_all.ecsv 
+ magic_19e_sed_fig3_mwl_target11.ecsv 
+ magic_19e_sed_fig3_mwl_target07.ecsv 
+ magic_19e_sed_fig3_mwl_target04.ecsv 
+ magic_19e_sed_fig3_mwl_target08.ecsv 
+ magic_19e_sed_fig3_mwl_target09.ecsv 
+ magic_19e_sed_fig3_mwl_target01.ecsv 
+
+ magic_19e_sed_fig3_nofit_target_all.ecsv 
+ magic_19e_sed_fig3_nofit_target11.ecsv 
+ magic_19e_sed_fig3_nofit_target07.ecsv 
+ magic_19e_sed_fig3_nofit_target04.ecsv 
+ magic_19e_sed_fig3_nofit_target08.ecsv 
+ magic_19e_sed_fig3_nofit_target09.ecsv 
+ magic_19e_sed_fig3_nofit_target01.ecsv 
+
+ magic_19e_sed_fig4_mwl_target_all.ecsv 
+ magic_19e_sed_fig4_mwl_target05.ecsv 
+ magic_19e_sed_fig4_mwl_target03.ecsv 
+ magic_19e_sed_fig4_mwl_target10.ecsv 
+ magic_19e_sed_fig4_mwl_target02.ecsv 
+ magic_19e_sed_fig4_nofit_target_all.ecsv 
+ magic_19e_sed_fig4_nofit_target05.ecsv 
+ magic_19e_sed_fig4_nofit_target03.ecsv 
+ magic_19e_sed_fig4_nofit_target10.ecsv 
+ magic_19e_sed_fig4_nofit_target02.ecsv 
+
+File on demands (available on request to Fmail)
+ magic_19e_sed1_fig1_target01_eblcorrected.ecsv 
+ magic_19e_sed1_fig1_target04_eblcorrected.ecsv 
+ magic_19e_sed1_fig1_target07_eblcorrected.ecsv 
+ magic_19e_sed1_fig1_target08_eblcorrected.ecsv 
+ magic_19e_sed1_fig1_target09_eblcorrected.ecsv 
+
+ magic_19e_sed_fig3_model_target_all.ecsv 
+ magic_19e_sed_fig3_model_target11.ecsv 
+ magic_19e_sed_fig3_model_target07.ecsv 
+ magic_19e_sed_fig3_model_target04.ecsv 
+ magic_19e_sed_fig3_model_target08.ecsv 
+ magic_19e_sed_fig3_model_target09.ecsv 
+ magic_19e_sed_fig3_model_target01.ecsv 
+
+ magic_19e_sed_fig4_model_target_all.ecsv 
+ magic_19e_sed_fig4_model_target05.ecsv 
+ magic_19e_sed_fig4_model_target03.ecsv 
+ magic_19e_sed_fig4_model_target10.ecsv 
+ magic_19e_sed_fig4_model_target02.ecsv 
+Comments: 
+              

@@ -1,0 +1,24 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: energy    , unit: GeV          , datatype: float32 , description: Energy                                }
+# - {name: energy_wlo, unit: GeV          , datatype: float32 , description: Energy bin width low                      }
+# - {name: energy_wup, unit: GeV          , datatype: float32 , description: Energy bin width up                        }
+# - {name: nufnu     , unit: TeV cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘energy ‘  }
+# - {name: nufnu_elo , unit: TeV cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: TeV cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: h            , datatype: float32 , description: Observation time                      }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_sed_fig1_target08_eblcorrected.ecsv}
+# - {Source: 1ES2037+521}
+# - {Commments: EBL model Franceschini+ 2008}
+# schema : astropy −2.0
+
+energy   energy_wlo energy_wup nufnu        nufnu_elo   nufnu_eup   tstart tstop texpo comments
+156.978  49.1636    75.3011    5.32062e-11   2.11802e-11  2.11802e-11    57658  57672 28.1 ""
+3.38E+02 1.06E+02   162.231    1.10359e-11   3.77722e-12  3.77722e-12    57658  57672 28.1 ""
+7.29E+02 2.28E+02   349.517    2.40206e-12   9.50507e-13  9.50507e-13    57658  57672 28.1 ""
+1.57E+03 4.92E+02   753.011    5.50387e-13   2.83945e-13  2.83945e-13	 57658  57672 28.1 ""

@@ -12,6 +12,7 @@ from astropy.table import Table
 import json
 import yaml
 import pickle
+import glob
 import os
 import  numpy as np
 
@@ -44,7 +45,26 @@ ns_conf = api.namespace('api/v1.0/magic', description='data access')
 
 
 
+def set_paper_id(paper_id):
+    catalog_dir = paper_id
+    paper_id = catalog_dir.split('_')[0]
+
+    return paper_id
+
+def get_catalog_path(paper_id):
+    config = micro_service.config.get('conf')
+
+    catalog_dir =paper_id
+    paper_id = set_paper_id(paper_id)
+
+    catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
+    catalog_file_path = os.path.join(config.data_root_path, catalog_dir, catalog_file_name)
+    catalog_file_dir=os.path.join(config.data_root_path, catalog_dir)
+
+    return catalog_file_path,catalog_file_dir
+
 def get_file_path(paper_id,file_name):
+
     config = micro_service.config.get('conf')
     file_path = os.path.join(config.data_root_path, paper_id, file_name)
     return file_path
@@ -128,6 +148,7 @@ def index():
     return render_template("index.html")
 
 def get_pars():
+    p_dict=None
     if request.method == 'POST':
         p_dict= request.form
 
@@ -197,7 +218,10 @@ def plot_target():
         script, div = c.get(render=False)
         resp = make_response('{"test": "ok"}')
         resp.headers['Content-Type'] = "text/html"
-        return Response((script, div), content_type='text/html')
+        if 'render' in p_dict.keys():
+            return render_template("plot.html", script=script, div=div, )
+        else:
+            return Response((script, div), content_type='text/html')
         #return make_response(script=script, div=div)
         #return render_template("index.html", script=script, div=div,)
     except Exception as e:
@@ -233,9 +257,6 @@ class Papers(Resource):
         returns the list of paper ids
         """
         config = micro_service.config.get('conf')
-        # TODO make this walk through directories
-        # TODO and put root_file into a method/function
-        config = micro_service.config.get('conf')
         try:
             papers_ids_list = os.listdir(config.data_root_path)
 
@@ -256,19 +277,22 @@ class Catalog(Resource):
         api_parser.add_argument('paper_id', required=True, help="the id of the paper", type=str)
 
         api_args = api_parser.parse_args()
-        paper_id = api_args['paper_id']
 
-        catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
-        catalog_file_path = os.path.join(config.data_root_path, paper_id, catalog_file_name)
+        paper_id=api_args['paper_id']
+
+        catalog_file_path,catalog_file_dir=get_catalog_path(paper_id)
+        #print('-->',catalog_file_path,catalog_file_dir)
         # TODO make this walk through directories
         # TODO and put root_file into a method/function
+
+        _o_dict={}
         try:
             with open(catalog_file_path) as f:
                 data = yaml.load(f,Loader=yaml.FullLoader)
 
             #_o_dict = json.dumps(data,sort_keys=False)
             _o_dict=dict(catalog=data)
-            #print(_o_dict)
+            #print('-->',_o_dict,data)
             return jsonify(_o_dict)
         except Exception as e:
             print(e)
@@ -283,16 +307,17 @@ class Targets(Resource):
         returns the list of sources
         """
         config = micro_service.config.get('conf')
+        #print('--> config',config)
         # TODO make this walk through directories
         # TODO and put root_file into a method/function
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('paper_id', required=True, help="the id of the paper", type=str)
 
         api_args = api_parser.parse_args()
+
         paper_id = api_args['paper_id']
 
-        catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
-        catalog_file_path = os.path.join(config.data_root_path, paper_id, catalog_file_name)
+        catalog_file_path,catalog_file_dir = get_catalog_path(paper_id)
         try:
             with open(catalog_file_path) as f:
                 data = yaml.load(f,Loader=yaml.FullLoader)
@@ -317,37 +342,55 @@ class SearchName(Resource):
         api_args = api_parser.parse_args()
         target_name = api_args['target_name']
         paper_id= api_args['paper_id']
-
+        #print('target_name', target_name)
         config = micro_service.config.get('conf')
-        print('target_name', target_name)
+        #print('target_name', target_name)
         #TODO make this walk through directories
         #TODO and put root_file into a method/function
-        catalog_file_name = config.catalog_file_prefix+paper_id+config.catalog_file_type
-        catalog_file_path = os.path.join(config.data_root_path,paper_id,catalog_file_name)
 
-        print(catalog_file_path)
+
+        catalog_file_path,catalog_file_dir = get_catalog_path(paper_id)
+
+
+
+        print('catalog_file_path',catalog_file_path)
         try:
             with open(catalog_file_path) as f:
                 data = yaml.load(f,Loader=yaml.FullLoader)
 
 
             target_list=[]
-            print('target_name',target_name)
+            #print('target_name',target_name)
             for key, value in data[config.source_name_field].items():
-                print('key, value', key, value)
+                #print('key, value', key, value)
                 if value is not None:
-                    print('target_list', target_list)
-                    target_list.extend([key for f in value.split(';') if f.strip().lower()==target_name.lower()])
-                    print('target_list', target_list)
+                    #print('target_list', target_list)
+                    target_list.extend([value for f in value.split(';') if f.strip().lower()==target_name.lower()])
+                    #print('target_list', target_list)
 
-            target_list=[n.replace('Tpname','target').replace('Taname','target') for n in target_list]
-            print('target_list',target_list)
+            #target_list=[n.replace('Tpname','target').replace('Taname','target') for n in target_list]
+            print('-->target_list',target_list)
             _o_dict = {}
-            _o_dict['MWL_files'] = [n for n in data[config.MW_file_kw] if any(t in n for t in target_list)]
-            _o_dict['MAGIC_files'] = [n for n in data[config.MAGIC_file_kw] if any(t in n for t in target_list)]
-            #print(_o_dict)
-            #print('go')
+
+            mw_files=[]
+            if config.MW_file_kw in data.keys():
+                mw_files=data[config.MW_file_kw]
+
+            magic_files=[]
+            if config.MAGIC_file_kw in data.keys():
+                magic_files=data[config.MAGIC_file_kw]
+
+
+            if target_name in target_list:
+
+
+                _o_dict['MWL_files'] = [n for n in mw_files  if (target_name in Table.read(get_file_path(paper_id,n),format='ascii.ecsv',delimiter=';')['srcname'])]
+
+                _o_dict['MAGIC_files'] = [n for n in magic_files  if (target_name in Table.read(get_file_path(paper_id,n),format='ascii.ecsv',delimiter=';')['srcname'])]
+
+            print('-->t done')
             return jsonify(_o_dict)
+
         except Exception as e:
             print(e)
             raise APIerror('table file is empty/corrupted or missing: %s' % e, status_code=410)
@@ -373,7 +416,6 @@ class APITable(Resource):
         try:
             #api_args = api_parser.parse_args()
             #file_name = api_args['file_name']
-            #print('file_name', file_name)
             config = micro_service.config.get('conf')
             # TODO make this walk through directories
             # TODO and put root_file into a method/function
@@ -454,21 +496,33 @@ class APIPlotSED(Resource):
             #sed_plot.fig.savefig(buf, format="png")
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-            if 'energy' in sed_table.colnames:
-                x=sed_table['energy']
-                dx=sed_table['energy_wlo']
-            elif 'freq' in sed_table.colnames:
-                x=sed_table['freq']
-                dx=sed_table['freq_elo']
-            else:
-                raise APIerror('problem im producing sedplot, x axis names not valid:, status_code=410')
+            #if 'energy' in sed_table.colnames:
+            x=sed_table['en']
+            dx=sed_table['en_wlo']
+            #elif 'freq' in sed_table.colnames:
+            #    x=sed_table['freq']
+             #   dx=sed_table['freq_elo']
+            #else:
+            #    raise APIerror('problem im producing sedplot, x axis names not valid:, status_code=410')
+            #print(x, sed_table['nufnu'], dx, sed_table['nufnu_elo'])
+
+            dx = [sed_table['en_wlo'], sed_table['en_wup']]
+            dy = [sed_table['nufnu_elo'], sed_table['nufnu_eup']]
 
             sp1 = ScatterPlot(w=600, h=400, x_label=str(x.unit), y_label=str(sed_table['nufnu'].unit),
                               y_axis_type='log', x_axis_type='log',title=name)
 
+            if dx is None:
+                dx = np.zeros((2,len(x)))
+            else:
+                dx = np.fabs(x - dx)
 
+            if dy is None:
+                dy = np.zeros(len(sed_table['nufnu']))
+            else:
+                dy = np.fabs(sed_table['nufnu'] - dy)
 
-            sp1.add_errorbar(x, sed_table['nufnu'], yerr=sed_table['nufnu_elo'], xerr=dx)
+            sp1.add_errorbar(x, sed_table['nufnu'],xerr=dx,yerr=dy,dataformat=sed_table['dataformat'])
 
             script, div = sp1.get_html_draw()
 
@@ -538,7 +592,7 @@ class APIPlotLC(Resource):
         #return  output_html(render_template('plot_mpld3.html', plot=mpld3.fig_to_html(lc_plot.fig)),200)
         #return  mpld3.fig_to_html(lc_plot.fig)
 
-        return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
+        #return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
 
 def run_micro_service(conf,debug=False,threaded=False):
 

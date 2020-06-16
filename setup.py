@@ -43,7 +43,7 @@ setup(name='magic_data_server',
       package_data={'magic_data_server': ['config_dir/*','templates/*','static/*']},
       packages=packs,
       include_package_data=True,
-      install_requires=install_req,
+      #install_requires=install_req,
       python_requires='>=3.5')
 
 

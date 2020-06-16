@@ -1,0 +1,12 @@
+#Contact: Vandad Fallah Ramazani (vafara@utu.fi)
+#Source: 1ES_0927+500
+#RA: 09:30:37.6 (J2000)
+#Dec: +49:50:26 (J2000)
+#nH: 0.0138e22 (cm**-2)
+#F1: 2-10 keV (cgs)
+#F2: 0.3-10 keV (cgs)
+#Gamma: equivalant photon index when logparabola is the best-fit model
+DATE-TIME          MJD         EXP     APE.  G_PSF  F1         F1_ERR     F2         F2_ERR     Alpha   Alpha_ERR  Beta    Beta_ERR   R.CHI2  DOF  OID         ftest   Gamma      Gamma_err 
+2010-09-06T02:59:37   20    g4     1.4243e-11 5.6122e-13 1.81430 4.7121e-02 0.00000 0.0000e+00 1.35959 44   00039154001 0.00464 1.81430 4.7121e-02
+2011-03-21T23:28:37   20    g0     2.4342e-11 2.4484e-12 1.90984 1.0574e-01 0.00000 0.0000e+00 0.63101 10   00039154002 0.40303 1.90984 1.0574e-01
+2011-03-28T20:44:49   20    g12    1.4098e-11 8.0312e-13 2.05652 6.6833e-02 0.00000 0.0000e+00 1.49150 26   00039154003 0.85015 2.05652 6.6833e-02

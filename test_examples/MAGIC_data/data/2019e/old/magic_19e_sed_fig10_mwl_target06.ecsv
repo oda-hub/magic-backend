@@ -1,0 +1,40 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: freq      , unit: s-1          , datatype: float32 , description: 'Frequency'  }
+# - {name: freq_elo  , unit: s-1          , datatype: float32 , description: Lower Stat error (1 sigma) on ‘freq‘ }
+# - {name: freq_eup  , unit: s-1          , datatype: float32 , description: Upper Stat error (1 sigma) on ‘freq‘ }
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘freq'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_sed_fig10_mwl_target06.ecsv}
+# - {Source: RBS 0921}
+# schema : astropy −2.0
+
+freq	       freq_elo    freq_eup nufnu     nufnu_elo  nufnu_eup      tstart   tstop texpo  comments 
+
+5.550e14       0 0   1.183570718e-12     0                0	             57434.2 57434.2 2497 "Swift-UVOT"
+6.925e14       0 0   0.689187941e-12     0.221240471e-12  0.221240471e-12     57434.2 57434.2 2497 "Swift-UVOT"
+8.563e14       0 0   0.418818913e-12     0 		  0 		     57434.2 57434.2 2497 "Swift-UVOT"
+1.157e15       0 0   0.32716651e-12      0.114293977e-12  0.114293977e-12     57434.2 57434.2 2497 "Swift-UVOT"
+1.345e15       0 0   0.398790648e-12   	 0.101510347e-12  0.101510347e-12    57434.2 57434.2 2497 "Swift-UVOT"
+1.475e15       0 0   0.338811485e-12     0.080296363e-12  0.080296363e-12     57434.2 57434.2 2497 "Swift-UVOT"
+1.03E+17	3.02E+16	3.02E+16	1.12E-12	3.83E-13	3.83E-13 57434.2 57434.2 2497 "Swift-XRT"
+1.58E+17	2.54E+16	2.54E+16	1.47E-12	3.46E-13	3.46E-13 57434.2 57434.2 2497 "Swift-XRT"
+2.03E+17	1.93E+16	1.93E+16	1.75E-12	3.44E-13	3.44E-13 57434.2 57434.2 2497 "Swift-XRT" 
+2.45E+17	2.30E+16	2.30E+16	1.48E-12	2.90E-13	2.90E-13 57434.2 57434.2 2497 "Swift-XRT"
+3.00E+17	3.14E+16	3.14E+16	1.25E-12	2.52E-13	2.52E-13 57434.2 57434.2 2497 "Swift-XRT"
+3.66E+17	3.51E+16	3.51E+16	1.57E-12	3.10E-13	3.10E-13 57434.2 57434.2 2497 "Swift-XRT" 
+4.36E+17	3.51E+16	3.51E+16	2.62E-12	4.95E-13	4.95E-13 57434.2 57434.2 2497 "Swift-XRT"
+5.45E+17	7.37E+16	7.37E+16	2.24E-12	4.90E-13	4.90E-13 57434.2 57434.2 2497 "Swift-XRT"
+7.60E+17	1.41E+17	1.41E+17	2.21E-12	5.59E-13	5.59E-13 57434.2 57434.2 2497 "Swift-XRT"
+2.66e+25 0 0 5.43203e-12 0 0 57270 57360 50000 "MAGIC; UL"
+4.91e+25 0 0 5.67204e-12 0 0 57270 57360 50000 "MAGIC; UL"
+8.97e+25 0 0 5.85797e-12 0 0 57270 57360 50000 "MAGIC; UL"
+1.63e+26 0 0 3.08486e-12 0 0 57270 57360 50000 "MAGIC; UL"
+

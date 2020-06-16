@@ -1,0 +1,43 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: freq      , unit: s-1          , datatype: float32 , description: 'Frequency'  }
+# - {name: freq_elo  , unit: s-1          , datatype: float32 , description: Lower Stat error (1 sigma) on ‘freq‘ }
+# - {name: freq_eup  , unit: s-1          , datatype: float32 , description: Upper Stat error (1 sigma) on ‘freq‘ }
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘freq'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_sed_fig3_mwl_target07.ecsv}
+# - {Source: 1ES 1426+428}
+# schema : astropy −2.0
+
+freq	       freq_elo    freq_eup nufnu     nufnu_elo  nufnu_eup      tstart   tstop texpo  comments 
+5.55e14         0 	   0        5.40586228e-12      0.35504604e-12 	0.35504604e-12  56064 56064 2009 "Swift-UVOT"
+6.925e14        0 	   0        4.46797183e-12      0.22375949e-12    0.22375949e-12    56064 56064 2009 "Swift-UVOT"
+8.563e14       	0 	   0        3.92385032e-12      0.24299073e-12  0.24299073e-12  56064 56064 2009 "Swift-UVOT"
+1.157e15       	0 	   0        3.97865133e-12      0.29562734e-12   0.29562734e-12  56064 56064 2009 "Swift-UVOT"
+1.345e15        0 	   0        4.36393963e-12      0.22040099e-12   0.22040099e-12  56064 56064 2009 "Swift-UVOT"
+1 1.475e15   	0 	   0        4.25126223e-12      0.24063748e-12   0.24063748e-12  56064 56064 2009 "Swift-UVOT"
+9.07E+16	1.81E+16   1.81E+16	2.32E-11	4.75E-12	4.75E-12 56064 56064 2009 "Swift-XRT"
+1.31E+17	2.18E+16   2.18E+16	2.06E-11	3.57E-12	3.57E-12 56064 56064 2009 "Swift-XRT" 
+1.74E+17	2.18E+16   2.18E+16	2.44E-11	3.23E-12	3.23E-12 56064 56064 2009 "Swift-XRT"
+2.19E+17	2.30E+16   2.30E+16	2.25E-11	2.57E-12	2.57E-12 56064 56064 2009 "Swift-XRT"
+2.67E+17	2.54E+16   2.54E+16	2.20E-11	2.31E-12	2.31E-12 56064 56064 2009 "Swift-XRT"
+3.22E+17	2.90E+16   2.90E+16	2.30E-11	2.32E-12	2.32E-12 56064 56064 2009 "Swift-XRT"	
+3.93E+17	4.23E+16   4.23E+16	2.44E-11	2.85E-12	2.85E-12 56064 56064 2009 "Swift-XRT"		
+5.21E+17	8.58E+16   8.58E+16	2.66E-11	4.55E-12	4.55E-12 56064 56064 2009 "Swift-XRT"
+8.18E+17	2.12E+17   2.12E+17	2.63E-11	6.91E-12	6.91E-12 56064 56064 2009 "Swift-XRT"
+4.9368E+23	2.5168E+23 5.13474E+23	6.69E-13	2.98727E-13	2.98727E-13 54682.65  58318.04 nan  "Fermi-LAT"
+2.05458E+24	1.0474E+24 2.13698E+24	1.81E-12	7.51892E-13	7.51892E-13 54682.65  58318.04 nan  "Fermi-LAT"
+8.55083E+24	4.3593E+24 8.89358E+24	7.16E-12	2.86833E-12	2.86833E-12 54682.65  58318.04 nan "Fermi-LAT"
+3.55873E+25	1.8143E+25 3.70127E+25	1.69E-11	0		0	    54682.65  58318.04 nan "Fermi-LAT; UL"
+3.59e+25 	8.97e+24 1.04e+25 2.45708e-12 1.72631e-12 1.72631e-12 54035 56066 31300 "MAGIC"
+6.16e+25 	1.54e+25 1.78e+25 3.75576e-12 1.81651e-12 1.81651e-12 54035 56066 31300 "MAGIC"
+1.06e+26 	2.65e+25 3.06e+25 3.40499e-12 1.64891e-12 1.64891e-12 54035 56066 31300 "MAGIC"
+1.82e+26 	4.56e+25 5.27e+25 3.04038e-12 2.00206e-12 2.00206e-12 54035 56066 31300 "MAGIC"
+3.13e+26 	7.84e+25 9.05e+25 4.7896e-12  3.17252e-12 3.17252e-12 54035 56066 31300 "MAGIC"

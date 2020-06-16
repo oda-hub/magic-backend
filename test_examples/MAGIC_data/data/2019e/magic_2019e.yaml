@@ -1,0 +1,79 @@
+File_info:
+ Fdate = 20191125
+ Fvers = 1
+ Fgen = Elisa Prandini, elisa.prandini@unipd.it
+ Fmail = contact.magic@mpp.mpg.de 
+ Flink = <link_to_thisfile_repository>
+ Fstatus = 'In completion, some paper info to be updated after publication'
+Paper info:
+ Ptitle: 'New hard-TeV extreme blazars detected with the MAGIC telescopes'
+ Pref : Astrophysical Journal Supplement, in press.
+ Pdoi: https:// doi.org/XXX 
+ Parxiv: http://arxiv.org/abs/arXiv:1911.06680
+ Pcoll: magic
+ Pcauthor: Elisa Prandini, Cornelia Arcaro, Vandad Fallah Ramazani
+ Pfauthor: Acciari V.A., Ansoldi S., Antonelli L.A., Engels A.A., Asano K., 
+         Baack D., Babic A., Banerjee B., Barres de Almeida U., Barrio J.A.,
+         Becerra Gonzalez J., Bednarek W., Bellizzi L., Bernardini E., 
+         Berti A., Besenrieder J., Bhattacharyya W., Bigongiari C., 
+         Biland A., Blanch O., Bonnoli G., Bosnjak Z., Busetto G., Carosi R.,
+         Ceribella G., Cerruti M., Chai Y., Chilingaryan A., Cikota S., 
+         Colak S.M., Colin U., Colombo E., Contreras J.L., Cortina J., 
+         Covino S., D'Elia V., Da Vela P., Dazzi F., De Angelis A., De Lotto B.,
+         Delfino M., Delgado J., Depaoli D., Di Pierro F., Di Venere L., 
+         Do Souto Espineira E., Dominis Prester D., Donini A., Dorner D., 
+         Doro M., Elsaesser D., Fallah Ramazani V., Fattorini A., Ferrara G., 
+         Fidalgo D., Foffano L., Fonseca M.V., Font L., Fruck C., Fukami S., 
+         Garcia Lopez R.J., Garczarczyk M., Gasparyan S., Gaug M., Giglietto N.,
+         Giordano F., Godinovic N., Green D., Guberman D., Hadasch D., 
+         Hahn A., Herrera J., Hoang J., Hrupec D., Hutten M., Inada T., 
+         Inoue S., Ishio K., Iwamura Y., Jouvin L., Kerszberg D., Kubo H., 
+         Kushida J., Lamastra A., Lelas D., Leone F., Lindfors E., Lombardi S.,
+         Longo F., Lopez M., Lopez-Coto R., Lopez-Oramas A., Loporchio S., 
+         Machado de Oliveira Fraga B., Maggio C., Majumdar P., Makariev M., 
+         Mallamaci M., Maneva G., Manganaro M., Mannheim K., Maraschi L., 
+         Mariotti M., Martinez M., Mazin D., Micanovic S., Miceli D., Minev M.,
+         Miranda J.M., Mirzoyan R., Molina E., Moralejo A., Morcuende D., 
+         Moreno V., Moretti E., Munar-Adrover P., Neustroev V., Nigro C., 
+         Nilsson K., Ninci D., Nishijima K., Noda K., Nogues L., Nozaki S.,
+         Paiano S., Palatiello M., Paneque D., Paoletti R., Paredes J.M., 
+         Penil P., Peresano M., Persic M., Prada Moroni P.G., Prandini E., 
+         Puljak I., Rhode W., Ribo M., Rico J., Righi C., Rugliancich A., 
+         Saha L., Sahakyan N., Saito T., Sakurai S., Satalecka K., Schmidt K.,
+         Schweizer T., Sitarek J., Snidaric I., Sobczynska D., Somero A., 
+         Stamerra A., Strom D., Strzys M., Suda Y., Suric T., Takahashi M.,
+         Tavecchio F., Temnikov P., Terzic T., Teshima M., Torres-Alba N., 
+         Tosti L., Vagelli V., van Scherpenberg J., Vanzo G., Vazquez Acosta M.,
+         Vigorito C.F., Vitale V., Vovk I.,Will M., Zaric D., Arcaro C., 
+         Carosi A., D'Ammando F., Tombesi F., Lohfink A. 
+ Pads:  2019arXiv191106680M
+ Pinspire : Acciari:2019jzj
+Targets in file:
+ Tpname01: TXS0210+515
+ Taname01: BZBJ0214+5144; 1RXSJ021417.8+514457; 87GB02109+5130; GB6J0214+5145; 5BZGJ0214+5144; GB6B0210+5131; 2WHSPJ021417.8+514451; 2FHLJ0214.9+5149
+ Tpname02: TXS0637-128
+ Taname02: 3HSPJ064007.2-125315;  2WHSPJ064007.0-125314; 1RXSJ064007.4-125316; 2FHLJ0639.9-1252;
+ Tpname03: BZBJ0809+3455
+ Taname03: BZBJ0809+3455; 2FHLJ0809.5+3458; 0806+350; 1WHSPJ080938.9+345537; ROXAJ081002.5+502538.7; 3HSPJ080938.9+345537; GB6J0809+3455; B20806+35; CRATESJ080937+345534; 5BZGJ0809+3455; GB6B0806+3504; 1FGL_J0809.4+3455; 2WHSPJ080938.8+345536; 1RXSJ080938.5+345544
+ Tpname04: RBS0723
+ Taname04: BZBJ0847+1133; SHBLJ084712.9+113350; SDSSJ084712.93+113350.2; 2FGLJ0847.2+1134; 1FGL_J0847.2+1134; 3HSPJ084712.9+113350; RXSJ08472+1133; 1RXSJ084713.3+113349; 2WHSPJ084712.8+113350; 2FHLJ0847.2+1133; 1WHSPJ084712.9+113350; 5BZBJ0847+1133
+ Tpname05: 1ES0927+500  
+ Taname05: BZBJ0930+4950; SHBLJ093037.5+495025; 1WHSPJ093037.5+495025; 1RXSJ093037.1+495028; 2WHSPJ093037.4+495025; SDSSJ093037.57+495025.6; RXJ09306+4950; ROXAJ093034.9+464408.4; 1ES0927+500; 3HSPJ093037.6+495026; 5BZBJ0930+4950
+ Tpname06: RBS0921
+ Taname06: BZBJ1056+0252; 2WHSPJ105606.6+025213; SDSSJ105606.61+025213.4; 5BZGJ1056+0252; RXSJ10561+0252; 1WHSPJ105606.6+025213; 1RXSJ105607.0+025215; SHBLJ105606.6+025213; 3HSPJ105606.6+025214
+ Tpname07: 1ES1426+428
+ Taname07: BZBJ1428+4240; H1426+428; 2WHSPJ142832.5+424020; 2FGLJ1428.6+4240; ROXAJ142832.6+424024.7; GB6B1426+4253; 5BZBJ1428+4240; 3HSPJ142832.6+424021; 2FHLJ1428.5+4239; 1RXSJ142832.6+424028; 1ES1426+428; 1WHSPJ142832.6+424021; 1H1430+423; 1WGAJ1428.5+4240; 1426+428; 1FGL_J1428.7+4239; SDSSJ142832.60+424021.0; SHBLJ142832.6+424024; GB6J1428+4240
+ Tpname08: 1ES2037+521
+ Taname09: BZBJ2039+5219; 5BZBJ2039+5219; 1RXSJ203923.4+521958; GB6B2037+5209; 2E2037.9+5209; 2FGLJ2039.6+5218; GB6J2039+5220; 1ES2037+521; 3HSPJ203923.5+521950
+ Tpname09: RGBJ2042+244
+ Taname09: 
+ Tpname10: RGBJ2323+147
+ Taname10: 
+ Tpname11: 1ES0229+200
+ Taname11: BZBJ0232+2017; 3HSPJ023248.6+201717; 1ES0229+200; 1WHSPJ023248.6+201717; GB6B0229+2003; 2WHSPJ023248.5+201717; 1RXSJ023248.3+201722; GB6J0232+2017; 5BZGJ0232+2017
+File list MAGIC:
+ magic_2019e_sed_fig1.ecsv
+ magic_2019e_lc_fig2.ecsv
+ magic_2019e_sed_fig3.ecsv
+ magic_2019e_sed_fig4.ecsv
+               

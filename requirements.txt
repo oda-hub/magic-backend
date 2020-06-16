@@ -7,3 +7,5 @@ bokeh
 matplotlib
 numpy
 requests
+pyqt
+werkzeug==0.16.0

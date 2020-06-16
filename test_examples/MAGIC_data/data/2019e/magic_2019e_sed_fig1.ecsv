@@ -1,0 +1,54 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: srcname   , unit: latex        , datatype: str     , description: Source name                           }
+# - {name: en        , unit: GeV          , datatype: float32 , description: Energy                                }
+# - {name: en_wlo    , unit: GeV          , datatype: float32 , description: Energy bin width low                  }
+# - {name: en_wup    , unit: GeV          , datatype: float32 , description: Energy bin width up                   }
+# - {name: nufnu     , unit: TeV cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘energy‘  }
+# - {name: nufnu_elo , unit: TeV cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: TeV cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: h            , datatype: float32 , description: Observation time                      }
+# - {name: instrument, unit: latex        , datatype: str     , description: Instrument                            }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename: magic_2019e_fig1.ecsv}
+# - {Sources:   TXS0210515; RBS0723; 1ES1426+428; RGBJ2042+244}
+# - {Figure: Figure 1}
+# - {Title: New hard-Tev extreme blazars detected with the Magic telescopes }
+# - {Comments: Figure: Broadband SED and modeled spectra for four sources with no MAGIC detection or hints    (but Fermi-LAT detection) presented in the study.}
+# schema : astropy −2.0
+
+srcname       en       e_wlo    en_wup   nufnu    e_nufnu  E_nufnu  tstart   tstop     texp instrum     comment
+TXS0210515    598.132  nan      nan      8.89748E-13  3.78E-13  3.7871E-13  57370  58042 28.6 "MAGIC" ""
+TXS0210515    1502.44  nan      nan      1.40498E-13  5.23E-14  5.23943E-14 57370  58042 28.6 "MAGIC" ""
+TXS0210515    3773.96  nan      nan      2.43844E-14  9.36E-15  9.36573E-15 57370  58042 28.6 "MAGIC" ""
+TXS0210515    598.132 nan        nan        4.23572e-13  1.80288e-13 1.80288e-13 57370  58042 28.6 "MAGIC" "EBL deabs Franceschini+ 2008"
+TXS0210515    1502.44 nan        nan        5.78451e-13  2.15715e-13 2.15715e-13 57370  58042 28.6 "MAGIC" "EBL deabs Franceschini+ 2008"
+TXS0210515    3773.96 nan        nan        7.99959e-13  3.07254e-13 3.07254e-13 57370  58042 28.6 "MAGIC" "EBL deabs Franceschini+ 2008"
+RBS0723       217.886  31.506   41.088   3.90E-11     9.45E-12  9.45E-12   56629  56985 45.3  "MAGIC" ""
+RBS0723       302.752  43.778   57.092   8.87E-12     3.21E-12  3.21E-12   56629  56985 45.3  "MAGIC" ""
+RBS0723       420.672  60.828   79.329   4.16E-12     1.88E-12  1.88E-12   56629  56985 45.3  "MAGIC" ""
+RBS0723       217.886 31.506     41.088    5.03716e-11   1.22054e-11  1.22054e-11    56629  56985 45.3  "MAGIC" "EBL deabs Franceschini+ 2008"
+RBS0723       302.752 43.778     57.092    1.46207e-11   5.29114e-12  5.29114e-12   56629  56985 45.3  "MAGIC" "EBL deabs Franceschini+ 2008"
+RBS0723       420.672 60.828     79.329    9.89446e-12   4.47154e-12  4.47154e-12   56629  56985 45.3  "MAGIC" "EBL deabs Franceschini+ 2008"
+1ES1426+428 144.711 33.5054    46.4597    7.02E-11 4.92E-11  4.92E-11  56039  56065 8.7 "MAGIC"   ""	 
+1ES1426+428 248.769 57.5982    79.8676    3.14E-11 1.52E-11  1.52E-11  56039  56065 8.7 "MAGIC"   ""	 
+1ES1426+428 427.652 99.0154    137.298    6.84E-12 3.31E-12  3.31E-12  56039  56065 8.7  "MAGIC"  ""       
+1ES1426+428 735.165 170.215    236.026    1.25E-12 8.19E-13  8.19E-13  56039  56065 8.7 "MAGIC"   ""
+1ES1426+428 1263.8 292.611    405.745    3.99E-13 2.66E-13  2.66E-13  56039  56065 8.7  "MAGIC"  ""
+1ES1426+428 144.711 33.5054    46.4597  7.40815e-11   5.19204e-11  5.19204e-11    56039  56065 8.7 "MAGIC" "EBL deabs Franceschini+ 2008"
+1ES1426+428 248.769 57.5982    79.8676  3.81665e-11   1.84755e-11  1.84755e-11    56039  56065 8.7 "MAGIC" "EBL deabs Franceschini+ 2008"
+1ES1426+428 427.652 99.0154    137.298  1.15944e-11   5.61076e-12  5.61076e-12    56039  56065 8.7 "MAGIC" "EBL deabs Franceschini+ 2008"
+1ES1426+428 735.165 170.215    236.026  3.50477e-12   2.29632e-12  2.29632e-12    56039  56065 8.7 "MAGIC" "EBL deabs Franceschini+ 2008"
+1ES1426+428 1263.8 	292.611    405.745  1.85673e-12   1.23782e-12  1.23782e-12    56039  56065 8.7   ""
+RGBJ2042+244 184.606 87.03      179.117    1.46E-11 4.97E-12  4.97E-12  57194  58055 52.5 "MAGIC" ""
+RGBJ2042+244 688.135 324.413    667.675    5.86E-13 2.24E-13  2.24E-13  57194  58055 52.5 "MAGIC" ""
+RGBJ2042+244 2565.09 1209.28    2488.82    3.81E-14 2.10E-14  2.10E-14  57194  58055 52.5 "MAGIC" ""
+RGBJ2042+244 184.606 87.03      179.117   1.57485e-11   5.36097e-12  5.36097e-12   57194  58055 52.5 "MAGIC" "EBL deabs Franceschini+ 2008"
+RGBJ2042+244 688.135 324.413    667.675   1.25e-12      4.77815e-13  4.77815e-13   57194  58055 52.5 "MAGIC" "EBL deabs Franceschini+ 2008"
+RGBJ2042+244 2565.09 1209.28    2488.82   1.8889e-13    1.04113e-13  1.04113e-13   57194  58055 52.5 "MAGIC" "EBL deabs Franceschini+ 2008"
+
+

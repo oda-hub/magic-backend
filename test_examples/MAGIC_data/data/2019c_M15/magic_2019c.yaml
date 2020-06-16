@@ -1,0 +1,22 @@
+File_info:
+ Fdate = 20200131
+ Fvers = 1
+ Fgen = Michele Doro michele.doro@unipd.it
+ Fmail = contact.magic@mpp.mpg.de
+ Flink = <link_to_thisfile_repository>
+ Fstatus= "Figure 3 only to be created"
+Paper info:
+ Ptitle: "Deep observations of the globular cluster M15 with the MAGIC telescopes"
+ Pref : Monthly Notices of the Royal Astronomical Society, Volume 484, Issue 2, p.2876-2885
+ Pdoi:  10.1093/mnras/stz179
+ Parxiv: http://arxiv.org/abs/arXiv:1901.04367
+ Pcoll: magic
+ Pcauthor: Julian Sitarek, Wlodek Bednarek, Pratik Majumdar
+ Pfauthor: Acciari, V. A.;  Ansoldi, S.;  Antonelli, L. A.;  Arbet Engels, A.;  Baack, D.; Babić;  , A.;  Banerjee, B.;  Barres de Almeida, U.;  Barrio, J. A.;  Becerra González, J.;  Bednarek, W.; Bernardini, E.;  Berti, A.;  Besenrieder, J.;  Bhattacharyya, W.;  Bigongiari, C.;  Biland, A.;  Blanch, O. Bonnoli, G.;  Busetto, G.;  Carosi, R.;  Ceribella, G.;  Cikota, S.;  Colak, S. M.;  Colin, P.;  Colombo, E.; Contreras, J. L.;  Cortina, J.;  Covino, S.;  D'Elia, V.;  da Vela, P.;  Dazzi, F.;  de Angelis, A.; de Lotto, B.;  Delfino, M.;  Delgado, J.;  di Pierro, F.;  Do Souto Espiñera, E.;  Domínguez, A.; Dominis Prester, D.;  Dorner, D.;  Doro, M.;  Einecke, S.;  Elsaesser, D.;  Fallah Ramazani, V.; Fattorini, A.;  Fernández-Barral, A.;  Ferrara, G.;  Fidalgo, D.;  Foffano, L.;  Fonseca, M. V.;  Font, L.; Fruck, C.;  Galindo, D.;  Gallozzi, S.;  García López, R. J.;  Garczarczyk, M.;  Gasparyan, S.; Gaug, M.;  Giammaria, P.;  Godinović;  , N.;  Green, D.;  Guberman, D.;  Hadasch, D.;  Hahn, A.; Herrera, J.;  Hoang, J.;  Hrupec, D.;  Inoue, S.;  Ishio, K.;  Iwamura, Y.;  Kubo, H.;  Kushida, J.; Kuveždić;  , D.;  Lamastra, A.;  Lelas, D.;  Leone, F.;  Lindfors, E.;  Lombardi, S.;  Longo, F.;  López, M.; López-Oramas, A.;  Machado de Oliveira Fraga, B.;  Maggio, C.;  Majumdar, P.;  Makariev, M.; Mallamaci, M.;  Maneva, G.;  Manganaro, M.;  Mannheim, K.;  Maraschi, L.;  Mariotti, M.; Martínez, M.;  Masuda, S.;  Mazin, D.;  Minev, M.;  Miranda, J. M.;  Mirzoyan, R.;  Molina, E.; Moralejo, A.;  Moreno, V.;  Moretti, E.;  Munar-Adrover, P.;  Neustroev, V.;  Niedzwiecki, A.; Nievas Rosillo, M.;  Nigro, C.;  Nilsson, K.;  Ninci, D.;  Nishijima, K.;  Noda, K.;  Nogués, L.;  Nöthe, M.; Paiano, S.;  Palacio, J.;  Paneque, D.;  Paoletti, R.;  Paredes, J. M.;  Pedaletti, G.;  Peñil, P.; Peresano, M.;  Persic, M.;  Prada Moroni, P. G.;  Prandini, E.;  Puljak, I.;  Garcia, J. R.;  Rhode, W.; Ribó, M.;  Rico, J.;  Righi, C.;  Rugliancich, A.;  Saha, L.;  Sahakyan, N.;  Saito, T.;  Satalecka, K.; Schweizer, T.;  Sitarek, J.;  Šnidarić;  , I.;  Sobczynska, D.;  Somero, A.;  Stamerra, A.;  Strzys, M.; Surić;  , T.;  Tavecchio, F.;  Temnikov, P.;  Terzić;  , T.;  Teshima, M.;  Torres-Albà, N.;  Tsujimoto, S.; van Scherpenberg, J.;  Vanzo, G.;  Vazquez Acosta, M.;  Vovk, I.;  Will, M.;  Zarić, D.
+ Pads:   2019MNRAS.484.2876M
+ Pinspire : Acciari:2019ysf
+Targets in file:
+ Tpname01: M15
+ Taname01: 4U2127+119; AXS_J212957+1209; SAXWFCJ2130.0+1209.7; 2127+119; CXOJ212958.1+121002; 1RXSJ212958.4+120959; 4U2129+12; 1WGAJ2129.9+1210; PSRB2127+11; 1ES2127+119; PBCJ2129.9+1210
+File list MAGIC:
+ - magic_2019c_fig3_sed.ecsv

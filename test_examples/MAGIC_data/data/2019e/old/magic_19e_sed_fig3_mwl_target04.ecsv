@@ -1,0 +1,40 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: freq      , unit: s-1          , datatype: float32 , description: 'Frequency'  }
+# - {name: freq_elo  , unit: s-1          , datatype: float32 , description: Lower Stat error (1 sigma) on ‘freq‘ }
+# - {name: freq_eup  , unit: s-1          , datatype: float32 , description: Upper Stat error (1 sigma) on ‘freq‘ }
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘freq'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_sed_fig3_mwl_target04.ecsv}
+# - {Source: RBS0723}
+# schema : astropy −2.0
+# freq     freq_elo    freq_eup nufnu		nufnu_elo	nufnu_eup	tstart   tstop texpo  comments 
+5.55e14    0 	       0  	2.05410414e-12  0.337417683e-12 0.337417683e-12 56671.43 nan 2617 "Swift-UVOT"
+6.925e14   0 	       0 	2.11995234e-12  0.218785117e-12  0.21878e-12 	56671.43 nan 2617   "Swift-UVOT"
+8.563e14   0 	       0  	1.61240770e-12  0.180210273e-12 0.180210273e-12 56671.43 nan 2617 "Swift-UVOT"
+1.157e15   0 	       0  	1.74754066e-12  0.198584100e-12 0.198584100e-12 56671.43 nan 2617 "Swift-UVOT"
+1.345e15   0 	       0  	2.01515007e-12  0.180216674e-12  0.1802166e-12	56671.43 nan 2617 "Swift-UVOT"
+1.475e15   0 	       0  	1.92174507e-12  0.160145423e-12 0.160145423e-12	56671.43 nan 2617 "Swift-UVOT"
+1.00E+17   2.78E+16    2.78E+16	3.70E-12	1.08E-12	1.08E-12	56671.43 nan 2617 "Swift-XRT"
+1.57E+17   2.90E+16    2.90E+16	4.47E-12	9.11E-13	9.11E-13	56671.43 nan 2617 "Swift-XRT"
+2.10E+17   2.42E+16    2.42E+16	4.78E-12	6.93E-13	6.93E-13	56671.43 nan 2617 "Swift-XRT"
+2.60E+17   2.54E+16    2.54E+16	4.70E-12	6.20E-13	6.20E-13	56671.43 nan 2617 "Swift-XRT"
+3.11E+17   2.54E+16    2.54E+16	5.51E-12	6.66E-13	6.66E-13	56671.43 nan 2617 "Swift-XRT"
+3.69E+17   3.26E+16    3.26E+16	5.97E-12	7.47E-13	7.47E-13	56671.43 nan 2617 "Swift-XRT"
+4.40E+17   3.87E+16    3.87E+16	8.27E-12	1.03E-12	1.03E-12	56671.43 nan 2617 "Swift-XRT"
+5.45E+17   6.65E+16    6.65E+16	8.58E-12	1.29E-12	1.29E-12	56671.43 nan 2617 "Swift-XRT"
+7.67E+17	1.55E+17	1.55E+17	7.04E-12	1.55E-12	1.55E-12    56671.43 nan 2617 "Swift-XRT"
+4.9368E+23	2.5168E+23	5.13474E+23	4.49E-13	1.71069E-13	1.71069E-13 56108  57203 nan "Fermi-LAT"
+2.05458E+24	1.04743E+24	2.13698E+24	5.20E-13	2.62413E-13	2.62413E-13 56108  57203 nan "Fermi-LAT"
+8.55083E+24	4.35927E+24	8.89358E+24	1.26E-12	7.37326E-13	7.37326E-13 56108  57203 nan "Fermi-LAT"
+3.55873E+25	1.81429E+25	3.70127E+25	2.82E-12	2.4381E-12	2.4381E-12  56108  57203 nan "Fermi-LAT"
+5.27284e+25   	7.62E+24	9.94E+24 	3.83095e-12 	9.2827e-13 	9.2827e-13  56640  56960 163000 "MAGIC"
+7.3266e+25 	1.06E+25	1.38E+25 	2.14687e-12 	7.76938e-13 	7.76938e-13 56640  56960   163000 "MAGIC"
+1.01803e+26 	1.47E+25	1.92E+25 	2.80506e-12 	1.26767e-12 	1.26767e-12 56640  56960   163000 "MAGIC"

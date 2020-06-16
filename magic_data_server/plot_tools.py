@@ -6,7 +6,7 @@ from builtins import (open, str, range,
 
 
 from bokeh.layouts import row, widgetbox, gridplot
-from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMapper, LabelSet, ColumnDataSource
+from bokeh.models import CustomJS, Slider, HoverTool, ColorBar, LinearColorMapper, LabelSet, ColumnDataSource,Whisker
 
 from bokeh.embed import components
 from bokeh.plotting import figure
@@ -29,6 +29,7 @@ class DataPlot(object):
                       label=None,
                       color=None,
                       fmt='o',
+                      dataformat=None,
                       ms=None,
                       mew=None,
                       loglog=True,
@@ -39,17 +40,26 @@ class DataPlot(object):
         # get x,y,dx,dy from SEDdata
         if dx is None:
             dx = np.zeros(len(x))
+        else:
+            dx=np.fabs(x-dx)
 
         if dy is None:
             dy = np.zeros(len(y))
+        else:
+            dy=np.fabs(y-dy)
 
         # set color
         #if color is None:
         #    color = self.counter
 
+        ul=None
+        if dataformat is not None:
 
+            ul = dataformat == 'ul'
+            dy = y * 0.2
 
-        line = self.ax.errorbar(x, y, xerr=dx, yerr=dy, fmt=fmt, label=label, ms=ms, mew=mew)
+         
+        line = self.ax.errorbar(x, y, xerr=dx, yerr=dy, fmt=fmt, label=label, ms=ms, mew=mew,uplims=ul)
         if loglog is True:
             self.ax.set_xscale("log", nonposx='clip')
             self.ax.set_yscale("log", nonposy='clip')
@@ -63,15 +73,16 @@ class DataPlot(object):
     def add_sed(self,sed_table,label=None,color=None):
         if label is None:
             label=sed_table.meta['Source']
-        self.add_data_plot(x=sed_table['freq'],
+        self.add_data_plot(x=sed_table['en'],
                            y=sed_table['nufnu'],
-                           dx=[sed_table['freq_elo'], sed_table['freq_eup']],
+                           dx=[sed_table['en_wlo'], sed_table['en_wup']],
                            dy=[sed_table['nufnu_elo'], sed_table['nufnu_eup']],
+                           dataformat=sed_table['dataformat'],
                            label=label,
                            color=color)
 
         self.ax.set_ylabel(sed_table['nufnu'].unit)
-        self.ax.set_xlabel(sed_table['freq'].unit)
+        self.ax.set_xlabel(sed_table['en'].unit)
         #self.ax.set_ylim(5E-14, 1E-9)
         #self.ax.grid()
 
@@ -105,27 +116,35 @@ class ScatterPlot(object):
 
         self.fig.add_tools(hover)
 
-    def add_errorbar(self, x, y, xerr=None, yerr=None, color='red',
+    def add_errorbar(self, x, y, xerr=None, yerr=None,dataformat=None, color='red',
                  point_kwargs={}, error_kwargs={}):
 
         self.fig.circle(x, y, color=color, **point_kwargs)
-
+        #print(xerr.shape)
         if xerr is not None:
             x_err_x = []
             x_err_y = []
-            for px, py, err in zip(x, y, xerr):
-                x_err_x.append((px - err, px + err))
+            for px, py, errm,errp in zip(x, y, xerr[0],xerr[1]):
+                x_err_x.append((px - errm, px + errp))
                 x_err_y.append((py, py))
             self.fig.multi_line(x_err_x, x_err_y, color=color, **error_kwargs)
 
         if yerr is not None:
+            ul = None
+
+            if dataformat is not None:
+                ul = dataformat == 'ul'
+                yerr[0][ul] = y[ul]*0.5
+                yerr[1][ul] = 0
             y_err_x = []
             y_err_y = []
-            for px, py, err in zip(x, y, yerr):
+            #print(yerr)
+            for px, py, errm,errp in zip(x, y,  yerr[0], yerr[1]):
+                #print(py - errm, py + errp)
                 y_err_x.append((px, px))
-                y_err_y.append((py - err, py + err))
+                y_err_y.append((py - errm, py + errp))
             self.fig.multi_line(y_err_x, y_err_y, color=color, **error_kwargs)
-
+            #self.fig.add_layout(Whisker(source=yerr, base="base", upper="upper", lower="lower", line_color='red'))
 
 
     def add_step_line(self,x,y,legend=None):

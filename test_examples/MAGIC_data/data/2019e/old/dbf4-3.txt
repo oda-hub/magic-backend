@@ -1,0 +1,158 @@
+Title: New hard-Tev extreme blazars detected with the Magic telescopes 
+Authors: Acciari V.A., Ansoldi S., Antonelli L.A., Engels A.A., Asano K., 
+         Baack D., Babic A., Banerjee B., Barres de Almeida U., Barrio J.A.,
+         Becerra Gonzalez J., Bednarek W., Bellizzi L., Bernardini E., 
+         Berti A., Besenrieder J., Bhattacharyya W., Bigongiari C., 
+         Biland A., Blanch O., Bonnoli G., Bosnjak Z., Busetto G., Carosi R.,
+         Ceribella G., Cerruti M., Chai Y., Chilingaryan A., Cikota S., 
+         Colak S.M., Colin U., Colombo E., Contreras J.L., Cortina J., 
+         Covino S., D'Elia V., Da Vela P., Dazzi F., De Angelis A., De Lotto B.,
+         Delfino M., Delgado J., Depaoli D., Di Pierro F., Di Venere L., 
+         Do Souto Espineira E., Dominis Prester D., Donini A., Dorner D., 
+         Doro M., Elsaesser D., Fallah Ramazani V., Fattorini A., Ferrara G., 
+         Fidalgo D., Foffano L., Fonseca M.V., Font L., Fruck C., Fukami S., 
+         Garcia Lopez R.J., Garczarczyk M., Gasparyan S., Gaug M., Giglietto N.,
+         Giordano F., Godinovic N., Green D., Guberman D., Hadasch D., 
+         Hahn A., Herrera J., Hoang J., Hrupec D., Hutten M., Inada T., 
+         Inoue S., Ishio K., Iwamura Y., Jouvin L., Kerszberg D., Kubo H., 
+         Kushida J., Lamastra A., Lelas D., Leone F., Lindfors E., Lombardi S.,
+         Longo F., Lopez M., Lopez-Coto R., Lopez-Oramas A., Loporchio S., 
+         Machado de Oliveira Fraga B., Maggio C., Majumdar P., Makariev M., 
+         Mallamaci M., Maneva G., Manganaro M., Mannheim K., Maraschi L., 
+         Mariotti M., Martinez M., Mazin D., Micanovic S., Miceli D., Minev M.,
+         Miranda J.M., Mirzoyan R., Molina E., Moralejo A., Morcuende D., 
+         Moreno V., Moretti E., Munar-Adrover P., Neustroev V., Nigro C., 
+         Nilsson K., Ninci D., Nishijima K., Noda K., Nogues L., Nozaki S.,
+         Paiano S., Palatiello M., Paneque D., Paoletti R., Paredes J.M., 
+         Penil P., Peresano M., Persic M., Prada Moroni P.G., Prandini E., 
+         Puljak I., Rhode W., Ribo M., Rico J., Righi C., Rugliancich A., 
+         Saha L., Sahakyan N., Saito T., Sakurai S., Satalecka K., Schmidt K.,
+         Schweizer T., Sitarek J., Snidaric I., Sobczynska D., Somero A., 
+         Stamerra A., Strom D., Strzys M., Suda Y., Suric T., Takahashi M.,
+         Tavecchio F., Temnikov P., Terzic T., Teshima M., Torres-Alba N., 
+         Tosti L., Vagelli V., van Scherpenberg J., Vanzo G., Vazquez Acosta M.,
+         Vigorito C.F., Vitale V., Vovk I.,Will M., Zaric D., Arcaro C., 
+         Carosi A., D'Ammando F., Tombesi F., Lohfink A. 
+Figure: Broadband SED and modeled spectra for four sources with no MAGIC 
+        detection or hints (but Fermi-LAT detection) presented in the study
+================================================================================
+Byte-by-byte Description of file: dbf4.txt
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label  Explanations
+--------------------------------------------------------------------------------
+   1- 14 A14    ---     Name   Source identifier
+  16- 23 E8.2   Hz      Freq   Frequency 
+  25- 32 E8.2   Hz    e_Freq   ? Lower 1{sigma} uncertainty limit in Freq
+  34- 41 E8.2   Hz    E_Freq   ? Upper 1{sigma} uncertainty limit in Freq
+  43- 50 E8.2   mW/m2   nufnu  Differential photon flux at Freq (1)
+  52- 59 E8.2   mW/m2 e_nufnu  ? Lower 1{sigma} uncertainty limit in nufnu
+  61- 68 E8.2   mW/m2 E_nufnu  ? Upper 1{sigma} uncertainty limit in nufnu
+  70- 77 F8.2   d       Start  ? Modified Julian start date of observation
+  79- 86 F8.2   d       End    ? Modified Julian end date of observation
+  88- 93 I6     s       Texp   ? Exposure time
+  95-107 A13    ---     Com    Comment(s) (2)
+--------------------------------------------------------------------------------
+Note (1): In units of erg/s/cm^2^.
+Note (2): UL indicates un upper limit on nufnu.
+--------------------------------------------------------------------------------
+1ES 0927+500   9.31e+16 2.06e+16 2.06e+16 4.10e-12 1.04e-12 1.04e-12 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   1.28e+17 1.45e+16 1.45e+16 6.31e-12 1.06e-12 1.06e-12 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   1.62e+17 1.93e+16 1.93e+16 5.44e-12 9.42e-13 9.42e-13 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   2.03e+17 2.18e+16 2.18e+16 4.51e-12 7.49e-13 7.49e-13 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   2.48e+17 2.30e+16 2.30e+16 4.58e-12 7.10e-13 7.10e-13 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   2.97e+17 2.66e+16 2.66e+16 4.59e-12 7.03e-13 7.03e-13 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   3.61e+17 3.75e+16 3.75e+16 4.45e-12 7.26e-13 7.26e-13 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   5.21e+17 1.22e+17 1.22e+17 3.56e-12 9.45e-13 9.45e-13 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   8.28e+17 1.85e+17 1.85e+17 6.06e-12 1.56e-12 1.56e-12 55648.9  55648.9    1785 Swift-XRT    
+1ES 0927+500   4.94e+23 2.52e+23 5.13e+23 3.83e-13                   55562.   57022.          Fermi-LAT; UL
+1ES 0927+500   2.05e+24 1.05e+24 2.14e+24 7.32e-13                   55562.   57022.          Fermi-LAT; UL
+1ES 0927+500   8.55e+24 4.36e+24 8.89e+24 1.18e-12 5.85e-13 5.85e-13 55562.   57022.          Fermi-LAT    
+1ES 0927+500   3.56e+25 1.81e+25 3.70e+25 4.52e-12                   55562.   57022.          Fermi-LAT; UL
+1ES 0927+500   2.67e+25                   4.39e-12                   56270.   56330.    94300 MAGIC; UL    
+1ES 0927+500   4.92e+25                   2.02e-12                   56270.   56330.    94300 MAGIC; UL    
+1ES 0927+500   9.00e+25                   5.12e-12                   56270.   56330.    94300 MAGIC; UL    
+1ES 0927+500   1.64e+26                   4.95e-12                   56270.   56330.    94300 MAGIC; UL    
+BZB J0809+3455 5.55e+14                   6.08e-12 4.24e-13 4.24e-13 57126.4  57126.4    5534 Swift-UVOT   
+BZB J0809+3455 6.92e+14                   3.40e-12 2.58e-13 2.58e-13 57126.4  57126.4    5534 Swift-UVOT   
+BZB J0809+3455 8.56e+14                   1.55e-12 1.75e-13 1.75e-13 57126.4  57126.4    5534 Swift-UVOT   
+BZB J0809+3455 1.16e+15                   8.07e-13 1.30e-13 1.30e-13 57126.4  57126.4    5534 Swift-UVOT   
+BZB J0809+3455 1.34e+15                   7.81e-13 9.59e-14 9.59e-14 57126.4  57126.4    5534 Swift-UVOT   
+BZB J0809+3455 1.48e+15                   6.18e-13 8.06e-14 8.06e-14 57126.4  57126.4    5534 Swift-UVOT   
+BZB J0809+3455 9.79e+16 2.54e+16 2.54e+16 8.21e-13 2.51e-13 2.51e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 1.41e+17 1.81e+16 1.81e+16 1.36e-12 2.77e-13 2.77e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 1.81e+17 2.18e+16 2.18e+16 1.18e-12 2.27e-13 2.27e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 2.25e+17 2.18e+16 2.18e+16 1.13e-12 2.04e-13 2.04e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 2.67e+17 2.06e+16 2.06e+16 1.27e-12 2.18e-13 2.18e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 3.16e+17 2.78e+16 2.78e+16 1.18e-12 2.07e-13 2.07e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 3.84e+17 4.11e+16 4.11e+16 1.14e-12 2.17e-13 2.17e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 4.98e+17 7.25e+16 7.25e+16 1.24e-12 2.64e-13 2.64e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 8.02e+17 2.31e+17 2.31e+17 1.15e-12 3.75e-13 3.75e-13 57126.4  57126.4    5534 Swift-XRT    
+BZB J0809+3455 4.94e+23 2.52e+23 5.13e+23 4.64e-13 1.34e-13 1.34e-13 56658.   57753.          Fermi-LAT    
+BZB J0809+3455 2.05e+24 1.05e+24 2.14e+24 6.34e-13                   56658.   57753.          Fermi-LAT; UL
+BZB J0809+3455 8.55e+24 4.36e+24 8.89e+24 1.04e-12 6.06e-13 6.06e-13 56658.   57753.          Fermi-LAT    
+BZB J0809+3455 3.56e+25 1.81e+25 3.70e+25 2.13e-12                   56658.   57753.          Fermi-LAT; UL
+BZB J0809+3455 1.45e+25                   1.46e-11                   57012.   57317.    78500 MAGIC; UL    
+BZB J0809+3455 2.67e+25                   7.32e-12                   57012.   57317.    78500 MAGIC; UL    
+BZB J0809+3455 4.93e+25                   1.70e-12                   57012.   57317.    78500 MAGIC; UL    
+BZB J0809+3455 9.08e+25                   2.20e-12                   57012.   57317.    78500 MAGIC; UL    
+BZB J0809+3455 1.67e+26                   7.94e-13                   57012.   57317.    78500 MAGIC; UL    
+BZB J0809+3455 3.08e+26                   2.37e-12                   57012.   57317.    78500 MAGIC; UL    
+RGB J2313+147  5.55e14                    3.39e-12 0.33e-12 0.33e-12 57172.   57172.     6752 Swift-UVOT
+RGB J2313+147  6.925e14                   1.70e-12 0.17e-12 0.17e-12 57172.   57172.     6752 Swift-UVOT
+RGB J2313+147  8.563e14                   0.95e-12 0.12e-12 0.12e-12 57172.   57172.     6752 Swift-UVOT
+RGB J2313+147  1.157e15                   0.79e-12 0.11e-12 0.11e-12 57172.   57172.     6752 Swift-UVOT
+RGB J2313+147  1.345e15                   0.91e-12 0.11e-12 0.11e-12 57172.   57172.     6752 Swift-UVOT
+RGB J2313+147  1.475e15                   1.01e-12 0.10e-12 0.10e-12 57172.   57172.     6752 Swift-UVOT
+RGB J2313+147  1.34E+17 1.09E+16 1.09E+16 1.73E-12 1.76E-13 1.76E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  1.57E+17 1.21E+16 1.21E+16 1.65E-12 1.66E-13 1.66E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  1.81E+17 1.21E+16 1.21E+16 1.58E-12 1.71E-13 1.71E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  2.06E+17 1.21E+16 1.21E+16 1.51E-12 1.64E-13 1.64E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  2.28E+17 1.09E+16 1.09E+16 1.46E-12 1.88E-13 1.88E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  2.50E+17 1.09E+16 1.09E+16 1.42E-12 1.89E-13 1.89E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  2.72E+17 1.09E+16 1.09E+16 1.39E-12 2.11E-13 2.11E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  2.96E+17 1.33E+16 1.33E+16 1.35E-12 1.89E-13 1.89E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  3.20E+17 1.09E+16 1.09E+16 1.32E-12 2.52E-13 2.52E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  3.53E+17 2.18E+16 2.18E+16 1.28E-12 1.60E-13 1.60E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  3.91E+17 1.57E+16 1.57E+16 1.24E-12 2.61E-13 2.61E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  4.36E+17 3.02E+16 3.02E+16 1.19E-12 1.88E-13 1.88E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  4.99E+17 3.26E+16 3.26E+16 1.14E-12 2.44E-13 2.44E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  5.85E+17 5.32E+16 5.32E+16 1.09E-12 2.50E-13 2.50E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  7.54E+17 1.16E+17 1.16E+17 1.01E-12 1.71E-13 1.71E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  1.34E+18 4.65E+17 4.65E+17 8.68E-13 1.38E-13 1.38E-13 57172.   57172.     6752 Swift-XRT 
+RGB J2313+147  7.83E+17 5.80E+16 5.80E+16 9.04E-13 1.74E-13 1.74E-13 57172.   57172.    22900 NUSTAR
+RGB J2313+147  9.38E+17 9.67E+16 9.67E+16 7.80E-13 1.24E-13 1.24E-13 57172.   57172.    22900 NUSTAR
+RGB J2313+147  1.14E+18 1.06E+17 1.06E+17 7.71E-13 1.27E-13 1.27E-13 57172.   57172.    22900 NUSTAR
+RGB J2313+147  1.38E+18 1.31E+17 1.31E+17 7.64E-13 1.13E-13 1.13E-13 57172.   57172.    22900 NUSTAR
+RGB J2313+147  1.69E+18 1.79E+17 1.79E+17 6.55E-13 1.07E-13 1.07E-13 57172.   57172.    22900 NUSTAR
+RGB J2313+147  2.21E+18 3.43E+17 3.43E+17 5.16E-13 8.50E-14 8.50E-14 57172.   57172.    22900 NUSTAR
+RGB J2313+147  9.27E+18 6.71E+18 6.71E+18 3.14E-13 1.35E-13 1.35E-13 57172.   57172.    22900 NUSTAR     
+RGB J2313+147  4.94E+23 2.52E+23 5.13E+23 8.81E-13                   56838.   57569.          Fermi-LAT; UL
+RGB J2313+147  2.05E+24 1.05E+24 2.14E+24 1.11E-12 4.50E-13 4.50E-13 56838.   57569.          Fermi-LAT
+RGB J2313+147  8.55E+24 4.36E+24 8.89E+24 3.38E-12                   56838.   57569.          Fermi-LAT; UL
+RGB J2313+147  3.56E+25 1.81E+25 3.70E+25 3.78E-12                   56838.   57569.          Fermi-LAT; UL
+RGB J2313+147  2.68e+25                   5.98e-12                   57245.   57286.    41400 MAGIC; UL     
+RGB J2313+147  4.93e+25                   1.03e-12                   57245.   57286.    41400 MAGIC; UL     
+RGB J2313+147  9.14e+25                   2.03e-12                   57245.   57286.    41400 MAGIC; UL     
+RGB J2313+147  1.69e+26                   4.57e-12                   57245.   57286.    41400 MAGIC; UL     
+RGB J2313+147  3.12e+26                   1.37e-11                   57245.   57286.    41400 MAGIC; UL     
+TXS 0637-128   5.55e+14                   8.76e-12 8.67e-13 8.67e-13 57784.   57784.     1508 Swift-UVOT   
+TXS 0637-128   6.92e+14                   6.18e-12 6.24e-13 6.24e-13 57784.   57784.     1508 Swift-UVOT   
+TXS 0637-128   8.56e+14                   4.81e-12 6.12e-13 6.12e-13 57784.   57784.     1508 Swift-UVOT   
+TXS 0637-128   1.16e+15                   4.43e-12 8.03e-13 8.03e-13 57784.   57784.     1508 Swift-UVOT   
+TXS 0637-128   1.37e+17 6.41e+16 6.41e+16 1.14e-11 5.52e-12 5.52e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   2.29e+17 2.78e+16 2.78e+16 8.96e-12 1.51e-12 1.51e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   2.78e+17 2.18e+16 2.18e+16 1.00e-11 1.37e-12 1.37e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   3.20e+17 2.06e+16 2.06e+16 1.03e-11 1.36e-12 1.36e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   3.68e+17 2.66e+16 2.66e+16 9.80e-12 1.32e-12 1.32e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   4.24e+17 3.02e+16 3.02e+16 1.12e-11 1.53e-12 1.53e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   5.02e+17 4.72e+16 4.72e+16 1.05e-11 1.58e-12 1.58e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   6.48e+17 9.91e+16 9.91e+16 9.46e-12 1.82e-12 1.82e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   8.97e+17 1.50e+17 1.50e+17 1.01e-11 2.06e-12 2.06e-12 57784.   57784.     1508 Swift-XRT    
+TXS 0637-128   4.94e+23 2.52e+23 5.13e+23 7.05e-13                   54682.65 58318.04        Fermi-LAT; UL
+TXS 0637-128   2.05e+24 1.05e+24 2.14e+24 9.25e-13 3.51e-13 3.51e-13 54682.65 58318.04        Fermi-LAT    
+TXS 0637-128   8.55e+24 4.36e+24 8.89e+24 3.21e-12 1.19e-12 1.19e-12 54682.65 58318.04        Fermi-LAT    
+TXS 0637-128   3.56e+25 1.81e+25 3.70e+25 2.30e-12                   54682.65 58318.04        Fermi-LAT; UL
+TXS 0637-128   3.26e+25                   1.97e-11                   57780.   58115.    59000 MAGIC; UL    
+TXS 0637-128   5.54e+25                   8.37e-12                   57780.   58115.    59000 MAGIC; UL    
+TXS 0637-128   9.41e+25                   1.67e-12                   57780.   58115.    59000 MAGIC; UL    
+TXS 0637-128   1.59e+26                   6.53e-12                   57780.   58115.    59000 MAGIC; UL    

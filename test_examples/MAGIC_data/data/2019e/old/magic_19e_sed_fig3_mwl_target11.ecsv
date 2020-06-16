@@ -1,0 +1,57 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: freq      , unit: s-1          , datatype: float32 , description: 'Frequency'  }
+# - {name: freq_elo  , unit: s-1          , datatype: float32 , description: Lower Stat error (1 sigma) on ‘freq‘ }
+# - {name: freq_eup  , unit: s-1          , datatype: float32 , description: Upper Stat error (1 sigma) on ‘freq‘ }
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘freq'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_sed_fig3_mwl_target11.ecsv}
+# - {Source: 1ES 0229+200}
+# schema : astropy −2.0
+
+freq	       freq_elo    freq_eup nufnu     nufnu_elo  nufnu_eup      tstart   tstop texpo  comments 
+					
+1.34896E+15	0			0	1.58489E-12	2.0461E-13 	2.0461E-13  56264.1  56264.1 1506 "Swift-UVOT;  from Costamante18"
+8.51138E+14	0			0	1.77828E-12	1.83518E-13	1.83518E-13 56264.1  56264.1 1506 "Swift-UVOT; from Costamante18"
+1.14815E+15	0			0	1.41254E-12	1.45633E-13	1.45633E-13 56264.1  56264.1 1506 "Swift-UVOT;  from Costamante18"
+7.94328E+17	6.33477E+16	6.33477E+16	1.23027E-11	4.61228E-13	4.61228E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+9.33254E+17	8.2201E+16	8.2201E+16	1.23027E-11	3.76339E-13	3.76339E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.12202E+18	1.10754E+17	1.10754E+17	1.23027E-11	3.3168E-13	3.3168E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.38038E+18	1.53361E+17	1.53361E+17	1.25893E-11	3.05667E-13	3.05667E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.7378E+18	2.05929E+17	2.05929E+17	1.31826E-11	3.12559E-13	3.12559E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+2.23872E+18	2.84094E+17	2.84094E+17	1.31826E-11	3.27455E-13	3.27455E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+2.95121E+18	3.86608E+17	3.86608E+17	1.31826E-11	4.12219E-13	4.12219E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+3.80189E+18	5.23901E+17	5.23901E+17	1.25893E-11	5.22202E-13	5.22202E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+5.12861E+18	7.2416E+17	7.2416E+17	1.25893E-11	6.96563E-13	6.96563E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+6.76083E+18	9.72883E+17	9.72883E+17	1.09648E-11	1.0422E-12	1.0422E-12 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+9.12011E+18	1.33883E+18	1.33883E+18	1.1749E-11	1.59551E-12	1.59551E-12 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.47911E+19	4.28498E+18	4.28498E+18	1.09648E-11	2.68418E-12	2.68418E-12 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.12202E+17	3.17082E+16	3.17082E+16	4.89779E-12	2.28384E-13	2.28384E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.7378E+17	2.93688E+16	2.93688E+16	6.45654E-12	2.56066E-13	2.56066E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+2.29087E+17	2.99875E+16	2.99875E+16	6.91831E-12	2.38336E-13	2.38336E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+2.95121E+17	3.60048E+16	3.60048E+16	7.58578E-12	2.37511E-13	2.37511E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+3.80189E+17	4.70674E+16	4.70674E+16	9.12011E-12	2.79805E-13	2.79805E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+4.89779E+17	5.95571E+16	5.95571E+16	1.09648E-11	3.79601E-13	3.79601E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+6.30957E+17	7.82387E+16	7.82387E+16	1.09648E-11	4.67538E-13	4.67538E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+7.94328E+17	9.73052E+16	9.73052E+16	1.23027E-11	5.22249E-13	5.22249E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.02329E+18	1.25763E+17	1.25763E+17	1.28825E-11	6.01613E-13	6.01613E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.31826E+18	1.62937E+17	1.62937E+17	1.25893E-11	7.73861E-13	7.73861E-13 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+1.69824E+18	2.09054E+17	2.09054E+17	1.25893E-11	1.19837E-12	1.19837E-12 56264.1 nan nan "NUSTAR+XRT; from Costamante18"
+4.9368E+23	2.5168E+23	5.13474E+23	5.54E-13	0		0		56293  58118	nan "Fermi-LAT; UL" 	
+2.05458E+24	1.04743E+24	2.13698E+24	4.36E-13	1.87303E-13	1.87303E-13	56293  58118	nan "Fermi-LAT" 	
+8.55083E+24	4.35927E+24	8.89358E+24	1.97E-12	7.27619E-13	7.27619E-13	56293  58118	nan "Fermi-LAT" 	
+3.55873E+25	1.81429E+25	3.70127E+25	3.15E-12	1.91499E-12	1.91E-12	56293  58118	nan "Fermi-LAT" 	
+3.75e+25 	0 		0 		1.56818e-12 	4.28564e-13 	1.56938e-12 	nan nan 423000 "MAGIC"
+6.25e+25 	0 		0 		1.14354e-12 	3.0326e-13 	3.03119e-13 	nan nan 423000 "MAGIC"
+1.04e+26 	0 		0 		1.64937e-12 	2.89268e-13 	2.88586e-13 	nan nan 423000 "MAGIC"
+1.72e+26 	0 		0 		1.36529e-12 	3.52525e-13 	3.53625e-13 	nan nan 423000 "MAGIC"
+2.87e+26 	0 		0 		1.94762e-12 	5.22407e-13 	5.21363e-13 	nan nan 423000 "MAGIC"
+4.81e+26 	0 		0 		2.17335e-12 	7.10724e-13 	7.10868e-13 	nan nan 423000 "MAGIC"
+8.02e+26 	0 		0 		1.40686e-12 	8.44118e-13 	8.43804e-13 	nan nan 423000 "MAGIC"

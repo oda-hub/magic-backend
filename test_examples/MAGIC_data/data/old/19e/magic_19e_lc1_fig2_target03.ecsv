@@ -1,0 +1,24 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: nufnu     , unit: erg cm-2 s-1 , datatype: float32 , description: Differential photon flux at ‘energy'  }
+# - {name: nufnu_elo , unit: erg cm-2 s-1 , datatype: float32 , description: Lower Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: nufnu_eup , unit: erg cm-2 s-1 , datatype: float32 , description: Upper Stat error (1 sigma) on ‘nufnu‘ }
+# - {name: tstart    , unit: mjd          , datatype: float32 , description: MJD start                             }
+# - {name: tstop     , unit: mjd          , datatype: float32 , description: MJD stop                              }
+# - {name: texpo     , unit: s            , datatype: float32 , description: Exposure time                         }
+# - {name: comments  , unit: latex        , datatype: str     , description: Comments                              }
+# meta: !!omap
+# - {Filename : magic_19e_lc1_fig2_target03.ecsv}
+# - {Source: BZB J0809+3455}
+# schema : astropy −2.0
+
+nufnu      nufnu_elo  nufnu_eup  tstart      tstop texpo  comments
+3.3742e-12  3.0089e-13  3.0089e-13 55124.69759 nan 3211.5  "photon counting"
+1.6577e-12  3.8690e-13  3.8690e-13 55528.69538 nan 1106.3  "photon counting"
+2.3002e-12  3.2611e-13  3.2611e-13 57012.04036 nan 3843.3  "photon counting"
+2.8707e-12  3.6991e-13  3.6991e-13 57019.09448 nan 4120.5  "photon counting"
+1.5357e-12  2.0994e-13  2.0994e-13 57043.08272 nan 4060.6  "photon counting"
+2.0836e-12  2.3318e-13  2.3318e-13 57126.38615 nan 5534.0  "photon counting"
+2.3446e-12  2.9882e-13  2.9882e-13 57312.37083 nan 2956.8  "photon counting"
+2.9636e-12  4.1182e-13  4.1182e-13 57316.35067 nan 2871.9  "photon counting"
