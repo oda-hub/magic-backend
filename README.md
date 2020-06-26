@@ -41,13 +41,29 @@ cd to the `magic-backend` directory
 * `sudo python setup.py install`
 
 Testing 
--------
-- cd to the `test_examples` directory 
+------- 
 
--  run 'on the command line' the app: `run_magic_back_end.py`
+-  cd to the `test_examples` OR copy its content to new direcotory  
+
+-  check that the `MAGIC_data` directory is in the same directory where you run the backend 
+   
+   OR
+   
+   set the path editing the `config.yml` by setting
+    - `data_root_path: MAGIC_data/data`
+    
+
+-  run 'on the command line': `run_magic_back_end.py`
 
    this a script installed with the package and it is available in your command line
-
+   
+- configuring port and host: edit the `config.yml` by setting:
+    - `url: 0.0.0.0`
+    - `port: 5001`
+    - run the app passing the conf file 
+    
+      `run_magic_back_end.py -conf_file config.yml`
+        
 1) with the notebook
     
     * browse this url to get api doc `http://localhost:5001/`

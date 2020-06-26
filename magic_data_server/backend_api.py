@@ -55,11 +55,22 @@ def get_catalog_path(paper_id):
     config = micro_service.config.get('conf')
 
     catalog_dir =paper_id
-    paper_id = set_paper_id(paper_id)
+    if paper_id is not None:
+        paper_id = set_paper_id(paper_id)
 
-    catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
-    catalog_file_path = os.path.join(config.data_root_path, catalog_dir, catalog_file_name)
-    catalog_file_dir=os.path.join(config.data_root_path, catalog_dir)
+        catalog_file_name = config.catalog_file_prefix + paper_id + config.catalog_file_type
+        catalog_file_path = [os.path.join(config.data_root_path, catalog_dir, catalog_file_name)]
+        catalog_file_dir = os.path.join(config.data_root_path, catalog_dir)
+    else:
+        catalog_file_name=None
+
+
+
+    if catalog_file_name is None:
+        p=os.path.join(config.data_root_path,'*','%s*%s'%( config.catalog_file_prefix,config.catalog_file_type))
+        print('p',p)
+        catalog_file_path=glob.glob(p)
+        catalog_file_dir=None
 
     return catalog_file_path,catalog_file_dir
 
@@ -249,6 +260,21 @@ def handle_api_error(error):
 
 
 
+@ns_conf.route('/test-connection')
+class Papers(Resource):
+    @api.doc(responses={410: ''},)
+    def get(self):
+        """
+        returns the list of paper ids
+        """
+        config = micro_service.config.get('conf')
+        try:
+            return jsonify(['connection OK'])
+        except Exception as e:
+            print(e)
+            raise APIerror('NO connection', status_code=410)
+
+
 @ns_conf.route('/paper_ids')
 class Papers(Resource):
     @api.doc(responses={410: ''},)
@@ -286,9 +312,11 @@ class Catalog(Resource):
         # TODO and put root_file into a method/function
 
         _o_dict={}
+        data=[]
         try:
-            with open(catalog_file_path) as f:
-                data = yaml.load(f,Loader=yaml.FullLoader)
+            for cf in catalog_file_path:
+                with open(cf) as f:
+                    data.extend([yaml.load(f,Loader=yaml.FullLoader)])
 
             #_o_dict = json.dumps(data,sort_keys=False)
             _o_dict=dict(catalog=data)
@@ -318,11 +346,15 @@ class Targets(Resource):
         paper_id = api_args['paper_id']
 
         catalog_file_path,catalog_file_dir = get_catalog_path(paper_id)
+        data=[]
         try:
-            with open(catalog_file_path) as f:
-                data = yaml.load(f,Loader=yaml.FullLoader)
+            for cf in catalog_file_path:
+                with open(cf) as f:
+                    _d=yaml.load(f,Loader=yaml.FullLoader)
+                    print('_d[config.source_name_field]',_d[config.source_name_field])
+                    data.extend([_d[config.source_name_field]])
 
-            return jsonify(data[config.source_name_field])
+            return jsonify(data)
         except Exception as e:
             print(e)
             raise APIerror('table catalog is empty/corrupted or missing: %s' % e, status_code=410)
@@ -330,7 +362,7 @@ class Targets(Resource):
 
 @ns_conf.route('/search-by-name')
 class SearchName(Resource):
-    @api.doc(responses={410: ''}, params={'target_name': 'the source name','paper_id':'the paper id'})
+    @api.doc(responses={410: ''}, params={'target_name': 'the source name','paper_id':'the paper id','get_products': 'bool flag to get table data'})
     def get(self):
         """
         returns the file list for a given source
@@ -338,7 +370,7 @@ class SearchName(Resource):
         api_parser = reqparse.RequestParser()
         api_parser.add_argument('target_name', required=True, help="the name of the source",type=str)
         api_parser.add_argument('paper_id', required=False, help="the id of the paper", type=str)
-
+        api_parser.add_argument('get_products', required=False, help="bool flag to get table data", type=bool)
         api_args = api_parser.parse_args()
         target_name = api_args['target_name']
         paper_id= api_args['paper_id']
@@ -347,48 +379,76 @@ class SearchName(Resource):
         #print('target_name', target_name)
         #TODO make this walk through directories
         #TODO and put root_file into a method/function
-
+        if paper_id is not None:
+            if paper_id.strip()=='':
+                paper_id =None
 
         catalog_file_path,catalog_file_dir = get_catalog_path(paper_id)
-
-
-
-        print('catalog_file_path',catalog_file_path)
+        print('->start')
+        print('->target_name', target_name)
+        print('->paper_id', paper_id)
+        print('->catalog_file_path',catalog_file_path)
+        _o_dict = {}
+        _o_dict['src_name'] = target_name
+        _o_dict['src_aliases'] = []
+        _prod_dict = lambda src_name,src_aliases,file, paper_id, table: {'src_name': src_name,
+                                                                         'src_aliases': src_aliases,
+                                                                         'file': file,
+                                                                         'paper_id': paper_id,
+                                                                         'astropy_table' : table}
+        _o_dict['MWL_files']={}
+        _o_dict['MAGIC_files']={}
+        _p_id_mwf=0
+        _p_id_mgf=0
         try:
-            with open(catalog_file_path) as f:
-                data = yaml.load(f,Loader=yaml.FullLoader)
+            for cf in catalog_file_path:
+                with open(cf) as f:
+                    data = yaml.load(f,Loader=yaml.FullLoader)
 
+                target_list=[]
+                for key, value in data[config.source_name_field].items():
+                    if value is not None:
 
-            target_list=[]
-            #print('target_name',target_name)
-            for key, value in data[config.source_name_field].items():
-                #print('key, value', key, value)
-                if value is not None:
-                    #print('target_list', target_list)
-                    target_list.extend([value for f in value.split(';') if f.strip().lower()==target_name.lower()])
-                    #print('target_list', target_list)
+                        target_list.extend([key for f in value.split(';') if f.strip().lower()==target_name.lower()])
 
-            #target_list=[n.replace('Tpname','target').replace('Taname','target') for n in target_list]
-            print('-->target_list',target_list)
-            _o_dict = {}
+                target_list = [n.replace('Taname', 'Tpname') for n in target_list]
+                #for t in target_list:
+                #    _o_dict['src_name'].append(data[config.source_name_field][t])
 
-            mw_files=[]
-            if config.MW_file_kw in data.keys():
-                mw_files=data[config.MW_file_kw]
+                target_list = [n.replace('Tpname', 'Taname') for n in target_list]
+                for t in target_list:
+                    _o_dict['src_aliases'].append(data[config.source_name_field][t])
 
-            magic_files=[]
-            if config.MAGIC_file_kw in data.keys():
-                magic_files=data[config.MAGIC_file_kw]
+                if paper_id is None:
+                    _current_paper_id=os.path.basename(os.path.dirname(cf))
+                else:
+                    _current_paper_id=paper_id
 
+                if len(target_list)>0:
+                    mw_files=[]
+                    if config.MW_file_kw in data.keys():
+                        mw_files=data[config.MW_file_kw]
 
-            if target_name in target_list:
+                    magic_files=[]
+                    if config.MAGIC_file_kw in data.keys():
+                        magic_files=data[config.MAGIC_file_kw]
 
+                    src_name=_o_dict['src_name']
+                    for n in mw_files:
+                        _t = MAGICTable.from_file(file_path=get_file_path(_current_paper_id, n), format='ascii', name='MAGIC TABLE')
 
-                _o_dict['MWL_files'] = [n for n in mw_files  if (target_name in Table.read(get_file_path(paper_id,n),format='ascii.ecsv',delimiter=';')['srcname'])]
+                        if src_name in _t.table['srcname']:
+                            p_dict=_prod_dict(src_name,_o_dict['src_aliases'][-1],n,_current_paper_id, _t.encode(use_binary=False))
+                            _o_dict['MWL_files']['prod_id_%d'%_p_id_mwf]=p_dict
+                            _p_id_mwf+=1
+                    for n in magic_files:
 
-                _o_dict['MAGIC_files'] = [n for n in magic_files  if (target_name in Table.read(get_file_path(paper_id,n),format='ascii.ecsv',delimiter=';')['srcname'])]
-
-            print('-->t done')
+                        _t = MAGICTable.from_file(file_path=get_file_path(_current_paper_id, n), format='ascii', name='MAGIC TABLE')
+                        if src_name in _t.table['srcname']:
+                            p_dict = _prod_dict(src_name,_o_dict['src_aliases'][-1],n, _current_paper_id,  _t.encode(use_binary=False))
+                            _o_dict['MAGIC_files']['prod_id_%d'%_p_id_mgf]=p_dict
+                            _p_id_mgf += 1
+            _o_dict = json.dumps(_o_dict)
             return jsonify(_o_dict)
 
         except Exception as e:
@@ -408,6 +468,7 @@ class APITable(Resource):
         returns the astropy table
         """
         api_parser = reqparse.RequestParser()
+        api_parser.add_argument('src_name', required=False, help="src name", type=str)
         api_parser.add_argument('file_name', required=True, help="the name of the file",type=str)
         api_parser.add_argument('paper_id', required=True, help="the paper id", type=str)
         api_args = api_parser.parse_args()
@@ -497,8 +558,8 @@ class APIPlotSED(Resource):
             #data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
             #if 'energy' in sed_table.colnames:
+            #sed_table=sed_table['srcname']==
             x=sed_table['en']
-            dx=sed_table['en_wlo']
             #elif 'freq' in sed_table.colnames:
             #    x=sed_table['freq']
              #   dx=sed_table['freq_elo']

@@ -1,0 +1,38 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: srcname   , unit: latex   , datatype: str     , description: Source name                         }
+# - {name: en        , unit: GeV     , datatype: float32 , description: Energy                              }
+# - {name: en_wlo    , unit: GeV     , datatype: float32 , description: Energy bin width low                }
+# - {name: en_wup    , unit: GeV     , datatype: float32 , description: Energy bin width up                 }
+# - {name: nufnu     , unit: erg/cm2/s   , datatype: float32 , description: Differential photon flux at energy  }
+# - {name: nufnu_elo , unit: erg/cm2/s   , datatype: float32 , description: Lower uncertainty in nufnu          }
+# - {name: nufnu_eup , unit: erg/cm2/s   , datatype: float32 , description: Upper uncertainty in nufnu          }
+# - {name: tstart    , unit: mjd     , datatype: float32 , description: MJD start                           }
+# - {name: tstop     , unit: mjd     , datatype: float32 , description: MJD stop                            }
+# - {name: texpo     , unit: h       , datatype: float32 , description: Observation time                    }
+# - {name: instrument, unit: latex   , datatype: str     , description: Instrument                          }
+# - {name: dataformat, unit: latex   , datatype: str     , description: Data Format                         }
+# - {name: comments  , unit: latex   , datatype: str     , description: Comments                            }
+# meta: !!omap
+# - {Filename: magic_2019c_fig3_sed.ecsv}
+# - {Source: "M15"}
+# - {Figure: "Figure 3 in the paper. Broadband SED data. Only upper limits."}
+# - {Title: "Deep observations of the globular cluster M15 with the MAGIC telescopes"}
+# - {Comments: "Only upper limits"}
+# schema : astropy −2.0
+
+#srcname;     en;     en_wlo;    en_wup;     nufnu;    nufnu_elo;  nufnu_eup;  tstart; tstop;  texpo; instrument; dataformat; comments
+M15;   59.44692;  47.22056 ; 74.83894; 2.8759e-11; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   94.21626;  74.83894 ; 118.6108; 6.2414e-12; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   149.3215;  118.6108 ; 187.9839; 1.3773e-12; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   236.6567;  187.9839 ; 297.932 ; 4.8347e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   375.0726;  297.932  ; 472.1865; 6.1422e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   594.4452;  472.1865 ; 748.3591; 1.7449e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   942.1245;  748.3591 ; 1186.06 ; 1.6071e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   1493.155;  1186.06  ; 1879.763; 3.0143e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   2366.472;  1879.763 ; 2979.199; 2.7845e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   3750.574;  2979.199 ; 4721.674; 3.5470e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   5944.212;  4721.674 ; 7483.289; 1.8031e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   9420.865;  7483.289 ; 11860.12; 2.1818e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""
+M15;   14930.94;  11860.12 ; 18796.87; 4.0687e-13; nan; nan; 57174; 57632; 173; MAGIC; ul; ""

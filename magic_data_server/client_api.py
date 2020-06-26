@@ -134,12 +134,22 @@ class MagicClientAPI(object):
         t_rec = ascii.read(_o_dict['astropy_table']['ascii'])
         return t_rec
 
-    @safe_run
-    def search_by_name(self, target_name,paper_id):
-        res = self.request(product='search-by-name', params=dict(target_name=target_name,paper_id=paper_id))
+    #@safe_run
+    def search_by_name(self, target_name,paper_id=None,get_products=False):
+        res = self.request(product='search-by-name', params=dict(target_name=target_name,paper_id=paper_id,get_products=get_products))
         #targets = json.loads(res.json())
+        _o_dict=json.loads(res.json())
+        if get_products is True:
+            for _kw in ['MAGIC_files','MWL_files']:
+                for p in _o_dict[_kw]:
+                    print('p ->',p)
+                    t_rec = ascii.read( _o_dict[_kw][p]['astropy_table']['ascii'])
+                    _o_dict[_kw][p]['astropy_table']=t_rec
+        return _o_dict
+
+    @safe_run
+    def test_connection(self,):
+        res = self.request(product='test-connection')
         return res.json()
-
-
 
 
