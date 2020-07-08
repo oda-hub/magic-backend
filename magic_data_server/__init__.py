@@ -21,3 +21,5 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=[pkg_dir],
         pass
 
 conf_dir=os.path.dirname(__file__)+'/config_dir'
+
+print("setting config dir as", conf_dir)
