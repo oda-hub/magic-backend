@@ -1,0 +1,24 @@
+
+test-py37: 
+  &test
+  image: python:3.7-alpine
+  stage: build
+  before_script:
+    - apk add git openssh gcc musl-dev linux-headers
+    - pip install pip --upgrade
+    - pip install pylint mypy
+    - python setup.py install 
+  script:
+    - pylint -E magic_data_server || echo "ignoring issues for now!"
+    - mypy magic_data_server || echo "ignore mypy too!"
+
+test-py38:
+  <<: *test
+  image: python:3.8-alpine
+
+
+trigger_build:
+  stage: .post
+  trigger: cdci/magic/magic-chart
+  only:
+    - staging-1-3
