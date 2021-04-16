@@ -655,15 +655,16 @@ class APIPlotLC(Resource):
 
         #return output_html(f"<img src='data:image/png;base64,{data}'/>", 200)
 
-def run_micro_service(conf,debug=False,threaded=False):
-
+def conf_micro_service(conf):
     #micro_service.config_dir.from_pyfile('config_dir.py')
     micro_service.config['conf'] = conf
     micro_service.config["JSON_SORT_KEYS"] = False
 
     print(micro_service.config,micro_service.config['conf'])
+    return micro_service
 
-
+def run_micro_service(conf,debug=False,threaded=False):
+    conf_micro_service(conf)
     micro_service.run(host=conf.url,port=conf.port,debug=debug,threaded=threaded)
 
 
